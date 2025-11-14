@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GinecoSpa Procedimientos - Catálogo completo de tratamientos de ginecología, estética avanzada y bienestar.">
+    <title>Procedimientos - GinecoSpa | Tratamientos Especializados</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'rosa-palido': '#FFF5F7',
+                        'rosa-claro': '#FFE5EC',
+                        'rosa-medio': '#FFB5C5',
+                        'rosa-intenso': '#FF8FA3',
+                        'rosa-oscuro': '#E75480',
+                        'coral': '#FF9B9B',
+                        'melon': '#FFD6A5',
+                        'lavanda': '#E8CFFF',
+                        'gris-calido': '#6B5D5D',
+                        'dorado': '#D4AF37',
+                        'crema': '#FFF8F0',
+                    },
+                    fontFamily: {
+                        'display': ['Cormorant Garamond', 'serif'],
+                        'sans': ['Montserrat', 'sans-serif'],
+                        'script': ['Dancing Script', 'cursive'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        * { font-family: 'Montserrat', sans-serif; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Cormorant Garamond', serif; font-weight: 600; }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #FFF5F7 0%, #FFE5EC 25%, #FFD6E8 50%, #FFC9E0 75%, #FFB5C5 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(231, 84, 128, 0.2);
+        }
+        
+        .filter-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active {
+            background: linear-gradient(135deg, #E75480 0%, #FF8FA3 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .procedure-card {
+            opacity: 1;
+            transform: scale(1);
+            transition: all 0.5s ease;
+        }
+        
+        .procedure-card.hidden {
+            opacity: 0;
+            transform: scale(0.8);
+            height: 0;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body class="bg-crema text-gris-calido">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm">
+        <div class="container mx-auto px-4 py-4">
+            <nav class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center hover:opacity-90 transition-opacity">
+                    <img src="https://res.cloudinary.com/dzq9lldhw/image/upload/v1763148037/Logo_2_ky7mki.png" alt="GinecoSpa Logo" class="h-16 lg:h-20 w-auto">
+                </a>
+                
+                <ul class="hidden lg:flex items-center space-x-8">
+                    <li><a href="index.html" class="text-sm font-medium hover:text-rosa-oscuro transition-colors">Inicio</a></li>
+                    <li><a href="index.html#servicios" class="text-sm font-medium hover:text-rosa-oscuro transition-colors">Servicios</a></li>
+                    <li><a href="procedimientos.html" class="text-sm font-medium text-rosa-oscuro">Procedimientos</a></li>
+                    <li><a href="index.html#tecnologia" class="text-sm font-medium hover:text-rosa-oscuro transition-colors">Tecnologías</a></li>
+                    <li><a href="index.html#sedes" class="text-sm font-medium hover:text-rosa-oscuro transition-colors">Sedes</a></li>
+                    <li><a href="index.html#contacto" class="text-sm font-medium hover:text-rosa-oscuro transition-colors">Contacto</a></li>
+                </ul>
+                
+                <a href="https://wa.me/584241234567" class="hidden lg:block bg-gradient-to-r from-rosa-oscuro to-rosa-intenso text-white px-6 py-3 rounded-full text-sm font-semibold hover:opacity-90 shadow-lg">
+                    Agendar por WhatsApp
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient py-16 lg:py-24">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <span class="font-script text-rosa-intenso text-2xl mb-4 block">Catálogo completo</span>
+                <h1 class="text-4xl lg:text-6xl font-display font-bold text-rosa-oscuro mb-6">
+                    Nuestros Procedimientos
+                </h1>
+                <p class="text-xl text-gris-calido mb-10">
+                    Explora todos nuestros tratamientos especializados en ginecología, estética y bienestar.
+                </p>
+                
+                <!-- Search Bar -->
+                <div class="max-w-2xl mx-auto mb-8">
+                    <div class="relative">
+                        <input 
+                            type="text" 
+                            id="searchInput" 
+                            placeholder="Buscar procedimiento..." 
+                            class="w-full px-6 py-4 pl-12 rounded-full border-2 border-rosa-palido focus:border-rosa-medio focus:outline-none text-gris-calido shadow-lg"
+                        >
+                        <svg class="w-6 h-6 text-rosa-medio absolute left-4 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- Filter Buttons -->
+                <div class="flex flex-wrap gap-3 justify-center">
+                    <button class="filter-btn active px-6 py-3 rounded-full text-sm font-semibold bg-white shadow-md hover:shadow-lg" data-filter="all">
+                        Todos (21)
+                    </button>
+                    <button class="filter-btn px-6 py-3 rounded-full text-sm font-semibold bg-white shadow-md hover:shadow-lg" data-filter="Facial">
+                        Facial
+                    </button>
+                    <button class="filter-btn px-6 py-3 rounded-full text-sm font-semibold bg-white shadow-md hover:shadow-lg" data-filter="Íntimo">
+                        Íntimo
+                    </button>
+                    <button class="filter-btn px-6 py-3 rounded-full text-sm font-semibold bg-white shadow-md hover:shadow-lg" data-filter="Corporal">
+                        Corporal
+                    </button>
+                    <button class="filter-btn px-6 py-3 rounded-full text-sm font-semibold bg-white shadow-md hover:shadow-lg" data-filter="Ginecológico">
+                        Ginecológico
+                    </button>
+                    <button class="filter-btn px-6 py-3 rounded-full text-sm font-semibold bg-white shadow-md hover:shadow-lg" data-filter="Bienestar">
+                        Bienestar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Procedures Grid -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div id="proceduresGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-[1400px] mx-auto">
+                
+                <!-- Procedure Cards will be inserted by JavaScript -->
+                
+            </div>
+            
+            <!-- No Results Message -->
+            <div id="noResults" class="hidden text-center py-20">
+                <svg class="w-24 h-24 mx-auto text-rosa-medio mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                <h3 class="text-2xl font-display font-bold text-rosa-oscuro mb-4">No encontramos resultados</h3>
+                <p class="text-gris-calido">Intenta con otra búsqueda o categoría</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-r from-rosa-medio via-rosa-intenso to-coral">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl lg:text-5xl font-display font-bold text-white mb-6">
+                ¿Tienes dudas sobre algún procedimiento?
+            </h2>
+            <p class="text-xl text-white/90 mb-10">
+                Agenda una consulta gratuita con nuestros especialistas
+            </p>
+            <a href="https://wa.me/584241234567?text=Hola,%20quisiera%20una%20consulta%20sobre%20procedimientos" class="inline-block bg-white text-rosa-oscuro px-10 py-5 rounded-full text-lg font-semibold hover:bg-gray-50 shadow-2xl transition-all">
+                Consulta Gratuita
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-br from-gris-calido to-gray-700 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <img src="https://res.cloudinary.com/dzq9lldhw/image/upload/v1763148037/Logo_2_ky7mki.png" alt="GinecoSpa Logo" class="h-14 mb-6 brightness-0 invert opacity-90">
+                    <p class="text-sm text-gray-300">Bienestar íntimo y estético para mujeres reales.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Enlaces</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="hover:text-rosa-claro">Inicio</a></li>
+                        <li><a href="index.html#servicios" class="hover:text-rosa-claro">Servicios</a></li>
+                        <li><a href="procedimientos.html" class="hover:text-rosa-claro">Procedimientos</a></li>
+                        <li><a href="index.html#sedes" class="hover:text-rosa-claro">Sedes</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-rosa-claro">Política de privacidad</a></li>
+                        <li><a href="#" class="hover:text-rosa-claro">Términos y condiciones</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-6 text-center text-xs text-gray-400">
+                © 2024 GinecoSpa. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/584241234567" class="floating-whatsapp bg-green-500 text-white w-20 h-20 rounded-full flex items-center justify-center shadow-2xl hover:bg-green-600">
+        <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path>
+        </svg>
+    </a>
+
+    <!-- JavaScript -->
+    <script>
+        // All procedures data
+        const procedures = [
+            {
+                name: "HIFU Facial 7D y 12D",
+                category: "Facial",
+                image: "https://res.cloudinary.com/dzq9lldhw/image/upload/v1763148218/HIFU_FACIAL_PARA_IMPULSAR_1_ekouf8.jpg",
+                description: "Lifting facial sin cirugía con ultrasonido microfocalizado de alta intensidad.",
+                benefits: ["Sin tiempo de recuperación", "Resultados desde la primera sesión", "Efecto lifting natural"],
+                badge: "PREMIUM",
+                badgeColor: "from-rosa-oscuro to-rosa-intenso"
+            },
+            {
+                name: "Cauterización de VPH",
+                category: "Ginecológico",
+                image: "https://res.cloudinary.com/dzq9lldhw/image/upload/v1763149059/2_b6abjt.png",
+                description: "Tratamiento efectivo para eliminación de verrugas genitales causadas por VPH.",
+                benefits: ["Procedimiento rápido", "Mínimas molestias", "Alta tasa de éxito"],
+                badge: "ESPECIALIZADO",
+                badgeColor: "from-purple-500 to-purple-700"
+            },
+            {
+                name: "Vacuna VPH",
+                category: "Preventivo",
+                image: "https://res.cloudinary.com/dzq9lldhw/image/upload/v1763149061/4_tgdx98.png",
+                description: "Inmunización contra los tipos de VPH de alto riesgo.",
+                benefits: ["Prevención efectiva", "Protección duradera", "Recomendada por OMS"],
+                badge: "PREVENCIÓN",
+                badgeColor: "from-green-500 to-green-700"
+            },
+            {
+                name: "Láser CO2",
+                category: "Dermatológico",
+                image: "https://res.cloudinary.com/dzq9lldhw/image/upload/v1763149061/6_ktalik.png",
+                description: "Tecnología láser CO2 fraccionado para rejuvenecimiento facial.",
+                benefits: ["Rejuvenecimiento profundo", "Mejora textura", "Renovación celular"],
+                badge: "TECNOLOGÍA",
+                badgeColor: "from-blue-500 to-blue-700"
+            },
+            {
+                name: "HIFU Corporal",
+                category: "Corporal",
+                image: "https://res.cloudinary.com/dzq9lldhw/image/upload/v1763149063/8_fybeya.png",
+                description: "Reducción de grasa localizada y tensado corporal sin cirugía.",
+                benefits: ["Reducción de medidas", "Tensado de piel", "Sin cirugía"],
+                badge: "CORPORAL",
+                badgeColor: "from-orange-500 to-orange-700"
+            },
+            {
+                name: "Labioplastia Láser",
+                category: "Íntimo",
+                image: "https://res.cloudinary.com/dzq9lldhw/image/upload/v1763149065/7_buh3je.png",
+                description: "Corrección estética de labios menores mediante láser.",
+                benefits: ["Mínimamente invasivo", "Recuperación rápida", "Resultados naturales"],
+                badge: "ÍNTIMO",
+                badgeColor: "from-pink-500 to-pink-700"
+            },
+            {
+                name: "Blanqueamiento Vaginal",
+                category: "Íntimo",
+                image: "https://res.cloudinary.com/dzq9lldhw/image/upload/v1763149066/10_x6pfeg.png",
+                description: "Aclaramiento de zona íntima mediante tecnología láser segura.",
+                benefits: ["Resultados visibles", "Procedimiento seguro", "Mejora autoestima"],
+                badge: "ESTÉTICO",
+                badgeColor: "from-rosa-medio to-coral"
+            },
+            {
+                name: "Blanqueamiento Anal",
+                category: "Íntimo",
+                image: "https://res.cloudinary.com/dzq9lldhw/image/upload/v1763149068/9_uzwffw.png",
+                description: "Aclaramiento de zona perianal con láser especializado.",
+                benefits: ["Técnica segura", "Resultados graduales", "Sin irritación"],
+                badge: "ESTÉTICO",
+                badgeColor: "from-rosa-medio to-coral"
+            },
+            {
+                name: "Tratamiento de Patologías de Piel",
+                category: "Dermatológico",
+                image: "https://res.cloudinary.com/dzq9lldhw/image/upload/v1763149073/13_ehdhdx.png",
+                description: "Diagnóstico y tratamiento de condiciones dermatológicas.",
+                benefits: ["Diagnóstico preciso", "Tratamientos personalizados", "Seguimiento continuo"],
+                badge: "DERMATOLOGÍA",
+                badgeColor: "from-teal-500 to-teal-700"
+            },
+            {
+                name: "HIFU Vaginal",
+                category: "Íntimo",
+                image: "https://res.cloudinary.com/dzq9lldhw/image/upload/v1763149073/11_xipujw.png",
+                description: "Tensado y rejuvenecimiento vaginal no invasivo.",
+                benefits: ["No invasivo", "Sin downtime", "Mejora calidad de vida"],
+                badge: "PREMIUM",
+                badgeColor: "from-rosa-oscuro to-rosa-intenso"
+            },
+            {
+                name: "Emsculpt",
+                category: "Corporal",
+                image: "https://res.cloudinary.com/dzq9lldhw/image/upload/v1763149082/23_avtcnh.png",
+                description: "Tecnología electromagnética para tonificar músculos.",
+                benefits: ["Aumenta masa muscular", "Reduce grasa", "Sin ejercicio"],
+                badge: "INNOVADOR",
+                badgeColor: "from-indigo-500 to-indigo-700"
+            },
+            {
+                name: "Hilos Tensores",
+                category: "Facial",
+                image: "https://res.cloudinary.com/dzq9lldhw/image/upload/v1763149084/25_erx85b.png",
+                description: "Lifting facial con hilos reabsorbibles PDO.",
+                benefits: ["Efecto inmediato", "Estimula colágeno", "Mínimamente invasivo"],
+                badge: "LIFTING",
+                badgeColor: "from-purple-600 to-pink-600"
+            },
+            {
+                name: "Hollywood Peel",
+                category: "Facial",
+                image: "https://res.cloudinary.com/dzq9lldhw/image/upload/v1763149088/26_glaha4.png",
+                description: "Tratamiento láser con carbón activado para luminosidad instantánea.",
+                benefits: ["Luminosidad inmediata", "Reduce poros", "Piel radiante"],
+                badge: "GLOW",
+                badgeColor: "from-yellow-400 to-orange-500"
+            },
+            {
+                name: "Rejuchip",
+                category: "Facial",
+                image: "https://res.cloudinary.com/dzq9lldhw/image/upload/v1763149092/32_conn5g.png",
+                description: "Microchips de ácido hialurónico que liberan hidratación prolongada.",
+                benefits: ["Hidratación prolongada", "Rejuvenecimiento gradual", "Duradero"],
+                badge: "INNOVADOR",
+                badgeColor: "from-indigo-500 to-indigo-700"
+            },
+            {
+                name: "PRP Cuero Cabelludo",
+                category: "Capilar",
+                image: "https://res.cloudinary.com/dzq9lldhw/image/upload/v1763149094/35_h1xstb.png",
+                description: "Plasma rico en plaquetas para estimular crecimiento capilar.",
+                benefits: ["Estimula crecimiento", "Fortalece cabello", "100% natural"],
+                badge: "REGENERATIVO",
+                badgeColor: "from-emerald-500 to-emerald-700"
+            },
+            {
+                name: "Tratamiento de Patologías del Tracto Genital",
+                category: "Ginecológico",
+                image: "https://res.cloudinary.com/dzq9lldhw/image/upload/v1763149095/33_hbyybv.png",
+                description: "Diagnóstico y tratamiento de patologías ginecológicas.",
+                benefits: ["Atención especializada", "Tratamiento integral", "Seguimiento personalizado"],
+                badge: "GINECOLOGÍA",
+                badgeColor: "from-red-400 to-pink-500"
+            },
+            {
+                name: "PRP Vaginal",
+                category: "Íntimo",
+                image: "https://res.cloudinary.com/dzq9lldhw/image/upload/v1763149096/36_c4jodx.png",
+                description: "Plasma rico en plaquetas para rejuvenecimiento vaginal.",
+                benefits: ["Rejuvenecimiento natural", "Mejora sensibilidad", "Trata sequedad"],
+                badge: "REGENERATIVO",
+                badgeColor: "from-emerald-500 to-emerald-700"
+            },
+            {
+                name: "Sueroterapia",
+                category: "Bienestar",
+                image: "https://res.cloudinary.com/dzq9lldhw/image/upload/v1763149097/37_zktpbm.png",
+                description: "Hidratación y nutrición intravenosa personalizada.",
+                benefits: ["Hidratación inmediata", "Energía y vitalidad", "Refuerzo inmunológico"],
+                badge: "WELLNESS",
+                badgeColor: "from-cyan-500 to-blue-600"
+            },
+            {
+                name: "Exosomas",
+                category: "Regenerativo",
+                image: "https://res.cloudinary.com/dzq9lldhw/image/upload/v1763149097/34_yblwzz.png",
+                description: "Terapia celular avanzada con exosomas para regeneración.",
+                benefits: ["Tecnología de vanguardia", "Regeneración celular", "Resultados superiores"],
+                badge: "EXCLUSIVO",
+                badgeColor: "from-gold-600 to-yellow-600"
+            },
+            {
+                name: "Limpieza Facial Profunda",
+                category: "Facial",
+                image: "https://res.cloudinary.com/dzq9lldhw/image/upload/v1763149098/39_lybffi.png",
+                description: "Limpieza facial profesional con extracción e hidratación.",
+                benefits: ["Piel purificada", "Poros desobstruidos", "Hidratación profunda"],
+                badge: "BÁSICO",
+                badgeColor: "from-gray-500 to-gray-700"
+            },
+            {
+                name: "Ondas de Choque",
+                category: "Corporal",
+                image: "https://res.cloudinary.com/dzq9lldhw/image/upload/v1763149101/40_ftsdwz.png",
+                description: "Terapia con ondas acústicas para reducir celulitis.",
+                benefits: ["Reduce celulitis", "Mejora circulación", "Tensado corporal"],
+                badge: "CORPORAL",
+                badgeColor: "from-orange-500 to-orange-700"
+            }
+        ];
+
+        // Render procedures
+        function renderProcedures(filteredProcedures) {
+            const grid = document.getElementById('proceduresGrid');
+            const noResults = document.getElementById('noResults');
+            
+            if (filteredProcedures.length === 0) {
+                grid.innerHTML = '';
+                noResults.classList.remove('hidden');
+                return;
+            }
+            
+            noResults.classList.add('hidden');
+            grid.innerHTML = filteredProcedures.map(proc => `
+                <div class="procedure-card card-hover bg-white rounded-3xl overflow-hidden shadow-xl" data-category="${proc.category}" data-name="${proc.name.toLowerCase()}">
+                    <div class="w-full aspect-video overflow-hidden relative group">
+                        <img src="${proc.image}" alt="${proc.name}" class="w-full h-full object-contain bg-gradient-to-br from-rosa-palido to-rosa-claro group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute top-4 left-4">
+                            <span class="inline-block bg-gradient-to-r ${proc.badgeColor} text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg">
+                                ${proc.badge}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-display font-bold text-rosa-oscuro mb-3">${proc.name}</h3>
+                        <p class="text-sm text-gris-calido mb-4 line-clamp-2">${proc.description}</p>
+                        <ul class="space-y-2 mb-6">
+                            ${proc.benefits.map(benefit => `
+                                <li class="flex items-start text-xs text-gris-calido">
+                                    <svg class="w-4 h-4 text-rosa-intenso mr-2 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>${benefit}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                        <a href="https://wa.me/584241234567?text=Hola,%20quisiera%20información%20sobre%20${encodeURIComponent(proc.name)}" target="_blank" class="block text-center bg-gradient-to-r from-rosa-oscuro to-rosa-intenso text-white px-6 py-3 rounded-full font-semibold hover:opacity-90 transition-opacity">
+                            Agendar consulta
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Initial render
+        renderProcedures(procedures);
+
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.dataset.filter;
+                const filtered = filter === 'all' 
+                    ? procedures 
+                    : procedures.filter(p => p.category === filter);
+                    
+                renderProcedures(filtered);
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filtered = procedures.filter(p => 
+                p.name.toLowerCase().includes(searchTerm) ||
+                p.description.toLowerCase().includes(searchTerm) ||
+                p.category.toLowerCase().includes(searchTerm)
+            );
+            renderProcedures(filtered);
+            
+            // Reset filter buttons
+            filterButtons.forEach(b => b.classList.remove('active'));
+            filterButtons[0].classList.add('active');
+        });
+    </script>
+</body>
+</html>
