@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kegel Master - Entrenador Inteligente del Suelo Pélvico</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: #2d2d2d;
+            line-height: 1.6;
+            background: #ffffff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #fff5f7 0%, #ffe8f0 100%);
+            padding: 80px 20px 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,182,193,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #d4457c;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            color: #6b6b6b;
+            font-weight: 400;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .badge {
+            background: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            color: #d4457c;
+            box-shadow: 0 4px 15px rgba(212,69,124,0.1);
+            font-weight: 500;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #e55d87 0%, #d4457c 100%);
+            color: white;
+            padding: 18px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(212,69,124,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(212,69,124,0.4);
+        }
+
+        .hero-description {
+            max-width: 600px;
+            margin: 50px auto 0;
+            color: #5a5a5a;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #d4457c;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #6b6b6b;
+            margin-bottom: 60px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Benefits Grid */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 30px 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .benefit-card h3 {
+            color: #d4457c;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .benefit-card p {
+            color: #6b6b6b;
+            font-size: 1rem;
+        }
+
+        /* Pain Points */
+        .pain-points {
+            background: #fff9fa;
+        }
+
+        .pain-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .pain-item {
+            display: flex;
+            align-items: start;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+        }
+
+        .pain-item::before {
+            content: '✕';
+            color: #e55d87;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .pain-item p {
+            color: #5a5a5a;
+            font-size: 1.05rem;
+        }
+
+        /* Product Features */
+        .product-showcase {
+            background: linear-gradient(135deg, #ffeef3 0%, #ffffff 100%);
+        }
+
+        .feature-description {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-size: 1.1rem;
+            color: #5a5a5a;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        .comparison-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            background: linear-gradient(135deg, #e55d87 0%, #d4457c 100%);
+            color: white;
+            padding: 20px;
+            font-weight: 600;
+        }
+
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            padding: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .comparison-row:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-row div:first-child {
+            font-weight: 500;
+            color: #2d2d2d;
+        }
+
+        .check {
+            color: #d4457c;
+            font-weight: 600;
+        }
+
+        .cross {
+            color: #ccc;
+            font-weight: 600;
+        }
+
+        /* Tech Features */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .tech-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            border-left: 4px solid #e55d87;
+        }
+
+        .tech-card h3 {
+            color: #d4457c;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .tech-card p {
+            color: #6b6b6b;
+            font-size: 0.95rem;
+        }
+
+        /* Target Audience */
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .audience-card {
+            background: linear-gradient(135deg, #fff5f7 0%, #ffffff 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid #ffe8f0;
+            text-align: center;
+        }
+
+        .audience-card h3 {
+            color: #d4457c;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .audience-card p {
+            color: #6b6b6b;
+            font-size: 0.95rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .timeline-week {
+            background: linear-gradient(135deg, #e55d87 0%, #d4457c 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin-right: 20px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            flex: 1;
+        }
+
+        .timeline-content p {
+            color: #5a5a5a;
+            font-size: 1.05rem;
+        }
+
+        /* Package Includes */
+        .package-list {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .package-item {
+            background: white;
+            padding: 20px 30px;
+            margin-bottom: 15px;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+        }
+
+        .package-item::before {
+            content: '✓';
+            color: #d4457c;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-right: 20px;
+        }
+
+        /* Usage Steps */
+        .usage-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #e55d87 0%, #d4457c 100%);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            box-shadow: 0 5px 20px rgba(212,69,124,0.3);
+        }
+
+        .step h3 {
+            color: #d4457c;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            color: #6b6b6b;
+            font-size: 0.95rem;
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            position: relative;
+        }
+
+        .testimonial::before {
+            content: '"';
+            font-size: 4rem;
+            color: #ffe8f0;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-family: Georgia, serif;
+        }
+
+        .testimonial-text {
+            color: #5a5a5a;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            color: #d4457c;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .testimonial-stars {
+            color: #ffc107;
+            margin-bottom: 15px;
+        }
+
+        /* Guarantee Section */
+        .guarantee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .guarantee-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .guarantee-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .guarantee-card h3 {
+            color: #d4457c;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .guarantee-card p {
+            color: #6b6b6b;
+            font-size: 0.95rem;
+        }
+
+        /* Pricing Section */
+        .pricing-section {
+            background: linear-gradient(135deg, #fff5f7 0%, #ffe8f0 100%);
+            text-align: center;
+        }
+
+        .price-box {
+            background: white;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+        }
+
+        .price {
+            font-size: 3.5rem;
+            color: #d4457c;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .price-note {
+            color: #6b6b6b;
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+
+        .price-benefits {
+            text-align: left;
+            margin: 30px 0;
+        }
+
+        .price-benefit {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #5a5a5a;
+        }
+
+        .price-benefit::before {
+            content: '✓';
+            color: #d4457c;
+            font-weight: 700;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        /* FAQ Section */
+        .faq-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 25px 30px;
+            font-weight: 600;
+            color: #d4457c;
+            font-size: 1.1rem;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+
+        .faq-question::after {
+            content: '+';
+            position: absolute;
+            right: 30px;
+            font-size: 1.5rem;
+            color: #e55d87;
+        }
+
+        .faq-answer {
+            padding: 0 30px 25px;
+            color: #5a5a5a;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Footer CTA */
+        .footer-cta {
+            background: linear-gradient(135deg, #e55d87 0%, #d4457c 100%);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .footer-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .cta-button-white {
+            background: white;
+            color: #d4457c;
+            padding: 18px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: inline-block;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .cta-button-white:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .comparison-header,
+            .comparison-row {
+                grid-template-columns: 2fr 1fr 1fr;
+                font-size: 0.9rem;
+                padding: 15px 10px;
+            }
+
+            .price {
+                font-size: 2.5rem;
+            }
+
+            .price-box {
+                padding: 30px 20px;
+            }
+        }
+
+        .bg-light {
+            background: #fafafa;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="container">
+            <h1>Fortalece tu Suelo Pélvico<br>con Tecnología Inteligente</h1>
+            <h2>El entrenador personal que transforma tu bienestar íntimo en solo minutos al día</h2>
+            
+            <div class="badges">
+                <span class="badge">✨ Tecnología de Sensores</span>
+                <span class="badge">📱 App Inteligente</span>
+                <span class="badge">💪 Resultados Reales</span>
+                <span class="badge">🏥 Grado Médico</span>
+            </div>
+
+            <a href="#oferta" class="cta-button">Quiero mi Kegel Master</a>
+
+            <p class="hero-description">
+                <strong>Kegel Master</strong> es un dispositivo de entrenamiento de suelo pélvico con sensores multipunto de presión, fabricado en silicona de grado médico. Se conecta a una app inteligente que guía cada sesión, mide tu progreso en tiempo real y te motiva con ejercicios personalizados. Diseñado para mujeres que buscan recuperar fuerza, control y confianza.
+            </p>
+        </div>
+    </section>
+
+    <!-- BENEFITS SECTION -->
+    <section class="benefits">
+        <div class="container">
+            <h2 class="section-title">Beneficios que Transforman tu Vida</h2>
+            <p class="section-subtitle">Experimenta mejoras reales en tu bienestar íntimo y calidad de vida</p>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">💪</div>
+                    <h3>Fortalece tu Suelo Pélvico</h3>
+                    <p>Recupera el tono muscular perdido con ejercicios científicamente diseñados</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🛡️</div>
+                    <h3>Reduce Escapes de Orina</h3>
+                    <p>Gana control sobre tu vejiga y di adiós a las fugas incómodas</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">✨</div>
+                    <h3>Mejora el Control Íntimo</h3>
+                    <p>Aumenta la sensibilidad y el control durante tus relaciones</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🤱</div>
+                    <h3>Ideal Post-Parto</h3>
+                    <p>Recuperación efectiva después del embarazo y parto</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">📈</div>
+                    <h3>Incrementa Fuerza y Tono</h3>
+                    <p>Músculos más fuertes significan mayor bienestar general</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">📱</div>
+                    <h3>App con Ejercicios Guiados</h3>
+                    <p>Rutinas personalizadas que se adaptan a tu nivel y progreso</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAIN POINTS SECTION -->
+    <section class="pain-points">
+        <div class="container">
+            <h2 class="section-title">¿Te Sientes Identificada?</h2>
+            <p class="section-subtitle">Estos problemas son más comunes de lo que piensas, y tienen solución</p>
+
+            <div class="pain-list">
+                <div class="pain-item">
+                    <p><strong>Fugas al reír, toser o estornudar</strong> que te hacen sentir insegura y limitan tu vida social y actividades físicas</p>
+                </div>
+
+                <div class="pain-item">
+                    <p><strong>Sensación de poco control</strong> en tu área íntima que afecta tu confianza y autoestima</p>
+                </div>
+
+                <div class="pain-item">
+                    <p><strong>Debilidad post-parto</strong> que sientes que nunca recuperarás completamente sin ayuda profesional</p>
+                </div>
+
+                <div class="pain-item">
+                    <p><strong>Falta de sensibilidad</strong> durante las relaciones íntimas que impacta tu vida de pareja</p>
+                </div>
+
+                <div class="pain-item">
+                    <p><strong>Dificultad para activar los músculos</strong> correctos al hacer ejercicios de Kegel por tu cuenta</p>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 40px; font-size: 1.15rem; color: #5a5a5a; max-width: 700px; margin-left: auto; margin-right: auto;">
+                No estás sola. Millones de mujeres experimentan debilidad del suelo pélvico, especialmente después del parto, con la edad o por falta de entrenamiento adecuado. <strong style="color: #d4457c;">Pero ahora existe una solución inteligente, efectiva y fácil de usar.</strong>
+            </p>
+        </div>
+    </section>
+
+    <!-- PRODUCT SOLUTION SECTION -->
+    <section class="product-showcase">
+        <div class="container">
+            <h2 class="section-title">Kegel Master: Tu Entrenador Personal Inteligente</h2>
+            <p class="section-subtitle">Tecnología avanzada al servicio de tu bienestar</p>
+
+            <p class="feature-description">
+                <strong>Kegel Master</strong> revoluciona el entrenamiento del suelo pélvico combinando sensores de presión multipunto de última generación con una aplicación inteligente que actúa como tu entrenadora personal. Cada sesión está guiada paso a paso, asegurando que actives los músculos correctos con la intensidad adecuada. 
+            </p>
+
+            <p class="feature-description">
+                El dispositivo mide en tiempo real la fuerza de tus contracciones, te da retroalimentación inmediata y almacena tu progreso para que veas mejoras concretas semana tras semana. Además, incluye rutinas gamificadas que hacen que el entrenamiento sea entretenido y motivador, transformando un ejercicio que antes era aburrido en una experiencia interactiva y efectiva.
+            </p>
+
+            <p class="feature-description" style="color: #d4457c; font-weight: 600;">
+                No más adivinar si lo estás haciendo bien. Con Kegel Master, cada repetición cuenta y cada sesión te acerca a tus objetivos de salud íntima.
+            </p>
+        </div>
+    </section>
+
+    <!-- COMPARISON SECTION -->
+    <section class="comparison bg-light">
+        <div class="container">
+            <h2 class="section-title">La Diferencia es Clara</h2>
+            <p class="section-subtitle">Por qué entrenar con Kegel Master es superior a hacerlo sola</p>
+
+            <div class="comparison-table">
+                <div class="comparison-header">
+                    <div>Aspecto</div>
+                    <div style="text-align: center;">Sin Guía</div>
+                    <div style="text-align: center;">Con Kegel Master</div>
+                </div>
+
+                <div class="comparison-row">
+                    <div>Técnica Correcta</div>
+                    <div style="text-align: center;" class="cross">Incierta</div>
+                    <div style="text-align: center;" class="check">✓ Garantizada</div>
+                </div>
+
+                <div class="comparison-row">
+                    <div>Motivación y Constancia</div>
+                    <div style="text-align: center;" class="cross">Difícil</div>
+                    <div style="text-align: center;" class="check">✓ Alta</div>
+                </div>
+
+                <div class="comparison-row">
+                    <div>Medición de Progreso</div>
+                    <div style="text-align: center;" class="cross">Imposible</div>
+                    <div style="text-align: center;" class="check">✓ Precisa</div>
+                </div>
+
+                <div class="comparison-row">
+                    <div>Resultados Visibles</div>
+                    <div style="text-align: center;" class="cross">Lentos/dudosos</div>
+                    <div style="text-align: center;" class="check">✓ Rápidos y reales</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECH FEATURES SECTION -->
+    <section class="tech-features">
+        <div class="container">
+            <h2 class="section-title">Tecnología Premium que Funciona</h2>
+            <p class="section-subtitle">Características diseñadas para tu comodidad y resultados óptimos</p>
+
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h3>🎯 Sensores Multipunto</h3>
+                    <p>Detección precisa de la fuerza y dirección de tus contracciones en tiempo real</p>
+                </div>
+
+                <div class="tech-card">
+                    <h3>📱 App Inteligente</h3>
+                    <p>Compatible con iOS y Android. Rutinas personalizadas, seguimiento y estadísticas detalladas</p>
+                </div>
+
+                <div class="tech-card">
+                    <h3>📴 Modo Offline</h3>
+                    <p>Entrena sin necesidad de conexión a internet. La app sincroniza cuando vuelvas a conectarte</p>
+                </div>
+
+                <div class="tech-card">
+                    <h3>🏥 Silicona Grado Médico</h3>
+                    <p>Material hipoalergénico, seguro, suave y certificado para uso interno</p>
+                </div>
+
+                <div class="tech-card">
+                    <h3>🔋 Carga Magnética</h3>
+                    <p>Batería de larga duración con sistema de carga magnética rápida y segura</p>
+                </div>
+
+                <div class="tech-card">
+                    <h3>💧 Resistente al Agua</h3>
+                    <p>Diseño 100% impermeable para fácil limpieza e higiene perfecta</p>
+                </div>
+
+                <div class="tech-card">
+                    <h3>✨ Diseño Ergonómico</h3>
+                    <p>Forma anatómica que se adapta perfectamente a tu cuerpo para máxima comodidad</p>
+                </div>
+
+                <div class="tech-card">
+                    <h3>🎮 Ejercicios Gamificados</h3>
+                    <p>Juegos interactivos que hacen que el entrenamiento sea divertido y motivador</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TARGET AUDIENCE SECTION -->
+    <section class="audience bg-light">
+        <div class="container">
+            <h2 class="section-title">¿Es Kegel Master para Ti?</h2>
+            <p class="section-subtitle">Diseñado específicamente para estas situaciones</p>
+
+            <div class="audience-grid">
+                <div class="audience-card">
+                    <h3>🤱 Mujeres Post-Parto</h3>
+                    <p>Recupera la fuerza muscular después del embarazo y el parto</p>
+                </div>
+
+                <div class="audience-card">
+                    <h3>💧 Escapes Urinarios</h3>
+                    <p>Controla y elimina las fugas de orina al toser, reír o hacer ejercicio</p>
+                </div>
+
+                <div class="audience-card">
+                    <h3>💪 Fortalecimiento Preventivo</h3>
+                    <p>Mantén tu suelo pélvico fuerte y saludable a cualquier edad</p>
+                </div>
+
+                <div class="audience-card">
+                    <h3>❤️ Vida Sexual Activa</h3>
+                    <p>Mejora la sensibilidad y el control durante las relaciones íntimas</p>
+                </div>
+
+                <div class="audience-card">
+                    <h3>🔒 Control y Seguridad</h3>
+                    <p>Recupera la confianza en tu cuerpo y vive sin preocupaciones</p>
+                </div>
+
+                <div class="audience-card">
+                    <h3>🏃‍♀️ Mujeres Activas</h3>
+                    <p>Previene problemas futuros si practicas deportes de alto impacto</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESULTS TIMELINE SECTION -->
+    <section class="timeline-section">
+        <div class="container">
+            <h2 class="section-title">Tu Transformación Semana a Semana</h2>
+            <p class="section-subtitle">Resultados progresivos y medibles que marcan la diferencia</p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-week">Semana 1</div>
+                    <div class="timeline-content">
+                        <p><strong>Conciencia Muscular:</strong> Aprenderás a identificar y activar correctamente los músculos del suelo pélvico. Muchas mujeres descubren que nunca habían activado los músculos correctos.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-week">Semana 2</div>
+                    <div class="timeline-content">
+                        <p><strong>Aumento del Tono:</strong> Comenzarás a sentir más firmeza en la zona. Las contracciones se vuelven más fuertes y controladas.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-week">Semanas 3-4</div>
+                    <div class="timeline-content">
+                        <p><strong>Menos Escapes:</strong> Notarás una reducción significativa en las fugas de orina. Mayor control al toser, reír o hacer ejercicio.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-week">6+ Semanas</div>
+                    <div class="timeline-content">
+                        <p><strong>Mayor Fuerza y Control Total:</strong> El suelo pélvico está notablemente más fuerte. Mejor calidad de vida íntima, más confianza y bienestar general.</p>
+                    </div>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 50px; font-size: 1.1rem; color: #d4457c; font-weight: 600;">
+                Los resultados varían según cada persona, pero con uso constante (10-15 minutos, 3-4 veces por semana), la mayoría de usuarias reportan mejoras significativas en 4-6 semanas.
+            </p>
+        </div>
+    </section>
+
+    <!-- PACKAGE INCLUDES SECTION -->
+    <section class="package bg-light">
+        <div class="container">
+            <h2 class="section-title">¿Qué Incluye tu Kegel Master?</h2>
+            <p class="section-subtitle">Todo lo que necesitas para empezar hoy mismo</p>
+
+            <div class="package-list">
+                <div class="package-item">
+                    <strong>Dispositivo Kegel Master</strong> con sensores multipunto y Bluetooth integrado
+                </div>
+
+                <div class="package-item">
+                    <strong>Cable de Carga Magnética</strong> para batería de larga duración
+                </div>
+
+                <div class="package-item">
+                    <strong>Bolsa de Almacenamiento Premium</strong> discreta y elegante
+                </div>
+
+                <div class="package-item">
+                    <strong>Manual de Usuario Completo</strong> en español con guía de inicio rápido
+                </div>
+
+                <div class="package-item">
+                    <strong>Acceso Completo a la App</strong> con todas las rutinas, seguimiento y juegos
+                </div>
+
+                <div class="package-item">
+                    <strong>Garantía de Calidad</strong> y soporte técnico en español
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- USAGE STEPS SECTION -->
+    <section class="usage">
+        <div class="container">
+            <h2 class="section-title">Modo de Uso: Simple y Rápido</h2>
+            <p class="section-subtitle">Solo 5 pasos para empezar a ver resultados</p>
+
+            <div class="usage-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Descarga la App</h3>
+                    <p>Disponible gratis en App Store y Google Play</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Conecta el Dispositivo</h3>
+                    <p>Sincronización Bluetooth en segundos</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Inserta Cómodamente</h3>
+                    <p>Diseño ergonómico para fácil colocación</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Sigue la Rutina</h3>
+                    <p>La app te guía paso a paso en cada ejercicio</p>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h3>Revisa tu Progreso</h3>
+                    <p>Estadísticas detalladas de tu evolución</p>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 50px; font-size: 1.05rem; color: #5a5a5a; max-width: 700px; margin-left: auto; margin-right: auto;">
+                Cada sesión dura entre 10-15 minutos. Se recomienda usar 3-4 veces por semana para resultados óptimos. Puedes entrenar en la comodidad y privacidad de tu hogar.
+            </p>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="testimonials bg-light">
+        <div class="container">
+            <h2 class="section-title">Lo que Dicen Nuestras Usuarias</h2>
+            <p class="section-subtitle">Historias reales de mujeres que transformaron su bienestar</p>
+
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">
+                        Después de mi segundo embarazo, tenía escapes constantemente. Me daba vergüenza hacer ejercicio o reír fuerte. En solo 5 semanas con Kegel Master, los escapes prácticamente desaparecieron. Me siento como antes del embarazo.
+                    </p>
+                    <p class="testimonial-author">— María S., 34 años</p>
+                </div>
+
+                <div class="testimonial">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">
+                        Intenté hacer ejercicios de Kegel por mi cuenta durante meses sin resultados. Con este dispositivo, desde la primera sesión supe que estaba trabajando los músculos correctos. La app hace todo muy fácil y motivador.
+                    </p>
+                    <p class="testimonial-author">— Laura G., 41 años</p>
+                </div>
+
+                <div class="testimonial">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">
+                        Lo que más me gusta es que puedo ver mi progreso con datos reales. No es solo una sensación, sino que veo los números mejorar cada semana. Eso me mantiene súper motivada. Mi calidad de vida ha mejorado muchísimo.
+                    </p>
+                    <p class="testimonial-author">— Carmen R., 38 años</p>
+                </div>
+
+                <div class="testimonial">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">
+                        Tenía dudas sobre si funcionaría, pero los resultados me sorprendieron. A las 3 semanas ya notaba diferencia en mi control. Ahora puedo hacer deporte sin preocupaciones. Es una inversión en mi salud que valió totalmente la pena.
+                    </p>
+                    <p class="testimonial-author">— Patricia M., 29 años</p>
+                </div>
+
+                <div class="testimonial">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">
+                        Como fisioterapeuta de suelo pélvico, recomiendo este tipo de dispositivos a mis pacientes. La retroalimentación en tiempo real marca una diferencia enorme en la efectividad del entrenamiento. Excelente calidad.
+                    </p>
+                    <p class="testimonial-author">— Dra. Sofía L., Fisioterapeuta</p>
+                </div>
+
+                <div class="testimonial">
+                    <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">
+                        Me encanta que sea tan discreto y fácil de usar. Nadie en casa sabe que lo uso. Los ejercicios gamificados hacen que sea divertido, no una obligación. Llevo 8 semanas y los cambios son increíbles.
+                    </p>
+                    <p class="testimonial-author">— Andrea V., 36 años</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GUARANTEE SECTION -->
+    <section class="guarantee">
+        <div class="container">
+            <h2 class="section-title">Compra con Total Confianza</h2>
+            <p class="section-subtitle">Tu seguridad y privacidad son nuestra prioridad</p>
+
+            <div class="guarantee-grid">
+                <div class="guarantee-card">
+                    <div class="guarantee-icon">🏥</div>
+                    <h3>Silicona Certificada</h3>
+                    <p>Material de grado médico, hipoalergénico y seguro. Cumple con todas las normativas internacionales de salud.</p>
+                </div>
+
+                <div class="guarantee-card">
+                    <div class="guarantee-icon">🔒</div>
+                    <h3>Producto Sellado</h3>
+                    <p>Cada unidad viene en empaque sellado de fábrica, garantizando higiene total y seguridad en tu compra.</p>
+                </div>
+
+                <div class="guarantee-card">
+                    <div class="guarantee-icon">📦</div>
+                    <h3>Envío Discreto</h3>
+                    <p>Empaque neutro sin ninguna referencia al producto. Tu privacidad es fundamental para nosotros.</p>
+                </div>
+
+                <div class="guarantee-card">
+                    <div class="guarantee-icon">💳</div>
+                    <h3>Pago Seguro</h3>
+                    <p>Procesamos tu pago con tecnología de encriptación bancaria. Aceptamos todas las tarjetas principales.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING SECTION -->
+    <section id="oferta" class="pricing-section">
+        <div class="container">
+            <h2 class="section-title">Invierte en tu Bienestar Hoy</h2>
+            <p class="section-subtitle">Una solución que cambiará tu calidad de vida</p>
+
+            <div class="price-box">
+                <p class="price">$149.99</p>
+                <p class="price-note">Pago único • Sin suscripciones • Envío incluido</p>
+
+                <div class="price-benefits">
+                    <div class="price-benefit">Dispositivo Kegel Master con tecnología de sensores</div>
+                    <div class="price-benefit">App completa con rutinas ilimitadas de por vida</div>
+                    <div class="price-benefit">Seguimiento de progreso y estadísticas detalladas</div>
+                    <div class="price-benefit">Cargador magnético y bolsa premium incluidos</div>
+                    <div class="price-benefit">Garantía de calidad de 12 meses</div>
+                    <div class="price-benefit">Soporte técnico en español</div>
+                    <div class="price-benefit">Envío discreto y rápido a toda Colombia</div>
+                    <div class="price-benefit">Pago seguro con todas las tarjetas</div>
+                </div>
+
+                <a href="#" class="cta-button" style="margin-top: 30px;">Quiero mi Kegel Master Ahora</a>
+
+                <p style="margin-top: 30px; color: #6b6b6b; font-size: 0.95rem;">
+                    🚚 Envío gratis • 📦 Entrega en 3-5 días hábiles • 💳 Pago en cuotas disponible
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="faq bg-light">
+        <div class="container">
+            <h2 class="section-title">Preguntas Frecuentes</h2>
+            <p class="section-subtitle">Resolvemos todas tus dudas</p>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">¿El uso de Kegel Master duele o es incómodo?</div>
+                    <div class="faq-answer">
+                        No, en absoluto. El dispositivo está fabricado en silicona suave de grado médico y tiene un diseño ergonómico que se adapta perfectamente a tu anatomía. La mayoría de las usuarias reportan que es muy cómodo. Si sientes alguna molestia, puedes ajustar la posición o usar un lubricante a base de agua.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">¿Es seguro usar Kegel Master?</div>
+                    <div class="faq-answer">
+                        Completamente seguro. Está fabricado con silicona de grado médico, certificada y libre de BPA, ftalatos y látex. Es hipoalergénico y ha sido probado dermatológicamente. Miles de mujeres lo usan diariamente sin ningún problema. Además, es 100% impermeable para una limpieza perfecta.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">¿Cómo se limpia el dispositivo?</div>
+                    <div class="faq-answer">
+                        La limpieza es muy sencilla. Lava el dispositivo con agua tibia y jabón neutro antes y después de cada uso. Al ser resistente al agua, puedes sumergirlo completamente. También puedes usar limpiadores específicos para juguetes de silicona. Deja secar al aire y guárdalo en su bolsa premium.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">¿Cuánto tiempo tarda en verse resultados?</div>
+                    <div class="faq-answer">
+                        Los resultados varían según cada persona y su condición inicial. La mayoría de usuarias reportan mayor conciencia muscular desde la primera semana. Mejoras notables en tono muscular aparecen alrededor de la semana 2-3. Reducción significativa de escapes de orina se observa típicamente entre las semanas 3-6 con uso regular de 3-4 veces por semana.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">¿Funciona después del parto? ¿Cuándo puedo empezar a usarlo?</div>
+                    <div class="faq-answer">
+                        Sí, es especialmente efectivo post-parto. Sin embargo, es importante esperar al menos 6-8 semanas después del parto vaginal (o hasta que tu médico te dé el visto bueno). En caso de cesárea, consulta con tu ginecólogo. Una vez autorizada, Kegel Master es excelente para recuperar el tono muscular perdido durante el embarazo y parto.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">¿Necesito usar la app siempre o puedo usarlo sin teléfono?</div>
+                    <div class="faq-answer">
+                        La app es altamente recomendada porque te guía, mide tu progreso y mantiene tu motivación alta. Sin embargo, el dispositivo también puede usarse en modo offline una vez que hayas descargado las rutinas. La app sincronizará tus datos cuando vuelvas a conectarte. Es flexible según tus preferencias.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">¿El envío es discreto? ¿Qué dirá el paquete?</div>
+                    <div class="faq-answer">
+                        Sí, absolutamente discreto. El paquete viene en una caja neutra sin ninguna referencia al producto ni imágenes. La etiqueta de envío solo muestra tu dirección y nuestro nombre comercial genérico. Nadie sabrá qué hay dentro. Respetamos completamente tu privacidad.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">¿Qué garantía tiene el producto?</div>
+                    <div class="faq-answer">
+                        Ofrecemos una garantía de calidad de 12 meses que cubre cualquier defecto de fabricación. Si el dispositivo presenta algún problema técnico durante este período, lo reemplazamos sin costo adicional. Además, si no estás satisfecha con tu compra, contáctanos y buscaremos la mejor solución. Tu satisfacción es nuestra prioridad.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER CTA -->
+    <section class="footer-cta">
+        <div class="container">
+            <h2>Recupera tu Confianza y Bienestar</h2>
+            <p>Miles de mujeres ya fortalecieron su suelo pélvico con Kegel Master</p>
+            <a href="#oferta" class="cta-button-white">Comenzar mi Transformación Ahora</a>
+        </div>
+    </section>
+
+</body>
+</html>
