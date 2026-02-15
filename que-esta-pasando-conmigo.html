@@ -1,0 +1,1934 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GinecoSpa - Check-in emocional. Descubre qué está pasando contigo realmente y recibe orientación personalizada.">
+    <title>GinecoSpa - ¿Qué está pasando contigo realmente?</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================
+           CSS VARIABLES - PALETA ROSADA PREMIUM
+           ============================================ */
+        :root {
+            --rosa-palido: #FFF5F7;
+            --rosa-claro: #FFE5EC;
+            --rosa-medio: #FFB5C5;
+            --rosa-intenso: #FF8FA3;
+            --rosa-oscuro: #E75480;
+            --rosa-profundo: #C9365E;
+            --coral: #FF9B9B;
+            --lavanda: #F3E8FF;
+            --lavanda-medio: #E0CFFF;
+            --gris-calido: #6B5D5D;
+            --gris-suave: #9A8F8F;
+            --crema: #FFF8F0;
+            --blanco: #FFFFFF;
+            --texto-principal: #3D2E2E;
+            --texto-secundario: #7A6B6B;
+            --sombra-rosa: rgba(231, 84, 128, 0.12);
+            --sombra-suave: rgba(61, 46, 46, 0.06);
+            --gradiente-hero: linear-gradient(135deg, #FFF5F7 0%, #FFE5EC 30%, #F3E8FF 70%, #FFF5F7 100%);
+            --gradiente-boton: linear-gradient(135deg, #E75480 0%, #FF8FA3 100%);
+            --gradiente-boton-hover: linear-gradient(135deg, #C9365E 0%, #E75480 100%);
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--texto-principal);
+            background: var(--gradiente-hero);
+            background-attachment: fixed;
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .font-script {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        /* ============================================
+           BACKGROUND DECORATIONS
+           ============================================ */
+        .bg-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-orb-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--rosa-claro);
+            top: -100px;
+            right: -100px;
+            animation: orbFloat 12s ease-in-out infinite;
+        }
+
+        .bg-orb-2 {
+            width: 350px;
+            height: 350px;
+            background: var(--lavanda);
+            bottom: -80px;
+            left: -80px;
+            animation: orbFloat 15s ease-in-out infinite reverse;
+        }
+
+        .bg-orb-3 {
+            width: 250px;
+            height: 250px;
+            background: var(--rosa-medio);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: orbFloat 10s ease-in-out infinite 2s;
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -20px) scale(1.05); }
+            66% { transform: translate(-20px, 15px) scale(0.95); }
+        }
+
+        /* ============================================
+           LAYOUT - MAIN CONTAINER
+           ============================================ */
+        .app-container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 1rem;
+        }
+
+        /* ============================================
+           HEADER / BRAND
+           ============================================ */
+        .brand-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            animation: fadeSlideDown 0.8s var(--transition-smooth);
+        }
+
+        .brand-header .logo-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: var(--rosa-oscuro);
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .brand-header .logo-text:hover {
+            opacity: 0.8;
+        }
+
+        .brand-header .subtitle {
+            font-size: 0.75rem;
+            color: var(--gris-suave);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 0.25rem;
+        }
+
+        /* ============================================
+           WIZARD CARD
+           ============================================ */
+        .wizard-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 229, 236, 0.6);
+            border-radius: 28px;
+            box-shadow:
+                0 4px 24px var(--sombra-rosa),
+                0 1px 3px var(--sombra-suave);
+            width: 100%;
+            max-width: 640px;
+            padding: 2rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow 0.3s var(--transition-smooth);
+        }
+
+        .wizard-card:hover {
+            box-shadow:
+                0 8px 40px var(--sombra-rosa),
+                0 2px 6px var(--sombra-suave);
+        }
+
+        .wizard-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradiente-boton);
+            border-radius: 28px 28px 0 0;
+        }
+
+        @media (min-width: 640px) {
+            .wizard-card {
+                padding: 2.5rem 3rem;
+            }
+        }
+
+        /* ============================================
+           PROGRESS BAR
+           ============================================ */
+        .progress-wrapper {
+            margin-bottom: 2rem;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .progress-step {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--rosa-oscuro);
+            letter-spacing: 0.5px;
+        }
+
+        .progress-percentage {
+            font-size: 0.75rem;
+            color: var(--gris-suave);
+            font-weight: 500;
+        }
+
+        .progress-bar-track {
+            width: 100%;
+            height: 6px;
+            background: var(--rosa-claro);
+            border-radius: 100px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--gradiente-boton);
+            border-radius: 100px;
+            transition: width 0.5s var(--transition-smooth);
+            position: relative;
+        }
+
+        .progress-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* ============================================
+           QUESTION SCREEN
+           ============================================ */
+        .question-screen {
+            position: relative;
+            min-height: 320px;
+        }
+
+        .question-slide {
+            animation: slideIn 0.45s var(--transition-smooth);
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInReverse {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeSlideDown {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .question-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            display: block;
+            animation: floatIcon 3s ease-in-out infinite;
+        }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        .question-category {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.1rem;
+            color: var(--rosa-oscuro);
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .question-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--texto-principal);
+            margin-bottom: 1.5rem;
+            line-height: 1.35;
+        }
+
+        @media (min-width: 640px) {
+            .question-text {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* ============================================
+           RADIO OPTIONS
+           ============================================ */
+        .options-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .option-item {
+            position: relative;
+        }
+
+        .option-item input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            padding: 0.9rem 1.1rem;
+            background: var(--blanco);
+            border: 2px solid var(--rosa-claro);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.25s var(--transition-smooth);
+            font-size: 0.9rem;
+            color: var(--texto-principal);
+            user-select: none;
+        }
+
+        .option-label:hover {
+            border-color: var(--rosa-medio);
+            background: var(--rosa-palido);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 12px var(--sombra-rosa);
+        }
+
+        .option-radio-circle {
+            width: 22px;
+            height: 22px;
+            min-width: 22px;
+            border-radius: 50%;
+            border: 2px solid var(--rosa-medio);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.25s var(--transition-smooth);
+        }
+
+        .option-radio-circle::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--rosa-oscuro);
+            transform: scale(0);
+            transition: transform 0.25s var(--transition-smooth);
+        }
+
+        .option-item input[type="radio"]:checked + .option-label {
+            border-color: var(--rosa-oscuro);
+            background: linear-gradient(135deg, var(--rosa-palido), rgba(255, 229, 236, 0.5));
+            box-shadow: 0 2px 16px var(--sombra-rosa);
+        }
+
+        .option-item input[type="radio"]:checked + .option-label .option-radio-circle {
+            border-color: var(--rosa-oscuro);
+            background: var(--rosa-palido);
+        }
+
+        .option-item input[type="radio"]:checked + .option-label .option-radio-circle::after {
+            transform: scale(1);
+        }
+
+        .option-item input[type="radio"]:checked + .option-label .option-check {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .option-check {
+            margin-left: auto;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.25s var(--transition-smooth);
+            color: var(--rosa-oscuro);
+            font-size: 1rem;
+        }
+
+        .option-item input[type="radio"]:focus-visible + .option-label {
+            outline: 3px solid var(--rosa-intenso);
+            outline-offset: 2px;
+        }
+
+        /* ============================================
+           OBSERVATIONS TEXTAREA
+           ============================================ */
+        .observations-wrapper {
+            margin-bottom: 1.5rem;
+        }
+
+        .observations-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: var(--gris-suave);
+            transition: color 0.2s;
+            padding: 0.3rem 0;
+            background: none;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .observations-toggle:hover {
+            color: var(--rosa-oscuro);
+        }
+
+        .observations-toggle svg {
+            transition: transform 0.3s var(--transition-smooth);
+        }
+
+        .observations-toggle.active svg {
+            transform: rotate(180deg);
+        }
+
+        .observations-area {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s var(--transition-smooth), opacity 0.3s;
+            opacity: 0;
+        }
+
+        .observations-area.open {
+            max-height: 150px;
+            opacity: 1;
+            margin-top: 0.5rem;
+        }
+
+        .observations-area textarea {
+            width: 100%;
+            min-height: 70px;
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--rosa-claro);
+            border-radius: 12px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            color: var(--texto-principal);
+            background: var(--blanco);
+            resize: vertical;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+        }
+
+        .observations-area textarea:focus {
+            border-color: var(--rosa-intenso);
+            box-shadow: 0 0 0 3px rgba(231, 84, 128, 0.1);
+        }
+
+        .observations-area textarea::placeholder {
+            color: var(--gris-suave);
+            font-style: italic;
+        }
+
+        /* ============================================
+           VALIDATION MESSAGE
+           ============================================ */
+        .validation-msg {
+            display: none;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.8rem;
+            color: var(--rosa-oscuro);
+            margin-bottom: 1rem;
+            padding: 0.5rem 0.8rem;
+            background: rgba(231, 84, 128, 0.08);
+            border-radius: 8px;
+            animation: fadeSlideUp 0.3s var(--transition-smooth);
+        }
+
+        .validation-msg.show {
+            display: flex;
+        }
+
+        /* ============================================
+           NAVIGATION BUTTONS
+           ============================================ */
+        .nav-buttons {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+        }
+
+        .btn {
+            padding: 0.85rem 1.8rem;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s var(--transition-smooth);
+            border: none;
+            outline: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .btn:focus-visible {
+            outline: 3px solid var(--rosa-intenso);
+            outline-offset: 3px;
+        }
+
+        .btn-prev {
+            background: var(--blanco);
+            color: var(--gris-calido);
+            border: 2px solid var(--rosa-claro);
+        }
+
+        .btn-prev:hover {
+            border-color: var(--rosa-medio);
+            background: var(--rosa-palido);
+            color: var(--rosa-oscuro);
+        }
+
+        .btn-next {
+            background: var(--gradiente-boton);
+            color: var(--blanco);
+            box-shadow: 0 4px 16px rgba(231, 84, 128, 0.3);
+            flex: 1;
+            justify-content: center;
+        }
+
+        .btn-next:hover {
+            background: var(--gradiente-boton-hover);
+            box-shadow: 0 6px 24px rgba(231, 84, 128, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .btn-next:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 8px rgba(231, 84, 128, 0.3);
+        }
+
+        .btn-next:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-arrow {
+            transition: transform 0.2s;
+        }
+
+        .btn-next:hover .btn-arrow {
+            transform: translateX(3px);
+        }
+
+        .btn-prev:hover .btn-arrow-back {
+            transform: translateX(-3px);
+        }
+
+        /* ============================================
+           WELCOME SCREEN
+           ============================================ */
+        .welcome-screen {
+            text-align: center;
+            padding: 1rem 0;
+            animation: scaleIn 0.6s var(--transition-smooth);
+        }
+
+        .welcome-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            display: block;
+            animation: floatIcon 4s ease-in-out infinite;
+        }
+
+        .welcome-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--texto-principal);
+            margin-bottom: 0.75rem;
+        }
+
+        .welcome-subtitle {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.1rem;
+            color: var(--rosa-oscuro);
+            margin-bottom: 1.25rem;
+        }
+
+        .welcome-text {
+            font-size: 0.9rem;
+            color: var(--texto-secundario);
+            margin-bottom: 2rem;
+            max-width: 420px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .welcome-features {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .welcome-feature {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.75rem;
+            color: var(--gris-suave);
+        }
+
+        .welcome-feature span:first-child {
+            font-size: 1.3rem;
+        }
+
+        .btn-start {
+            background: var(--gradiente-boton);
+            color: var(--blanco);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 6px 24px rgba(231, 84, 128, 0.3);
+            transition: all 0.3s var(--transition-smooth);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-start:hover {
+            background: var(--gradiente-boton-hover);
+            box-shadow: 0 8px 32px rgba(231, 84, 128, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* ============================================
+           ANALYZING SCREEN
+           ============================================ */
+        .analyzing-screen {
+            text-align: center;
+            padding: 3rem 1rem;
+            animation: fadeIn 0.5s var(--transition-smooth);
+        }
+
+        .analyzing-spinner {
+            width: 64px;
+            height: 64px;
+            border: 4px solid var(--rosa-claro);
+            border-top-color: var(--rosa-oscuro);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .analyzing-dots {
+            display: inline-flex;
+            gap: 4px;
+            margin-left: 4px;
+        }
+
+        .analyzing-dots span {
+            width: 5px;
+            height: 5px;
+            background: var(--rosa-oscuro);
+            border-radius: 50%;
+            animation: dotPulse 1.4s ease-in-out infinite;
+        }
+
+        .analyzing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .analyzing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes dotPulse {
+            0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        .analyzing-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            color: var(--texto-principal);
+            margin-bottom: 0.5rem;
+        }
+
+        .analyzing-subtext {
+            font-size: 0.85rem;
+            color: var(--gris-suave);
+        }
+
+        /* ============================================
+           RESULTS SCREEN
+           ============================================ */
+        .results-screen {
+            animation: fadeSlideUp 0.6s var(--transition-smooth);
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .results-icon {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 0.75rem;
+        }
+
+        .results-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            color: var(--texto-principal);
+            margin-bottom: 0.25rem;
+        }
+
+        .results-subtitle {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1rem;
+            color: var(--rosa-oscuro);
+        }
+
+        /* Level Badge */
+        .level-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 1rem auto;
+        }
+
+        .level-ajuste {
+            background: linear-gradient(135deg, #E8F8F0, #D4EFDF);
+            color: #2E7D5B;
+            border: 1px solid #B8E6CC;
+        }
+
+        .level-carga {
+            background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+            color: #C77A00;
+            border: 1px solid #FFD54F;
+        }
+
+        .level-desgaste {
+            background: linear-gradient(135deg, #FFEBEE, #FFCDD2);
+            color: #C62828;
+            border: 1px solid #EF9A9A;
+        }
+
+        .level-saturacion {
+            background: linear-gradient(135deg, #EDE7F6, #D1C4E9);
+            color: #6A1B9A;
+            border: 1px solid #CE93D8;
+        }
+
+        .results-message {
+            font-size: 0.9rem;
+            color: var(--texto-secundario);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        /* Recommendations */
+        .recommendations {
+            background: var(--rosa-palido);
+            border-radius: 16px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .recommendations h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--texto-principal);
+            margin-bottom: 0.75rem;
+        }
+
+        .recommendation-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            padding: 0.5rem 0;
+            font-size: 0.85rem;
+            color: var(--texto-secundario);
+            line-height: 1.5;
+        }
+
+        .recommendation-item span:first-child {
+            font-size: 1rem;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--rosa-claro), transparent);
+            margin: 1.5rem 0;
+        }
+
+        /* ============================================
+           FOTO vs PELICULA BLOCK
+           ============================================ */
+        .foto-pelicula {
+            background: linear-gradient(135deg, var(--lavanda), var(--rosa-palido));
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .foto-pelicula h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            color: var(--texto-principal);
+            margin-bottom: 0.5rem;
+        }
+
+        .foto-pelicula p {
+            font-size: 0.85rem;
+            color: var(--texto-secundario);
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           RESUMEN PERSONALIZADO
+           ============================================ */
+        .resumen-personal {
+            background: var(--blanco);
+            border: 2px solid var(--rosa-claro);
+            border-radius: 16px;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .resumen-personal h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--rosa-oscuro);
+            margin-bottom: 0.75rem;
+        }
+
+        .resumen-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            padding: 0.4rem 0;
+            font-size: 0.85rem;
+            color: var(--texto-principal);
+            line-height: 1.5;
+        }
+
+        .resumen-item strong {
+            color: var(--rosa-oscuro);
+            font-weight: 600;
+        }
+
+        /* ============================================
+           PREVIEW BLOQUEADO
+           ============================================ */
+        .locked-preview {
+            position: relative;
+            background: var(--blanco);
+            border: 2px solid var(--lavanda-medio);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+
+        .locked-preview-visible {
+            margin-bottom: 0.75rem;
+        }
+
+        .locked-preview-visible p {
+            font-size: 0.85rem;
+            color: var(--texto-principal);
+            line-height: 1.6;
+            margin-bottom: 0.3rem;
+        }
+
+        .locked-preview-visible p strong {
+            color: var(--rosa-oscuro);
+        }
+
+        .locked-preview-blurred {
+            filter: blur(6px);
+            user-select: none;
+            pointer-events: none;
+            padding: 0.5rem 0;
+        }
+
+        .locked-preview-blurred p {
+            font-size: 0.85rem;
+            color: var(--texto-secundario);
+            line-height: 1.6;
+            margin-bottom: 0.3rem;
+        }
+
+        .locked-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 70%;
+            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.95));
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            padding-bottom: 1.25rem;
+        }
+
+        .lock-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .lock-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--rosa-oscuro);
+        }
+
+        /* Unlock includes */
+        .unlock-includes {
+            background: var(--rosa-palido);
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .unlock-includes h5 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: var(--texto-principal);
+            margin-bottom: 0.6rem;
+        }
+
+        .unlock-includes ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .unlock-includes li {
+            font-size: 0.82rem;
+            color: var(--texto-secundario);
+            padding: 0.25rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .unlock-includes li span:first-child {
+            font-size: 0.9rem;
+        }
+
+        /* ============================================
+           CTA UNLOCK
+           ============================================ */
+        .cta-unlock {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-unlock p {
+            font-size: 0.85rem;
+            color: var(--gris-suave);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .btn-unlock {
+            background: var(--gradiente-boton);
+            color: var(--blanco);
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 6px 24px rgba(231, 84, 128, 0.3);
+            transition: all 0.3s var(--transition-smooth);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .btn-unlock:hover {
+            background: var(--gradiente-boton-hover);
+            box-shadow: 0 8px 32px rgba(231, 84, 128, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* ============================================
+           RESTART BUTTON
+           ============================================ */
+        .btn-restart {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 1.5rem;
+            font-size: 0.8rem;
+            color: var(--gris-suave);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            transition: color 0.2s;
+        }
+
+        .btn-restart:hover {
+            color: var(--rosa-oscuro);
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .app-footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            font-size: 0.7rem;
+            color: var(--gris-suave);
+        }
+
+        .app-footer a {
+            color: var(--rosa-oscuro);
+            text-decoration: none;
+        }
+
+        .app-footer .disclaimer {
+            max-width: 500px;
+            margin: 0.5rem auto 0;
+            line-height: 1.5;
+            font-size: 0.65rem;
+            opacity: 0.7;
+        }
+
+        /* ============================================
+           UTILITY
+           ============================================ */
+        .hidden {
+            display: none !important;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--rosa-medio); border-radius: 100px; }
+    </style>
+</head>
+<body>
+
+    <!-- Background orbs -->
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+
+    <div class="app-container">
+
+        <!-- Brand -->
+        <header class="brand-header">
+            <a href="index.html" class="logo-text">GinecoSpa</a>
+            <div class="subtitle">Check-in Emocional</div>
+        </header>
+
+        <!-- Wizard Card -->
+        <main class="wizard-card" id="wizardCard" role="main" aria-label="Check-in emocional">
+
+            <!-- ====== WELCOME SCREEN ====== -->
+            <section id="welcomeScreen" class="welcome-screen" aria-label="Bienvenida">
+                <span class="welcome-icon" aria-hidden="true">🔮</span>
+                <h1 class="welcome-title">¿Qué está pasando contigo realmente?</h1>
+                <p class="welcome-subtitle">Un check-in breve para entender cómo estás</p>
+                <p class="welcome-text">
+                    Un momento para conectar contigo y entender qué te pide este momento de tu vida.
+                    No es un diagnóstico. No hay respuestas correctas o incorrectas.
+                </p>
+                <div class="welcome-features">
+                    <div class="welcome-feature">
+                        <span aria-hidden="true">🔒</span>
+                        <span>Privado</span>
+                    </div>
+                    <div class="welcome-feature">
+                        <span aria-hidden="true">⏱️</span>
+                        <span>2 min</span>
+                    </div>
+                    <div class="welcome-feature">
+                        <span aria-hidden="true">💜</span>
+                        <span>10 preguntas</span>
+                    </div>
+                </div>
+                <button class="btn-start" id="btnStart" aria-label="Comenzar check-in">
+                    Comenzar
+                    <span class="btn-arrow" aria-hidden="true">→</span>
+                </button>
+            </section>
+
+            <!-- ====== QUIZ SCREEN ====== -->
+            <section id="quizScreen" class="hidden" aria-label="Preguntas del check-in">
+                <div class="progress-wrapper">
+                    <div class="progress-info">
+                        <span class="progress-step" id="progressStep">Pregunta 1 de 10</span>
+                        <span class="progress-percentage" id="progressPercent">10%</span>
+                    </div>
+                    <div class="progress-bar-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="10">
+                        <div class="progress-bar-fill" id="progressFill" style="width: 10%"></div>
+                    </div>
+                </div>
+
+                <div class="question-screen" id="questionContainer"></div>
+
+                <div class="validation-msg" id="validationMsg" role="alert">
+                    <span aria-hidden="true">💡</span>
+                    <span>Por favor, selecciona una opción para continuar</span>
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn btn-prev" id="btnPrev" aria-label="Pregunta anterior">
+                        <span class="btn-arrow-back" aria-hidden="true">←</span>
+                        Anterior
+                    </button>
+                    <button class="btn btn-next" id="btnNext" aria-label="Siguiente pregunta">
+                        Siguiente
+                        <span class="btn-arrow" aria-hidden="true">→</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- ====== ANALYZING SCREEN ====== -->
+            <section id="analyzingScreen" class="hidden" aria-label="Analizando respuestas">
+                <div class="analyzing-screen">
+                    <div class="analyzing-spinner" aria-hidden="true"></div>
+                    <p class="analyzing-text">
+                        Leyendo tus respuestas
+                        <span class="analyzing-dots" aria-hidden="true">
+                            <span></span><span></span><span></span>
+                        </span>
+                    </p>
+                    <p class="analyzing-subtext">Preparando tu lectura personalizada</p>
+                </div>
+            </section>
+
+            <!-- ====== RESULTS SCREEN ====== -->
+            <section id="resultsScreen" class="hidden" aria-label="Resultados">
+                <div class="results-screen" id="resultsContent">
+                    <!-- Populated by JS -->
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>
+                <a href="index.html" class="font-script" style="font-size: 0.9rem;">GinecoSpa</a>
+                &nbsp;·&nbsp; Bienestar Íntimo y Estético
+            </p>
+            <p class="disclaimer">
+                Este cuestionario no constituye un diagnóstico médico ni sustituye la evaluación profesional.
+                Es una herramienta de orientación general. Si sientes que necesitas ayuda, consulta con un especialista.
+                No es emergencia.
+            </p>
+        </footer>
+
+    </div>
+
+    <!-- ============================================
+         JAVASCRIPT - APP LOGIC
+         ============================================ -->
+    <script>
+    (() => {
+        'use strict';
+
+        // ============================================
+        // ENDPOINT (PEGAR URL DEL NUEVO WEB APP AQUÍ)
+        // ============================================
+        const ENDPOINT = "PEGAR_AQUI_URL_WEB_APP";
+
+        // ============================================
+        // QUESTIONNAIRE DATA (10 preguntas, scoring 0-3)
+        // ============================================
+        const questions = [
+            {
+                id: 1, icon: '💜', category: 'Sentir interno',
+                text: 'En este momento de tu vida, ¿cómo te sientes por dentro?',
+                options: [
+                    { label: 'Tranquilo/a y estable', score: 0 },
+                    { label: 'Algo confundido/a', score: 1 },
+                    { label: 'Cansado/a y saturado/a', score: 2 },
+                    { label: 'Perdido/a o sin rumbo', score: 3 }
+                ]
+            },
+            {
+                id: 2, icon: '⚡', category: 'Energía',
+                text: '¿Cómo sientes tu energía en el día a día?',
+                options: [
+                    { label: 'Buena y constante', score: 0 },
+                    { label: 'Variable', score: 1 },
+                    { label: 'Baja la mayor parte del tiempo', score: 2 },
+                    { label: 'Muy baja, me cuesta arrancar', score: 3 }
+                ]
+            },
+            {
+                id: 3, icon: '🧭', category: 'Claridad',
+                text: 'Cuando piensas en tu vida actual, ¿qué tan claro lo tienes?',
+                options: [
+                    { label: 'Bastante claro', score: 0 },
+                    { label: 'Más o menos', score: 1 },
+                    { label: 'Poco claro', score: 2 },
+                    { label: 'Nada claro', score: 3 }
+                ]
+            },
+            {
+                id: 4, icon: '🧠', category: 'Carga mental',
+                text: '¿Qué tan cargada sientes tu mente últimamente?',
+                options: [
+                    { label: 'Ligera', score: 0 },
+                    { label: 'Moderada', score: 1 },
+                    { label: 'Bastante cargada', score: 2 },
+                    { label: 'Saturada, no para', score: 3 }
+                ]
+            },
+            {
+                id: 5, icon: '🌊', category: 'Emoción dominante',
+                text: '¿Qué emoción aparece con más frecuencia?',
+                options: [
+                    { label: 'Calma', score: 0 },
+                    { label: 'Preocupación', score: 1 },
+                    { label: 'Tristeza', score: 2 },
+                    { label: 'Frustración', score: 3 }
+                ]
+            },
+            {
+                id: 6, icon: '🎯', category: 'Alineación',
+                text: '¿Sientes que tu vida actual está alineada con lo que quieres?',
+                options: [
+                    { label: 'Sí, bastante', score: 0 },
+                    { label: 'En parte', score: 1 },
+                    { label: 'Poco', score: 2 },
+                    { label: 'Nada', score: 3 }
+                ]
+            },
+            {
+                id: 7, icon: '🏋️', category: 'Responsabilidades',
+                text: '¿Cómo te pesan hoy tus responsabilidades?',
+                options: [
+                    { label: 'Las manejo bien', score: 0 },
+                    { label: 'A veces me superan', score: 1 },
+                    { label: 'Me pesan bastante', score: 2 },
+                    { label: 'Me abruman', score: 3 }
+                ]
+            },
+            {
+                id: 8, icon: '🫧', category: 'Espacio personal',
+                text: '¿Cuánto espacio tienes para ti y lo que necesitas?',
+                options: [
+                    { label: 'Suficiente', score: 0 },
+                    { label: 'Algo', score: 1 },
+                    { label: 'Poco', score: 2 },
+                    { label: 'Nada', score: 3 }
+                ]
+            },
+            {
+                id: 9, icon: '🤝', category: 'Red de apoyo',
+                text: '¿Sientes que puedes apoyarte en alguien cuando lo necesitas?',
+                options: [
+                    { label: 'Sí', score: 0 },
+                    { label: 'En parte', score: 1 },
+                    { label: 'Muy poco', score: 2 },
+                    { label: 'No', score: 3 }
+                ]
+            },
+            {
+                id: 10, icon: '🪞', category: 'Lectura interna',
+                text: 'En el fondo, ¿qué sientes que está pasando contigo?',
+                options: [
+                    { label: 'Estoy bien, solo ajustándome', score: 0 },
+                    { label: 'Necesito ordenar cosas', score: 1 },
+                    { label: 'Algo importante pide atención', score: 2 },
+                    { label: 'Me siento desconectado/a de mí', score: 3 }
+                ]
+            }
+        ];
+
+        // ============================================
+        // AREA LABELS (for top-2 areas display)
+        // ============================================
+        const areaLabels = [
+            'Estabilidad emocional',
+            'Energía vital',
+            'Claridad de rumbo',
+            'Carga mental',
+            'Gestión emocional',
+            'Alineación con propósito',
+            'Peso de responsabilidades',
+            'Espacio personal',
+            'Red de apoyo',
+            'Conexión interna'
+        ];
+
+        // ============================================
+        // PROFILES
+        // ============================================
+        const profiles = {
+            A: {
+                label: 'Ajuste saludable',
+                icon: '🌿',
+                badgeClass: 'level-ajuste',
+                title: 'Estás en un buen momento',
+                message: `Lo que reflejan tus respuestas es que estás en una etapa de ajuste natural. No todo tiene que ser perfecto para que las cosas estén bien. A veces lo que sentimos es simplemente el pulso normal de una vida que se mueve, que cambia, que se adapta.\n\nNo necesitas arreglar nada urgente. Pero sí vale la pena que cuides lo que ya funciona, porque es desde ahí donde se construye lo que viene.`,
+                recommendations: [
+                    { icon: '🌱', text: 'Protege tus rutinas de descanso y los pequeños momentos que te recargan. Son tu base.' },
+                    { icon: '📝', text: 'Dedica 5 minutos al día a revisar cómo te sientes. Un diario breve puede ser revelador.' },
+                    { icon: '🌸', text: 'Permítete disfrutar lo que ya tienes. No todo necesita ser "más" para ser suficiente.' }
+                ],
+                closing: 'Sin embargo, incluso cuando estamos bien, hay matices que a veces no vemos. ¿Qué está debajo de ese equilibrio? ¿Hay algo que estás sosteniendo sin darte cuenta?'
+            },
+            B: {
+                label: 'Carga moderada',
+                icon: '🌤️',
+                badgeClass: 'level-carga',
+                title: 'Estás cargando más de lo que crees',
+                message: `Puede que desde fuera todo parezca "normal", pero por dentro hay algo que pesa. No es alarma, pero tampoco es para ignorar. Lo que sientes tiene sentido: tu cuerpo y tu mente están pidiendo un ajuste, un respiro, un orden diferente.\n\nEste es el tipo de momento donde hacer una pausa a tiempo puede evitar que la carga se acumule hasta el punto de quiebre.`,
+                recommendations: [
+                    { icon: '🎯', text: 'Identifica 1 cosa que puedas soltar o delegar esta semana. No tienes que cargar todo.' },
+                    { icon: '🫧', text: 'Bloquea al menos 30 minutos al día que sean solo para ti. Sin culpa, sin productividad.' },
+                    { icon: '💬', text: 'Habla con alguien de confianza sobre lo que estás sintiendo. Decirlo en voz alta ya es un primer paso.' }
+                ],
+                closing: 'Lo que ves aquí es un primer vistazo. Pero detrás de la carga hay patrones, fugas de energía, y prioridades que aún no estás viendo con claridad.'
+            },
+            C: {
+                label: 'Desgaste emocional',
+                icon: '🌧️',
+                badgeClass: 'level-desgaste',
+                title: 'Tu cuerpo ya te está hablando',
+                message: `Hay señales claras de que llevas un tiempo funcionando con más peso del que deberías cargar. No es que estés "mal" — es que estás sosteniendo demasiado durante demasiado tiempo, y eso tiene un costo.\n\nLo más importante ahora no es resolver todo, sino dejar de ignorar lo que sientes. Tu agotamiento no es debilidad — es información.`,
+                recommendations: [
+                    { icon: '🛑', text: 'Para. Antes de seguir haciendo, necesitas entender qué estás sintiendo y por qué.' },
+                    { icon: '🔋', text: 'Prioriza dormir bien y comer bien esta semana. Tu sistema nervioso necesita lo básico.' },
+                    { icon: '🤝', text: 'Considera hablar con un profesional. No porque estés "mal", sino porque mereces claridad.' }
+                ],
+                closing: 'Tus respuestas revelan un patrón más profundo. Hay algo que te drena, algo que necesitas recuperar, y un paso que es más urgente que los demás.'
+            },
+            D: {
+                label: 'Saturación / desconexión',
+                icon: '🌑',
+                badgeClass: 'level-saturacion',
+                title: 'Necesitas atención, y está bien',
+                message: `Lo que muestran tus respuestas es que estás en un punto donde ya no se trata de "aguantar un poco más". Hay una desconexión importante entre lo que necesitas y lo que estás viviendo, y eso puede sentirse como vacío, confusión o agotamiento profundo.\n\nEste no es un resultado para asustarte — es para validarte. Lo que sientes es real, tiene causas, y tiene solución. Pero necesitas apoyo, no solo fuerza de voluntad.`,
+                recommendations: [
+                    { icon: '🩺', text: 'Busca ayuda profesional esta semana. No mañana, no "cuando pueda" — esta semana.' },
+                    { icon: '🤍', text: 'Deja de exigirte funcionar como si todo estuviera bien. Permítete sentir lo que sientes.' },
+                    { icon: '🫂', text: 'Acércate a una persona de confianza. No tienes que explicar todo — solo necesitas no estar solo/a.' }
+                ],
+                closing: 'Lo que ves aquí es la superficie. Debajo hay un patrón que explica mucho de lo que sientes, y un camino para empezar a reconectarte contigo.'
+            }
+        };
+
+        // ============================================
+        // DETERMINISTIC PATTERNS
+        // ============================================
+        const patternRules = [
+            {
+                id: 'saturacion_cero_pausa',
+                check: (a) => a[3] >= 2 && a[7] >= 2,
+                name: 'Saturación + cero pausa',
+                signal: 'Tu mente no para y no tienes espacio para ti. Es como intentar llenar un vaso que ya está rebosando.',
+                step: 'Necesitas crear un espacio de silencio diario — aunque sean 10 minutos. Tu sistema nervioso lo necesita.'
+            },
+            {
+                id: 'sostener_sola',
+                check: (a) => a[8] >= 2 && (a[4] >= 2 || a[9] >= 2),
+                name: 'Sostener sola / desconexión emocional',
+                signal: 'Llevas demasiado tiempo sosteniendo sin pedir ayuda. La tristeza o desconexión son señales de que necesitas red.',
+                step: 'Habla con alguien esta semana. No para pedir soluciones, sino para dejar de cargar en silencio.'
+            },
+            {
+                id: 'desconexion_rumbo',
+                check: (a) => a[2] >= 2 && a[9] >= 2,
+                name: 'Desconexión de rumbo',
+                signal: 'No es que no puedas — es que no sabes hacia dónde ir. La falta de claridad drena más que el esfuerzo.',
+                step: 'Antes de hacer más, necesitas detenerte y preguntarte: ¿qué quiero realmente?'
+            },
+            {
+                id: 'desgaste_carga',
+                check: (a) => a[1] >= 2 && a[6] >= 2,
+                name: 'Desgaste por carga sostenida',
+                signal: 'Tu energía baja y tus responsabilidades altas están creando un ciclo de agotamiento que se autoalimenta.',
+                step: 'Identifica 1 responsabilidad que puedas soltar o delegar esta semana. Tu energía es limitada.'
+            }
+        ];
+
+        const defaultPattern = {
+            id: 'ajuste_transicion',
+            name: 'Ajuste interno / transición',
+            signal: 'Estás en un momento de reacomodación natural. Las cosas se están moviendo, pero aún no encuentras el nuevo equilibrio.',
+            step: 'Sé paciente contigo. El ajuste lleva tiempo, y reconocerlo ya es avanzar.'
+        };
+
+        // ============================================
+        // FOCUS RULES (deterministic)
+        // ============================================
+        function getFocus(profile, topAreas) {
+            if (profile === 'D') return 'Recuperar conexión contigo antes de intentar resolver lo externo.';
+            if (profile === 'C') return 'Frenar el desgaste: descanso, límites, y una conversación honesta contigo.';
+            if (topAreas.includes(3) || topAreas.includes(7)) return 'Reducir la sobrecarga mental y crear espacio para procesar.';
+            if (topAreas.includes(8) || topAreas.includes(4)) return 'Reconectar con lo que sientes y necesitas realmente.';
+            if (profile === 'B') return 'Ordenar prioridades y proteger tu energía antes de que se agote.';
+            return 'Mantener lo que funciona y estar atento/a a lo que necesita ajuste.';
+        }
+
+        function getWeeklyPriority(profile, topAreas) {
+            if (profile === 'D') return 'Hablar con un profesional o una persona de confianza.';
+            if (profile === 'C') return 'Dormir 7+ horas y reducir 1 compromiso no esencial.';
+            if (topAreas.includes(7)) return 'Soltar o delegar 1 responsabilidad concreta.';
+            if (topAreas.includes(3)) return 'Dedicar 15 minutos al día a escribir lo que piensas sin filtro.';
+            if (topAreas.includes(8)) return 'Bloquear 30 minutos al día solo para ti.';
+            if (profile === 'B') return 'Identificar qué te drena más energía y ponerle un límite.';
+            return 'Dedicar tiempo a una actividad que te haga bien sin ninguna obligación.';
+        }
+
+        // ============================================
+        // STATE
+        // ============================================
+        let currentStep = 0;
+        let answers = new Array(questions.length).fill(null);
+        let notes = new Array(questions.length).fill('');
+        let direction = 'forward';
+
+        // ============================================
+        // DOM
+        // ============================================
+        const $ = (sel) => document.querySelector(sel);
+        const welcomeScreen = $('#welcomeScreen');
+        const quizScreen = $('#quizScreen');
+        const analyzingScreen = $('#analyzingScreen');
+        const resultsScreen = $('#resultsScreen');
+
+        const btnStart = $('#btnStart');
+        const btnPrev = $('#btnPrev');
+        const btnNext = $('#btnNext');
+
+        const progressStep = $('#progressStep');
+        const progressPercent = $('#progressPercent');
+        const progressFill = $('#progressFill');
+        const questionContainer = $('#questionContainer');
+        const validationMsg = $('#validationMsg');
+
+        // ============================================
+        // SCREEN MANAGEMENT
+        // ============================================
+        function showScreen(screen) {
+            [welcomeScreen, quizScreen, analyzingScreen, resultsScreen]
+                .forEach(s => s.classList.add('hidden'));
+            screen.classList.remove('hidden');
+        }
+
+        // ============================================
+        // RENDER QUESTION
+        // ============================================
+        function renderQuestion(index) {
+            const q = questions[index];
+            const selectedAnswer = answers[index];
+            const currentNote = notes[index];
+
+            const html = `
+                <div class="question-slide" style="animation-name: ${direction === 'forward' ? 'slideIn' : 'slideInReverse'}">
+                    <span class="question-icon" aria-hidden="true">${q.icon}</span>
+                    <p class="question-category">${q.category}</p>
+                    <h2 class="question-text">${q.text}</h2>
+                    <div class="options-group" role="radiogroup" aria-label="${q.text}">
+                        ${q.options.map((opt, i) => `
+                            <div class="option-item">
+                                <input
+                                    type="radio"
+                                    name="q${q.id}"
+                                    id="q${q.id}_opt${i}"
+                                    value="${i}"
+                                    ${selectedAnswer === i ? 'checked' : ''}
+                                    tabindex="0"
+                                >
+                                <label class="option-label" for="q${q.id}_opt${i}">
+                                    <span class="option-radio-circle"></span>
+                                    <span>${opt.label}</span>
+                                    <span class="option-check" aria-hidden="true">✓</span>
+                                </label>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="observations-wrapper">
+                        <button
+                            class="observations-toggle ${currentNote ? 'active' : ''}"
+                            type="button"
+                            aria-expanded="${currentNote ? 'true' : 'false'}"
+                            id="obsToggle"
+                        >
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                            Agregar observación (opcional)
+                        </button>
+                        <div class="observations-area ${currentNote ? 'open' : ''}" id="obsArea">
+                            <textarea
+                                placeholder="Escribe aquí cualquier detalle que quieras agregar…"
+                                aria-label="Observaciones opcionales"
+                                id="obsTextarea"
+                            >${currentNote}</textarea>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            questionContainer.innerHTML = html;
+
+            // Bind radios
+            questionContainer.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    answers[index] = parseInt(e.target.value);
+                    validationMsg.classList.remove('show');
+                });
+            });
+
+            // Bind observation toggle
+            const toggle = $('#obsToggle');
+            const area = $('#obsArea');
+            const textarea = $('#obsTextarea');
+
+            toggle.addEventListener('click', () => {
+                const isOpen = area.classList.toggle('open');
+                toggle.classList.toggle('active', isOpen);
+                toggle.setAttribute('aria-expanded', isOpen);
+                if (isOpen && textarea) textarea.focus();
+            });
+
+            if (textarea) {
+                textarea.addEventListener('input', (e) => {
+                    notes[index] = e.target.value;
+                });
+            }
+
+            updateProgress(index);
+            btnPrev.style.display = index === 0 ? 'none' : 'inline-flex';
+            btnNext.innerHTML = index === questions.length - 1
+                ? 'Ver resultados <span class="btn-arrow" aria-hidden="true">→</span>'
+                : 'Siguiente <span class="btn-arrow" aria-hidden="true">→</span>';
+            validationMsg.classList.remove('show');
+        }
+
+        // ============================================
+        // PROGRESS
+        // ============================================
+        function updateProgress(index) {
+            const total = questions.length;
+            const pct = Math.round(((index + 1) / total) * 100);
+            progressStep.textContent = `Pregunta ${index + 1} de ${total}`;
+            progressPercent.textContent = `${pct}%`;
+            progressFill.style.width = `${pct}%`;
+            progressFill.parentElement.setAttribute('aria-valuenow', pct);
+        }
+
+        // ============================================
+        // CALCULATE RESULTS
+        // ============================================
+        function calculateResults() {
+            // Get scores array
+            const scores = answers.map((a, i) => a !== null ? questions[i].options[a].score : 0);
+            const totalScore = scores.reduce((sum, s) => sum + s, 0);
+
+            // Determine profile
+            let profileKey;
+            if (totalScore <= 7) profileKey = 'A';
+            else if (totalScore <= 15) profileKey = 'B';
+            else if (totalScore <= 23) profileKey = 'C';
+            else profileKey = 'D';
+
+            const profile = profiles[profileKey];
+
+            // Top 2 areas by score
+            const indexed = scores.map((s, i) => ({ index: i, score: s }));
+            indexed.sort((a, b) => b.score - a.score || a.index - b.index);
+            const topAreas = [indexed[0].index, indexed[1].index];
+
+            // Determine pattern
+            let pattern = defaultPattern;
+            for (const rule of patternRules) {
+                if (rule.check(scores)) {
+                    pattern = rule;
+                    break;
+                }
+            }
+
+            // Focus and weekly priority
+            const focus = getFocus(profileKey, topAreas);
+            const weeklyPriority = getWeeklyPriority(profileKey, topAreas);
+
+            return {
+                totalScore,
+                profileKey,
+                profile,
+                scores,
+                topAreas,
+                pattern,
+                focus,
+                weeklyPriority
+            };
+        }
+
+        // ============================================
+        // SHOW RESULTS
+        // ============================================
+        function showResults(r) {
+            const content = $('#resultsContent');
+            content.innerHTML = `
+                <div class="results-header">
+                    <span class="results-icon" aria-hidden="true">${r.profile.icon}</span>
+                    <h2 class="results-title">${r.profile.title}</h2>
+                    <p class="results-subtitle">Tu lectura personal</p>
+                </div>
+
+                <!-- Level Badge -->
+                <div style="text-align: center;">
+                    <span class="level-badge ${r.profile.badgeClass}">
+                        <span aria-hidden="true">${r.profile.icon}</span> ${r.profile.label}
+                    </span>
+                </div>
+
+                <!-- Message -->
+                <div class="results-message">${r.profile.message.replace(/\n/g, '<br>')}</div>
+
+                <!-- Recommendations -->
+                <div class="recommendations">
+                    <h4>💡 Recomendaciones para este momento</h4>
+                    ${r.profile.recommendations.map(rec => `
+                        <div class="recommendation-item">
+                            <span aria-hidden="true">${rec.icon}</span>
+                            <span>${rec.text}</span>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <div class="divider"></div>
+
+                <!-- Foto vs Película -->
+                <div class="foto-pelicula">
+                    <h4>Lo que ves aquí es la foto… pero falta la película.</h4>
+                    <p>
+                        Este resultado muestra una parte de lo que está pasando, pero no el cuadro completo.
+                        El análisis completo conecta tus respuestas para mostrar qué te drena, qué necesitas
+                        recuperar primero y cuál es el siguiente paso más efectivo.
+                    </p>
+                </div>
+
+                <!-- Resumen Personalizado -->
+                <div class="resumen-personal">
+                    <h4>🔍 Tu lectura rápida</h4>
+                    <div class="resumen-item">
+                        <span aria-hidden="true">📌</span>
+                        <span><strong>Tus 2 áreas más altas:</strong> ${areaLabels[r.topAreas[0]]} y ${areaLabels[r.topAreas[1]]}</span>
+                    </div>
+                    <div class="resumen-item">
+                        <span aria-hidden="true">🎯</span>
+                        <span><strong>Tu foco principal hoy:</strong> ${r.focus}</span>
+                    </div>
+                    <div class="resumen-item">
+                        <span aria-hidden="true">📋</span>
+                        <span><strong>Una prioridad para esta semana:</strong> ${r.weeklyPriority}</span>
+                    </div>
+                </div>
+
+                <!-- Preview Bloqueado -->
+                <div class="locked-preview">
+                    <div class="locked-preview-visible">
+                        <p><strong>Tu patrón principal:</strong> ${r.pattern.name}</p>
+                        <p><strong>Señal típica:</strong> ${r.pattern.signal}</p>
+                        <p><strong>Primer paso sugerido:</strong> ${r.pattern.step}</p>
+                    </div>
+                    <div class="locked-preview-blurred">
+                        <p><strong>Fuga de energía #1:</strong> Lo que más te drena hoy no es lo que crees. Hay un patrón oculto que conecta tu cansancio con una necesidad no atendida.</p>
+                        <p><strong>Prioridad de reparación:</strong> Antes de resolver lo urgente, necesitas atender lo que tu cuerpo lleva meses pidiendo en silencio.</p>
+                        <p><strong>Plan de 7 días:</strong> Un plan paso a paso adaptado a tu perfil para empezar a sentir cambios reales esta semana.</p>
+                        <p><strong>Límites recomendados:</strong> Las 3 cosas que necesitas dejar de hacer para proteger tu energía y bienestar.</p>
+                    </div>
+                    <div class="locked-overlay">
+                        <span class="lock-icon" aria-hidden="true">🔒</span>
+                        <span class="lock-label">Desbloquea el análisis completo</span>
+                    </div>
+                </div>
+
+                <!-- Unlock Includes -->
+                <div class="unlock-includes">
+                    <h5>El análisis completo incluye:</h5>
+                    <ul>
+                        <li><span aria-hidden="true">✦</span> Patrón principal detallado</li>
+                        <li><span aria-hidden="true">✦</span> Fuga de energía #1</li>
+                        <li><span aria-hidden="true">✦</span> Prioridad de reparación</li>
+                        <li><span aria-hidden="true">✦</span> Plan personalizado de 7 días</li>
+                        <li><span aria-hidden="true">✦</span> Límites recomendados</li>
+                    </ul>
+                </div>
+
+                <!-- CTA Unlock -->
+                <div class="cta-unlock">
+                    <p>Si quieres una lectura más profunda y personalizada, puedes desbloquear el análisis completo.</p>
+                    <a href="nivel2.html" class="btn-unlock">
+                        Profundizar en mi análisis
+                        <span class="btn-arrow" aria-hidden="true">→</span>
+                    </a>
+                </div>
+
+                <div class="divider"></div>
+
+                <!-- Restart -->
+                <div style="text-align: center;">
+                    <button class="btn-restart" id="btnRestart">
+                        <span aria-hidden="true">↺</span> Realizar de nuevo
+                    </button>
+                </div>
+            `;
+
+            // Bind restart
+            $('#btnRestart').addEventListener('click', () => {
+                currentStep = 0;
+                answers = new Array(questions.length).fill(null);
+                notes = new Array(questions.length).fill('');
+                showScreen(welcomeScreen);
+            });
+
+            showScreen(resultsScreen);
+        }
+
+        // ============================================
+        // SEND DATA TO BACKEND
+        // ============================================
+        function sendData(resultData) {
+            const payload = {
+                funnel: 'momento_vital_v1',
+                timestamp: new Date().toISOString(),
+                score_total: resultData.totalScore,
+                perfil: resultData.profileKey,
+                answers: answers.map((a, i) => ({
+                    qId: i + 1,
+                    optionLabel: a !== null ? questions[i].options[a].label : null,
+                    score: a !== null ? questions[i].options[a].score : 0
+                })),
+                notes: notes.map((n, i) => ({ qId: i + 1, text: n })).filter(n => n.text),
+                user: { name: '', email: '', whatsapp: '' },
+                page_url: window.location.href,
+                user_agent: navigator.userAgent,
+                referrer: document.referrer || ''
+            };
+
+            // Save to localStorage as backup
+            try {
+                localStorage.setItem('ginecospa_momento_vital_backup', JSON.stringify(payload));
+            } catch (e) { /* silent */ }
+
+            // POST to endpoint
+            if (ENDPOINT && ENDPOINT !== 'PEGAR_AQUI_URL_WEB_APP') {
+                fetch(ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify(payload),
+                    mode: 'no-cors'
+                }).then(() => {
+                    console.log('Datos enviados correctamente');
+                }).catch((err) => {
+                    console.warn('Error enviando datos, guardado en localStorage:', err);
+                });
+            } else {
+                console.log('=== PAYLOAD (endpoint no configurado) ===');
+                console.log(JSON.stringify(payload, null, 2));
+            }
+        }
+
+        // ============================================
+        // EVENT HANDLERS
+        // ============================================
+        btnStart.addEventListener('click', () => {
+            currentStep = 1;
+            showScreen(quizScreen);
+            renderQuestion(0);
+        });
+
+        btnNext.addEventListener('click', () => {
+            const qIndex = currentStep - 1;
+            if (answers[qIndex] === null) {
+                validationMsg.classList.add('show');
+                return;
+            }
+            direction = 'forward';
+
+            if (currentStep < questions.length) {
+                currentStep++;
+                renderQuestion(currentStep - 1);
+            } else {
+                // Finished
+                showScreen(analyzingScreen);
+                const resultData = calculateResults();
+                sendData(resultData);
+
+                setTimeout(() => {
+                    showResults(resultData);
+                }, 2500);
+            }
+        });
+
+        btnPrev.addEventListener('click', () => {
+            if (currentStep > 1) {
+                direction = 'backward';
+                currentStep--;
+                renderQuestion(currentStep - 1);
+            }
+        });
+
+        // Keyboard nav
+        document.addEventListener('keydown', (e) => {
+            if (quizScreen.classList.contains('hidden')) return;
+            if (e.key === 'Enter' && !e.target.matches('textarea')) {
+                e.preventDefault();
+                btnNext.click();
+            }
+        });
+
+        // Auto-save state
+        let saveTimeout;
+        function saveState() {
+            try {
+                localStorage.setItem('ginecospa_momento_state', JSON.stringify({
+                    currentStep, answers, notes
+                }));
+            } catch (e) { /* silent */ }
+        }
+
+        function loadState() {
+            try {
+                const saved = localStorage.getItem('ginecospa_momento_state');
+                if (saved) {
+                    const state = JSON.parse(saved);
+                    if (state.answers && state.answers.length === questions.length) {
+                        currentStep = state.currentStep || 0;
+                        answers = state.answers;
+                        notes = state.notes || new Array(questions.length).fill('');
+                        if (currentStep > 0 && currentStep <= questions.length) {
+                            showScreen(quizScreen);
+                            renderQuestion(currentStep - 1);
+                        }
+                    }
+                }
+            } catch (e) { /* silent */ }
+        }
+
+        document.addEventListener('change', () => { clearTimeout(saveTimeout); saveTimeout = setTimeout(saveState, 500); });
+        document.addEventListener('input', () => { clearTimeout(saveTimeout); saveTimeout = setTimeout(saveState, 500); });
+
+        loadState();
+
+    })();
+    </script>
+
+</body>
+</html>
