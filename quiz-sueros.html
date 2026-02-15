@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GinecoSpa - Descubre qué suero es ideal para ti. Quiz rápido y personalizado de sueroterapia.">
+    <title>GinecoSpa - ¿Qué Suero Necesita Tu Cuerpo?</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --rosa-palido: #FFF5F7;
+            --rosa-claro: #FFE5EC;
+            --rosa-medio: #FFB5C5;
+            --rosa-intenso: #FF8FA3;
+            --rosa-oscuro: #E75480;
+            --rosa-profundo: #C9365E;
+            --coral: #FF9B9B;
+            --lavanda: #F3E8FF;
+            --lavanda-medio: #E0CFFF;
+            --gris-calido: #6B5D5D;
+            --gris-suave: #9A8F8F;
+            --crema: #FFF8F0;
+            --blanco: #FFFFFF;
+            --texto-principal: #3D2E2E;
+            --texto-secundario: #7A6B6B;
+            --sombra-rosa: rgba(231, 84, 128, 0.12);
+            --sombra-suave: rgba(61, 46, 46, 0.06);
+            --gradiente-hero: linear-gradient(135deg, #FFF5F7 0%, #FFE5EC 30%, #F3E8FF 70%, #FFF5F7 100%);
+            --gradiente-boton: linear-gradient(135deg, #E75480 0%, #FF8FA3 100%);
+            --gradiente-boton-hover: linear-gradient(135deg, #C9365E 0%, #E75480 100%);
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --verde-suave: #2E7D5B;
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: 16px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+        body { font-family: 'Montserrat', sans-serif; color: var(--texto-principal); background: var(--gradiente-hero); background-attachment: fixed; min-height: 100vh; line-height: 1.6; overflow-x: hidden; }
+        h1,h2,h3,h4,h5,h6 { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.2; }
+        .font-script { font-family: 'Dancing Script', cursive; }
+
+        .bg-orb { position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.3; pointer-events: none; z-index: 0; }
+        .bg-orb-1 { width: 400px; height: 400px; background: var(--rosa-claro); top: -100px; right: -100px; animation: orbFloat 12s ease-in-out infinite; }
+        .bg-orb-2 { width: 350px; height: 350px; background: var(--lavanda); bottom: -80px; left: -80px; animation: orbFloat 15s ease-in-out infinite reverse; }
+        @keyframes orbFloat { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(30px,-20px) scale(1.05); } 66% { transform: translate(-20px,15px) scale(0.95); } }
+
+        .app-container { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 1.5rem 1rem; }
+        .brand-header { text-align: center; margin-bottom: 1.5rem; animation: fadeSlideDown 0.8s var(--transition-smooth); }
+        .brand-header .logo-text { font-family: 'Dancing Script', cursive; font-size: 2rem; color: var(--rosa-oscuro); text-decoration: none; }
+        .brand-header .subtitle { font-size: 0.75rem; color: var(--gris-suave); letter-spacing: 3px; text-transform: uppercase; margin-top: 0.25rem; }
+
+        .wizard-card {
+            background: rgba(255,255,255,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,229,236,0.6); border-radius: 28px;
+            box-shadow: 0 4px 24px var(--sombra-rosa), 0 1px 3px var(--sombra-suave);
+            width: 100%; max-width: 640px; padding: 2rem 1.5rem; position: relative; overflow: hidden;
+        }
+        .wizard-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background: var(--gradiente-boton); border-radius: 28px 28px 0 0; }
+        @media (min-width: 640px) { .wizard-card { padding: 2.5rem 3rem; } }
+
+        /* Progress */
+        .progress-wrapper { margin-bottom: 2rem; }
+        .progress-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+        .progress-step { font-size: 0.8rem; font-weight: 600; color: var(--rosa-oscuro); letter-spacing: 0.5px; }
+        .progress-percentage { font-size: 0.75rem; color: var(--gris-suave); font-weight: 500; }
+        .progress-bar-track { width: 100%; height: 6px; background: var(--rosa-claro); border-radius: 100px; overflow: hidden; }
+        .progress-bar-fill { height: 100%; background: var(--gradiente-boton); border-radius: 100px; transition: width 0.5s var(--transition-smooth); position: relative; }
+        .progress-bar-fill::after { content:''; position:absolute; top:0; left:0; right:0; bottom:0; background: linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent); animation: shimmer 2s ease-in-out infinite; }
+        @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+
+        /* Animations */
+        @keyframes slideIn { from { opacity:0; transform:translateX(40px); } to { opacity:1; transform:translateX(0); } }
+        @keyframes slideInReverse { from { opacity:0; transform:translateX(-40px); } to { opacity:1; transform:translateX(0); } }
+        @keyframes fadeSlideDown { from { opacity:0; transform:translateY(-15px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes fadeSlideUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+        @keyframes scaleIn { from { opacity:0; transform:scale(0.9); } to { opacity:1; transform:scale(1); } }
+        @keyframes floatIcon { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes dotPulse { 0%,80%,100% { transform:scale(0.6); opacity:0.4; } 40% { transform:scale(1); opacity:1; } }
+
+        /* Question */
+        .question-screen { position: relative; min-height: 320px; }
+        .question-slide { animation: slideIn 0.45s var(--transition-smooth); }
+        .question-icon { font-size: 2rem; margin-bottom: 0.5rem; display: block; animation: floatIcon 3s ease-in-out infinite; }
+        .question-category { font-family: 'Dancing Script', cursive; font-size: 1.1rem; color: var(--rosa-oscuro); margin-bottom: 0.5rem; opacity: 0.9; }
+        .question-text { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--texto-principal); margin-bottom: 1.5rem; line-height: 1.35; }
+        @media (min-width: 640px) { .question-text { font-size: 1.6rem; } }
+
+        /* Options */
+        .options-group { display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 1.25rem; }
+        .option-item { position: relative; }
+        .option-item input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+        .option-label {
+            display: flex; align-items: center; gap: 0.85rem; padding: 0.9rem 1.1rem;
+            background: var(--blanco); border: 2px solid var(--rosa-claro); border-radius: 14px;
+            cursor: pointer; transition: all 0.25s var(--transition-smooth); font-size: 0.9rem;
+            color: var(--texto-principal); user-select: none;
+        }
+        .option-label:hover { border-color: var(--rosa-medio); background: var(--rosa-palido); transform: translateY(-1px); box-shadow: 0 2px 12px var(--sombra-rosa); }
+        .option-radio-circle { width: 22px; height: 22px; min-width: 22px; border-radius: 50%; border: 2px solid var(--rosa-medio); display: flex; align-items: center; justify-content: center; transition: all 0.25s var(--transition-smooth); }
+        .option-radio-circle::after { content:''; width: 10px; height: 10px; border-radius: 50%; background: var(--rosa-oscuro); transform: scale(0); transition: transform 0.25s var(--transition-smooth); }
+        .option-item input:checked + .option-label { border-color: var(--rosa-oscuro); background: linear-gradient(135deg,var(--rosa-palido),rgba(255,229,236,0.5)); box-shadow: 0 2px 16px var(--sombra-rosa); }
+        .option-item input:checked + .option-label .option-radio-circle { border-color: var(--rosa-oscuro); background: var(--rosa-palido); }
+        .option-item input:checked + .option-label .option-radio-circle::after { transform: scale(1); }
+        .option-item input:checked + .option-label .option-check { opacity: 1; transform: scale(1); }
+        .option-check { margin-left: auto; opacity: 0; transform: scale(0.5); transition: all 0.25s var(--transition-smooth); color: var(--rosa-oscuro); }
+
+        /* Validation */
+        .validation-msg { display: none; align-items: center; gap: 0.4rem; font-size: 0.8rem; color: var(--rosa-oscuro); margin-bottom: 1rem; padding: 0.5rem 0.8rem; background: rgba(231,84,128,0.08); border-radius: 8px; animation: fadeSlideUp 0.3s; }
+        .validation-msg.show { display: flex; }
+
+        /* Nav */
+        .nav-buttons { display: flex; gap: 0.75rem; justify-content: space-between; margin-top: 0.5rem; }
+        .btn { padding: 0.85rem 1.8rem; border-radius: 50px; font-family: 'Montserrat', sans-serif; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.3s var(--transition-smooth); border: none; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+        .btn-prev { background: var(--blanco); color: var(--gris-calido); border: 2px solid var(--rosa-claro); }
+        .btn-prev:hover { border-color: var(--rosa-medio); background: var(--rosa-palido); color: var(--rosa-oscuro); }
+        .btn-next { background: var(--gradiente-boton); color: var(--blanco); box-shadow: 0 4px 16px rgba(231,84,128,0.3); flex: 1; justify-content: center; }
+        .btn-next:hover { background: var(--gradiente-boton-hover); box-shadow: 0 6px 24px rgba(231,84,128,0.4); transform: translateY(-1px); }
+        .btn-next:active { transform: translateY(0); }
+
+        /* Welcome */
+        .welcome-screen { text-align: center; padding: 1rem 0; animation: scaleIn 0.6s var(--transition-smooth); }
+        .welcome-icon { font-size: 3.5rem; margin-bottom: 1rem; display: block; animation: floatIcon 4s ease-in-out infinite; }
+        .welcome-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 600; color: var(--texto-principal); margin-bottom: 0.75rem; }
+        .welcome-subtitle { font-family: 'Dancing Script', cursive; font-size: 1.1rem; color: var(--rosa-oscuro); margin-bottom: 1.25rem; }
+        .welcome-text { font-size: 0.9rem; color: var(--texto-secundario); margin-bottom: 2rem; max-width: 420px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+        .welcome-features { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .welcome-feature { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; font-size: 0.75rem; color: var(--gris-suave); }
+        .welcome-feature span:first-child { font-size: 1.3rem; }
+        .btn-start { background: var(--gradiente-boton); color: var(--blanco); padding: 1rem 2.5rem; border-radius: 50px; font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 600; border: none; cursor: pointer; box-shadow: 0 6px 24px rgba(231,84,128,0.3); transition: all 0.3s var(--transition-smooth); display: inline-flex; align-items: center; gap: 0.5rem; }
+        .btn-start:hover { background: var(--gradiente-boton-hover); box-shadow: 0 8px 32px rgba(231,84,128,0.4); transform: translateY(-2px); }
+
+        /* Form inputs */
+        .form-group { margin-bottom: 1.2rem; }
+        .form-label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--texto-principal); margin-bottom: 0.4rem; }
+        .form-label .req { color: var(--rosa-oscuro); }
+        .form-input {
+            width: 100%; padding: 0.8rem 1rem; border: 2px solid var(--rosa-claro); border-radius: 12px;
+            font-family: 'Montserrat', sans-serif; font-size: 0.9rem; color: var(--texto-principal);
+            background: var(--blanco); transition: border-color 0.2s, box-shadow 0.2s; outline: none;
+        }
+        .form-input:focus { border-color: var(--rosa-intenso); box-shadow: 0 0 0 3px rgba(231,84,128,0.1); }
+        .form-input::placeholder { color: var(--gris-suave); }
+        .form-input.error { border-color: var(--rosa-oscuro); background: rgba(231,84,128,0.03); }
+        .form-error { font-size: 0.75rem; color: var(--rosa-oscuro); margin-top: 0.3rem; display: none; }
+        .form-error.show { display: block; }
+
+        /* Checkbox */
+        .checkbox-wrapper { display: flex; align-items: flex-start; gap: 0.7rem; padding: 0.8rem 1rem; background: var(--rosa-palido); border-radius: 12px; border: 2px solid transparent; transition: border-color 0.2s; }
+        .checkbox-wrapper.error { border-color: var(--rosa-oscuro); }
+        .checkbox-wrapper input[type="checkbox"] { margin-top: 3px; width: 18px; height: 18px; accent-color: var(--rosa-oscuro); flex-shrink: 0; cursor: pointer; }
+        .checkbox-wrapper label { font-size: 0.8rem; color: var(--texto-secundario); line-height: 1.5; cursor: pointer; }
+
+        /* Analyzing */
+        .analyzing-screen { text-align: center; padding: 3rem 1rem; animation: fadeIn 0.5s; }
+        .analyzing-spinner { width: 64px; height: 64px; border: 4px solid var(--rosa-claro); border-top-color: var(--rosa-oscuro); border-radius: 50%; margin: 0 auto 1.5rem; animation: spin 1s linear infinite; }
+        .analyzing-dots { display: inline-flex; gap: 4px; margin-left: 4px; }
+        .analyzing-dots span { width: 5px; height: 5px; background: var(--rosa-oscuro); border-radius: 50%; animation: dotPulse 1.4s ease-in-out infinite; }
+        .analyzing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .analyzing-dots span:nth-child(3) { animation-delay: 0.4s; }
+        .analyzing-text { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--texto-principal); margin-bottom: 0.5rem; }
+        .analyzing-subtext { font-size: 0.85rem; color: var(--gris-suave); }
+
+        /* Results */
+        .results-screen { animation: fadeSlideUp 0.6s var(--transition-smooth); }
+        .results-header { text-align: center; margin-bottom: 1.5rem; }
+        .results-icon { font-size: 3rem; display: block; margin-bottom: 0.75rem; }
+        .results-title { font-size: 1.6rem; color: var(--texto-principal); margin-bottom: 0.25rem; }
+        .results-subtitle { font-family: 'Dancing Script', cursive; font-size: 1rem; color: var(--rosa-oscuro); }
+
+        .suero-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.5rem; border-radius: 50px; font-size: 0.95rem; font-weight: 700; margin: 1rem auto; background: var(--gradiente-boton); color: white; box-shadow: 0 4px 16px rgba(231,84,128,0.3); }
+
+        .result-section { background: var(--blanco); border: 2px solid var(--rosa-claro); border-radius: 16px; padding: 1.25rem; margin-bottom: 1.25rem; }
+        .result-section.highlight { background: linear-gradient(135deg, var(--rosa-palido), var(--lavanda)); border-color: var(--lavanda-medio); }
+        .result-section h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--rosa-oscuro); margin-bottom: 0.75rem; }
+        .result-section p, .result-section li { font-size: 0.88rem; color: var(--texto-secundario); line-height: 1.7; }
+
+        .benefit-item { display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.4rem 0; }
+        .benefit-item span:first-child { font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+
+        .ideal-si { background: var(--rosa-palido); border-radius: 12px; padding: 0.8rem 1rem; margin-top: 0.75rem; font-size: 0.85rem; color: var(--texto-principal); }
+        .ideal-si strong { color: var(--rosa-oscuro); }
+
+        .secondary-rec { background: var(--lavanda); border-radius: 12px; padding: 1rem; margin-bottom: 1.25rem; text-align: center; }
+        .secondary-rec p { font-size: 0.85rem; color: var(--texto-secundario); }
+        .secondary-rec strong { color: var(--rosa-oscuro); }
+
+        .divider { height: 1px; background: linear-gradient(to right, transparent, var(--rosa-claro), transparent); margin: 1.5rem 0; }
+
+        .cta-buttons { display: flex; flex-direction: column; gap: 0.75rem; margin: 1.5rem 0; }
+        .btn-whatsapp { background: #25D366; color: white; justify-content: center; font-size: 0.95rem; padding: 1rem 1.5rem; border-radius: 50px; font-family: 'Montserrat', sans-serif; font-weight: 600; border: none; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; text-decoration: none; box-shadow: 0 4px 16px rgba(37,211,102,0.3); transition: all 0.3s; }
+        .btn-whatsapp:hover { background: #20BA5C; box-shadow: 0 6px 24px rgba(37,211,102,0.4); transform: translateY(-1px); }
+        .btn-agenda { background: var(--gradiente-boton); color: white; justify-content: center; font-size: 0.95rem; padding: 1rem 1.5rem; border-radius: 50px; font-family: 'Montserrat', sans-serif; font-weight: 600; border: none; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; text-decoration: none; box-shadow: 0 4px 16px rgba(231,84,128,0.3); transition: all 0.3s; }
+        .btn-agenda:hover { background: var(--gradiente-boton-hover); box-shadow: 0 6px 24px rgba(231,84,128,0.4); transform: translateY(-1px); }
+
+        .disclaimer-box { background: var(--rosa-palido); border-radius: 12px; padding: 0.8rem 1rem; margin: 1rem 0; font-size: 0.75rem; color: var(--gris-suave); line-height: 1.5; text-align: center; }
+
+        .btn-restart { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1rem; font-size: 0.8rem; color: var(--gris-suave); background: none; border: none; cursor: pointer; font-family: 'Montserrat', sans-serif; transition: color 0.2s; }
+        .btn-restart:hover { color: var(--rosa-oscuro); }
+
+        .app-footer { text-align: center; margin-top: 2rem; padding: 1rem; font-size: 0.7rem; color: var(--gris-suave); }
+        .app-footer a { color: var(--rosa-oscuro); text-decoration: none; }
+        .app-footer .disclaimer { max-width: 500px; margin: 0.5rem auto 0; line-height: 1.5; font-size: 0.65rem; opacity: 0.7; }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+
+    <div class="app-container">
+        <header class="brand-header">
+            <a href="index.html" class="logo-text">GinecoSpa</a>
+            <div class="subtitle">Sueroterapia Personalizada</div>
+        </header>
+
+        <main class="wizard-card" id="wizardCard">
+
+            <!-- WELCOME -->
+            <section id="welcomeScreen" class="welcome-screen">
+                <span class="welcome-icon">💧</span>
+                <h1 class="welcome-title">¿Qué suero necesita tu cuerpo?</h1>
+                <p class="welcome-subtitle">Descúbrelo en menos de 3 minutos</p>
+                <p class="welcome-text">
+                    Responde unas preguntas rápidas y te recomendamos el suero ideal para lo que tu cuerpo necesita ahora mismo. Personalizado, con criterio profesional.
+                </p>
+                <div class="welcome-features">
+                    <div class="welcome-feature"><span>🔒</span><span>Privado</span></div>
+                    <div class="welcome-feature"><span>⏱️</span><span>3 min</span></div>
+                    <div class="welcome-feature"><span>💉</span><span>5 sueros</span></div>
+                </div>
+                <button class="btn-start" id="btnStart">Comenzar <span>→</span></button>
+            </section>
+
+            <!-- INTAKE FORM -->
+            <section id="intakeScreen" class="hidden">
+                <div class="question-slide">
+                    <span class="question-icon">📋</span>
+                    <p class="question-category">Tus datos</p>
+                    <h2 class="question-text">Antes de empezar, cuéntanos un poco sobre ti</h2>
+
+                    <div class="form-group">
+                        <label class="form-label">Nombre completo <span class="req">*</span></label>
+                        <input type="text" class="form-input" id="inputName" placeholder="Tu nombre completo" autocomplete="name">
+                        <p class="form-error" id="errorName">Por favor ingresa tu nombre</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Edad <span class="req">*</span></label>
+                        <input type="number" class="form-input" id="inputAge" placeholder="Ej: 32" min="16" max="99" autocomplete="off">
+                        <p class="form-error" id="errorAge">Por favor ingresa tu edad</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Ciudad <span class="req">*</span></label>
+                        <input type="text" class="form-input" id="inputCity" placeholder="Ej: Caracas, Bogotá…" autocomplete="address-level2">
+                        <p class="form-error" id="errorCity">Por favor ingresa tu ciudad</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Teléfono / WhatsApp <span class="req">*</span></label>
+                        <input type="tel" class="form-input" id="inputPhone" placeholder="Ej: +58 412 536 6811" autocomplete="tel">
+                        <p class="form-error" id="errorPhone">Por favor ingresa tu teléfono</p>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox-wrapper" id="consentWrapper">
+                            <input type="checkbox" id="inputConsent">
+                            <label for="inputConsent">Acepto ser contactado/a por GinecoSpa vía WhatsApp o llamada para seguimiento de mi recomendación.</label>
+                        </div>
+                        <p class="form-error" id="errorConsent">Debes aceptar para continuar</p>
+                    </div>
+
+                    <div class="nav-buttons">
+                        <button class="btn btn-prev" id="btnBackToWelcome"><span>←</span> Volver</button>
+                        <button class="btn btn-next" id="btnStartQuiz">Siguiente <span>→</span></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- QUIZ -->
+            <section id="quizScreen" class="hidden">
+                <div class="progress-wrapper">
+                    <div class="progress-info">
+                        <span class="progress-step" id="progressStep">Pregunta 1 de 8</span>
+                        <span class="progress-percentage" id="progressPercent">13%</span>
+                    </div>
+                    <div class="progress-bar-track"><div class="progress-bar-fill" id="progressFill" style="width:13%"></div></div>
+                </div>
+                <div class="question-screen" id="questionContainer"></div>
+                <div class="validation-msg" id="validationMsg"><span>💡</span><span>Selecciona una opción para continuar</span></div>
+                <div class="nav-buttons">
+                    <button class="btn btn-prev" id="btnPrev"><span>←</span> Anterior</button>
+                    <button class="btn btn-next" id="btnNext">Siguiente <span>→</span></button>
+                </div>
+            </section>
+
+            <!-- ANALYZING -->
+            <section id="analyzingScreen" class="hidden">
+                <div class="analyzing-screen">
+                    <div class="analyzing-spinner"></div>
+                    <p class="analyzing-text">Analizando tus respuestas<span class="analyzing-dots"><span></span><span></span><span></span></span></p>
+                    <p class="analyzing-subtext">Preparando tu recomendación personalizada</p>
+                </div>
+            </section>
+
+            <!-- RESULTS -->
+            <section id="resultsScreen" class="hidden">
+                <div class="results-screen" id="resultsContent"></div>
+            </section>
+
+        </main>
+
+        <footer class="app-footer">
+            <p><a href="index.html" class="font-script" style="font-size:0.9rem;">GinecoSpa</a> · Bienestar Íntimo y Estético</p>
+            <p class="disclaimer">Este quiz no constituye un diagnóstico médico. Es una herramienta de orientación. Toda recomendación requiere valoración profesional previa.</p>
+        </footer>
+    </div>
+
+<script>
+(() => {
+    'use strict';
+
+    const ENDPOINT = "PEGAR_AQUI_URL_WEB_APP_SUEROS";
+    const WA_NUMBER = "584125366811";
+
+    // ============================================
+    // SUERO CATEGORIES
+    // ============================================
+    const categories = {
+        energia:    { id: 'energia',    name: 'Suero Energía & Vitalidad',    icon: '⚡', color: '#FF8FA3' },
+        inmunidad:  { id: 'inmunidad',  name: 'Suero Escudo Inmune',          icon: '🛡️', color: '#7FB5FF' },
+        detox:      { id: 'detox',      name: 'Suero Detox & Antioxidante',   icon: '🍃', color: '#7ED6A0' },
+        estres:     { id: 'estres',     name: 'Suero Calma & Equilibrio',     icon: '🌙', color: '#C4A7FF' },
+        recovery:   { id: 'recovery',   name: 'Suero Recovery & Hidratación', icon: '💧', color: '#6DD5ED' }
+    };
+
+    // Priority for tiebreaker: energia > estres > inmunidad > detox > recovery
+    const priority = ['energia', 'estres', 'inmunidad', 'detox', 'recovery'];
+
+    // ============================================
+    // QUESTIONS (8)
+    // ============================================
+    const questions = [
+        {
+            id: 1, icon: '🔋', category: 'Energía',
+            text: '¿Cómo describirías tu nivel de energía en el día a día?',
+            options: [
+                { label: 'Me siento con buena energía', scores: { energia: 0, recovery: 0 } },
+                { label: 'Variable, depende del día', scores: { energia: 1, estres: 1 } },
+                { label: 'Baja la mayor parte del tiempo', scores: { energia: 2, recovery: 1 } },
+                { label: 'Agotado/a, me cuesta hasta arrancar', scores: { energia: 3, recovery: 2 } }
+            ]
+        },
+        {
+            id: 2, icon: '🤧', category: 'Defensas',
+            text: '¿Con qué frecuencia te enfermas o sientes que tus defensas bajan?',
+            options: [
+                { label: 'Casi nunca me enfermo', scores: { inmunidad: 0 } },
+                { label: 'Un par de veces al año', scores: { inmunidad: 1 } },
+                { label: 'Seguido, me agarro todo', scores: { inmunidad: 2, detox: 1 } },
+                { label: 'Muy frecuente, siento que nunca me recupero del todo', scores: { inmunidad: 3, energia: 1 } }
+            ]
+        },
+        {
+            id: 3, icon: '😴', category: 'Descanso',
+            text: '¿Cómo es tu sueño y descanso?',
+            options: [
+                { label: 'Duermo bien y me levanto descansado/a', scores: { estres: 0 } },
+                { label: 'Me cuesta dormirme o me despierto en la noche', scores: { estres: 2, energia: 1 } },
+                { label: 'Duermo pero no descanso', scores: { estres: 2, recovery: 1 } },
+                { label: 'Insomnio frecuente o duermo muy poco', scores: { estres: 3, energia: 1 } }
+            ]
+        },
+        {
+            id: 4, icon: '🧠', category: 'Estrés',
+            text: '¿Qué tan presente está el estrés o la ansiedad en tu vida?',
+            options: [
+                { label: 'Bajo control, lo manejo bien', scores: { estres: 0 } },
+                { label: 'Aparece seguido pero lo gestiono', scores: { estres: 1 } },
+                { label: 'Constante, me afecta el cuerpo', scores: { estres: 2, energia: 1 } },
+                { label: 'Desbordante, siento que no puedo más', scores: { estres: 3, energia: 1, recovery: 1 } }
+            ]
+        },
+        {
+            id: 5, icon: '🍔', category: 'Alimentación',
+            text: '¿Cómo es tu alimentación en general?',
+            options: [
+                { label: 'Balanceada, como variado y a horarios', scores: { detox: 0 } },
+                { label: 'Irregular, a veces como bien y a veces no', scores: { detox: 1, energia: 1 } },
+                { label: 'Mucho procesado, poco tiempo para cocinar', scores: { detox: 2, inmunidad: 1 } },
+                { label: 'Pésima, sé que me estoy alimentando mal', scores: { detox: 3, inmunidad: 1, energia: 1 } }
+            ]
+        },
+        {
+            id: 6, icon: '🏃', category: 'Actividad física',
+            text: '¿Cómo es tu actividad física?',
+            options: [
+                { label: 'Entreno 3+ veces por semana', scores: { recovery: 2, energia: 0 } },
+                { label: 'Algo de ejercicio, no constante', scores: { recovery: 1, energia: 1 } },
+                { label: 'Muy sedentario/a, casi nada', scores: { energia: 2, detox: 1 } },
+                { label: 'Entreno fuerte pero me cuesta recuperarme', scores: { recovery: 3, energia: 1 } }
+            ]
+        },
+        {
+            id: 7, icon: '✨', category: 'Piel y apariencia',
+            text: '¿Cómo sientes tu piel, cabello y aspecto general?',
+            options: [
+                { label: 'Bien, me veo saludable', scores: { detox: 0 } },
+                { label: 'Un poco opaca la piel o cabello sin brillo', scores: { detox: 1, inmunidad: 1 } },
+                { label: 'Noto envejecimiento, manchas o caída de cabello', scores: { detox: 2, inmunidad: 1 } },
+                { label: 'Muy deteriorado/a, sé que necesito ayuda', scores: { detox: 3, recovery: 1 } }
+            ]
+        },
+        {
+            id: 8, icon: '🎯', category: 'Tu objetivo',
+            text: '¿Qué es lo que más te gustaría lograr con sueroterapia?',
+            options: [
+                { label: 'Tener más energía y rendimiento', scores: { energia: 3, recovery: 1 } },
+                { label: 'Reforzar mis defensas y no enfermarme', scores: { inmunidad: 3 } },
+                { label: 'Desintoxicarme y mejorar mi piel', scores: { detox: 3 } },
+                { label: 'Relajarme, dormir mejor, bajar estrés', scores: { estres: 3 } },
+                { label: 'Recuperarme después de entrenar o deshidratación', scores: { recovery: 3 } }
+            ]
+        }
+    ];
+
+    // ============================================
+    // RESULT COPY per suero
+    // ============================================
+    const sueroCopy = {
+        energia: {
+            titulo: 'Suero Energía & Vitalidad',
+            subtitulo: 'Para recuperar la chispa que tu cuerpo necesita',
+            icon: '⚡',
+            beneficios: [
+                { icon: '🔋', text: 'Recarga tu energía celular desde adentro, no solo con cafeína.' },
+                { icon: '🧠', text: 'Mejora la concentración, claridad mental y rendimiento diario.' },
+                { icon: '💪', text: 'Ayuda a tu cuerpo a producir energía de forma sostenida.' }
+            ],
+            ideal: 'Sientes que la energía no te alcanza, te cuesta arrancar el día o llegas destruido/a al final de la jornada.',
+            incluye: 'Complejo B, aminoácidos energéticos, minerales y co-factores metabólicos en hidratación endovenosa.'
+        },
+        inmunidad: {
+            titulo: 'Suero Escudo Inmune',
+            subtitulo: 'Fortalece tus defensas desde la raíz',
+            icon: '🛡️',
+            beneficios: [
+                { icon: '🦠', text: 'Potencia tu sistema inmune para que responda más rápido y fuerte.' },
+                { icon: '🔄', text: 'Ayuda a acortar gripas, resfríos y procesos virales.' },
+                { icon: '🌿', text: 'Repone los micronutrientes clave que tus defensas consumen a diario.' }
+            ],
+            ideal: 'Te enfermas seguido, sientes que nunca te recuperas del todo o estás en una temporada de mucho desgaste.',
+            incluye: 'Vitamina C en alta concentración, zinc, selenio y antioxidantes en hidratación endovenosa.'
+        },
+        detox: {
+            titulo: 'Suero Detox & Antioxidante',
+            subtitulo: 'Limpieza profunda y rejuvenecimiento celular',
+            icon: '🍃',
+            beneficios: [
+                { icon: '✨', text: 'Ayuda a eliminar toxinas acumuladas y limpiar tu organismo.' },
+                { icon: '🌟', text: 'Mejora el aspecto de piel, cabello y uñas desde adentro.' },
+                { icon: '🔬', text: 'Combate el envejecimiento celular con antioxidantes potentes.' }
+            ],
+            ideal: 'Sientes que necesitas una limpieza interna, notas tu piel opaca, o llevas una alimentación poco balanceada.',
+            incluye: 'Glutatión, antioxidantes, hepatoprotectores y vitaminas en hidratación endovenosa.'
+        },
+        estres: {
+            titulo: 'Suero Calma & Equilibrio',
+            subtitulo: 'Para tu sistema nervioso y descanso profundo',
+            icon: '🌙',
+            beneficios: [
+                { icon: '😌', text: 'Ayuda a bajar la tensión acumulada y regular el sistema nervioso.' },
+                { icon: '💤', text: 'Favorece un descanso más profundo y reparador.' },
+                { icon: '🧘', text: 'Aporta nutrientes que tu cuerpo consume más cuando estás bajo estrés.' }
+            ],
+            ideal: 'El estrés te está pasando factura, no duermes bien, o sientes el cuerpo tenso todo el tiempo.',
+            incluye: 'Magnesio, complejo B neurotropo, aminoácidos relajantes y cofactores en hidratación endovenosa.'
+        },
+        recovery: {
+            titulo: 'Suero Recovery & Hidratación',
+            subtitulo: 'Recuperación express para tu cuerpo',
+            icon: '💧',
+            beneficios: [
+                { icon: '💦', text: 'Rehidrata profundamente, mucho más efectivo que tomar agua sola.' },
+                { icon: '🏋️', text: 'Acelera la recuperación muscular post-entreno o post-esfuerzo.' },
+                { icon: '⚡', text: 'Repone electrolitos y minerales que se pierden con el desgaste físico.' }
+            ],
+            ideal: 'Entrenas fuerte, viajas mucho, te deshidratas fácil o necesitas recuperarte rápido de un esfuerzo físico.',
+            incluye: 'Electrolitos balanceados, aminoácidos de recuperación, minerales y vitaminas en hidratación endovenosa.'
+        }
+    };
+
+    // ============================================
+    // STATE
+    // ============================================
+    let currentStep = 0;
+    let answers = new Array(questions.length).fill(null);
+    let direction = 'forward';
+    let userData = { name: '', age: '', city: '', phone: '', consent: false };
+
+    // ============================================
+    // DOM
+    // ============================================
+    const $ = sel => document.querySelector(sel);
+    const welcomeScreen = $('#welcomeScreen');
+    const intakeScreen = $('#intakeScreen');
+    const quizScreen = $('#quizScreen');
+    const analyzingScreen = $('#analyzingScreen');
+    const resultsScreen = $('#resultsScreen');
+
+    function showScreen(s) {
+        [welcomeScreen, intakeScreen, quizScreen, analyzingScreen, resultsScreen].forEach(el => el.classList.add('hidden'));
+        s.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ============================================
+    // INTAKE VALIDATION
+    // ============================================
+    function validateIntake() {
+        let valid = true;
+        const name = $('#inputName').value.trim();
+        const age = $('#inputAge').value.trim();
+        const city = $('#inputCity').value.trim();
+        const phone = $('#inputPhone').value.trim();
+        const consent = $('#inputConsent').checked;
+
+        // Reset
+        ['Name','Age','City','Phone','Consent'].forEach(f => {
+            $(`#error${f}`).classList.remove('show');
+            const input = $(`#input${f}`);
+            if (input && input.classList) input.classList.remove('error');
+        });
+        $('#consentWrapper').classList.remove('error');
+
+        if (!name) { $('#errorName').classList.add('show'); $('#inputName').classList.add('error'); valid = false; }
+        if (!age || age < 16 || age > 99) { $('#errorAge').classList.add('show'); $('#inputAge').classList.add('error'); valid = false; }
+        if (!city) { $('#errorCity').classList.add('show'); $('#inputCity').classList.add('error'); valid = false; }
+        if (!phone || phone.length < 7) { $('#errorPhone').classList.add('show'); $('#inputPhone').classList.add('error'); valid = false; }
+        if (!consent) { $('#errorConsent').classList.add('show'); $('#consentWrapper').classList.add('error'); valid = false; }
+
+        if (valid) {
+            userData = { name, age, city, phone, consent: true };
+        }
+        return valid;
+    }
+
+    // ============================================
+    // RENDER QUESTION
+    // ============================================
+    function renderQuestion(idx) {
+        const q = questions[idx];
+        const selected = answers[idx];
+
+        $('#questionContainer').innerHTML = `
+            <div class="question-slide" style="animation-name:${direction==='forward'?'slideIn':'slideInReverse'}">
+                <span class="question-icon">${q.icon}</span>
+                <p class="question-category">${q.category}</p>
+                <h2 class="question-text">${q.text}</h2>
+                <div class="options-group">
+                    ${q.options.map((opt, i) => `
+                        <div class="option-item">
+                            <input type="radio" name="q${q.id}" id="q${q.id}_${i}" value="${i}" ${selected===i?'checked':''}>
+                            <label class="option-label" for="q${q.id}_${i}">
+                                <span class="option-radio-circle"></span>
+                                <span>${opt.label}</span>
+                                <span class="option-check">✓</span>
+                            </label>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+
+        $('#questionContainer').querySelectorAll('input[type="radio"]').forEach(r => {
+            r.addEventListener('change', e => {
+                answers[idx] = parseInt(e.target.value);
+                $('#validationMsg').classList.remove('show');
+            });
+        });
+
+        const total = questions.length;
+        const pct = Math.round(((idx + 1) / total) * 100);
+        $('#progressStep').textContent = `Pregunta ${idx + 1} de ${total}`;
+        $('#progressPercent').textContent = `${pct}%`;
+        $('#progressFill').style.width = `${pct}%`;
+
+        $('#btnPrev').style.display = idx === 0 ? 'none' : 'inline-flex';
+        $('#btnNext').innerHTML = idx === total - 1 ? 'Ver mi recomendación <span>→</span>' : 'Siguiente <span>→</span>';
+        $('#validationMsg').classList.remove('show');
+    }
+
+    // ============================================
+    // CALCULATE SCORES
+    // ============================================
+    function calculateScores() {
+        const scores = { energia: 0, inmunidad: 0, detox: 0, estres: 0, recovery: 0 };
+
+        answers.forEach((a, i) => {
+            if (a !== null) {
+                const opt = questions[i].options[a];
+                Object.entries(opt.scores).forEach(([cat, pts]) => {
+                    scores[cat] += pts;
+                });
+            }
+        });
+
+        return scores;
+    }
+
+    function getRecommendation(scores) {
+        // Sort by score desc, then by priority
+        const sorted = Object.entries(scores).sort((a, b) => {
+            if (b[1] !== a[1]) return b[1] - a[1];
+            return priority.indexOf(a[0]) - priority.indexOf(b[0]);
+        });
+
+        const principal = sorted[0];
+        const second = sorted[1];
+
+        let secondary = null;
+        if (second[1] >= principal[1] - 2 && second[1] > 0) {
+            secondary = second;
+        }
+
+        return {
+            principal: { id: principal[0], score: principal[1] },
+            secondary: secondary ? { id: secondary[0], score: secondary[1] } : null,
+            allScores: scores
+        };
+    }
+
+    // ============================================
+    // GET SYMPTOM SUMMARY
+    // ============================================
+    function getSymptomSummary() {
+        const symptoms = [];
+        answers.forEach((a, i) => {
+            if (a !== null && a >= 2) {
+                const q = questions[i];
+                symptoms.push(q.category.toLowerCase());
+            }
+        });
+        if (symptoms.length === 0) {
+            // Fallback: use the objective question
+            const lastA = answers[7];
+            if (lastA !== null) symptoms.push(questions[7].options[lastA].label.toLowerCase());
+        }
+        return [...new Set(symptoms)].slice(0, 3).join(', ');
+    }
+
+    // ============================================
+    // RENDER RESULTS
+    // ============================================
+    function renderResults(rec) {
+        const suero = sueroCopy[rec.principal.id];
+        const cat = categories[rec.principal.id];
+        const symptoms = getSymptomSummary();
+
+        // WhatsApp message
+        const waMsg = `Hola GinecoSpa, soy ${userData.name}, tengo ${userData.age} años, estoy en ${userData.city}. Hice el quiz y me recomendó el suero: ${suero.titulo}. Mis principales objetivos/síntomas fueron: ${symptoms || 'mejorar mi bienestar'}. ¿Me ayudan a agendar una cita?`;
+        const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waMsg)}`;
+
+        let secondaryHtml = '';
+        if (rec.secondary) {
+            const sec = sueroCopy[rec.secondary.id];
+            secondaryHtml = `
+                <div class="secondary-rec">
+                    <p>${categories[rec.secondary.id].icon} También podría beneficiarte: <strong>${sec.titulo}</strong></p>
+                    <p style="font-size:0.8rem; margin-top:0.3rem;">Consúltalo con el equipo médico en tu cita.</p>
+                </div>
+            `;
+        }
+
+        $('#resultsContent').innerHTML = `
+            <div class="results-header">
+                <span class="results-icon">${suero.icon}</span>
+                <h2 class="results-title">Tu recomendación personalizada</h2>
+                <p class="results-subtitle">${userData.name}, esto es lo que tu cuerpo necesita</p>
+            </div>
+
+            <div style="text-align:center;">
+                <span class="suero-badge">${suero.icon} ${suero.titulo}</span>
+            </div>
+
+            <div class="result-section highlight">
+                <h4>¿Por qué te lo recomendamos?</h4>
+                <p style="margin-bottom:0.75rem;">${suero.subtitulo}</p>
+                ${suero.beneficios.map(b => `
+                    <div class="benefit-item">
+                        <span>${b.icon}</span>
+                        <span>${b.text}</span>
+                    </div>
+                `).join('')}
+                <div class="ideal-si">
+                    <strong>Ideal si:</strong> ${suero.ideal}
+                </div>
+            </div>
+
+            <div class="result-section">
+                <h4>¿Qué incluye?</h4>
+                <p>${suero.incluye}</p>
+            </div>
+
+            ${secondaryHtml}
+
+            <div class="divider"></div>
+
+            <div class="cta-buttons">
+                <a href="${waUrl}" target="_blank" rel="noopener" class="btn-whatsapp">
+                    📲 Agendar mi cita por WhatsApp
+                </a>
+                <a href="${waUrl}" target="_blank" rel="noopener" class="btn-agenda">
+                    💬 Escribir por WhatsApp
+                </a>
+            </div>
+
+            <div class="disclaimer-box">
+                ⚕️ Esta recomendación es orientativa y no sustituye una consulta médica.
+                Todo suero requiere valoración profesional previa. En GinecoSpa te acompañamos con criterio clínico.
+            </div>
+
+            <div style="text-align:center;">
+                <button class="btn-restart" id="btnRestart">↺ Hacer el quiz de nuevo</button>
+            </div>
+        `;
+
+        showScreen(resultsScreen);
+
+        $('#btnRestart').addEventListener('click', () => {
+            currentStep = 0;
+            answers = new Array(questions.length).fill(null);
+            userData = { name:'', age:'', city:'', phone:'', consent: false };
+            showScreen(welcomeScreen);
+        });
+    }
+
+    // ============================================
+    // SEND DATA
+    // ============================================
+    function sendData(rec) {
+        const symptoms = getSymptomSummary();
+        const payload = {
+            funnel: 'quiz_sueros_v1',
+            timestamp: new Date().toISOString(),
+            nombre: userData.name,
+            edad: userData.age,
+            ciudad: userData.city,
+            telefono: userData.phone,
+            score_energia: rec.allScores.energia,
+            score_inmunidad: rec.allScores.inmunidad,
+            score_detox: rec.allScores.detox,
+            score_estres: rec.allScores.estres,
+            score_recovery: rec.allScores.recovery,
+            recomendacion_principal: sueroCopy[rec.principal.id].titulo,
+            recomendacion_secundaria: rec.secondary ? sueroCopy[rec.secondary.id].titulo : '',
+            resumen_respuestas: answers.map((a, i) => a !== null ? questions[i].options[a].label : '').join(' | '),
+            sintomas_detectados: symptoms,
+            fuente_utm: new URLSearchParams(window.location.search).get('utm_source') || '',
+            estado_contacto: 'Pendiente',
+            page_url: window.location.href,
+            user_agent: navigator.userAgent,
+            referrer: document.referrer
+        };
+
+        // Backup
+        try { localStorage.setItem('ginecospa_sueros_backup', JSON.stringify(payload)); } catch(e) {}
+
+        if (ENDPOINT && ENDPOINT !== 'PEGAR_AQUI_URL_WEB_APP_SUEROS') {
+            fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload), mode: 'no-cors' })
+                .then(() => console.log('Datos enviados'))
+                .catch(err => console.warn('Error enviando:', err));
+        } else {
+            console.log('=== PAYLOAD (endpoint no configurado) ===');
+            console.log(JSON.stringify(payload, null, 2));
+        }
+    }
+
+    // ============================================
+    // EVENTS
+    // ============================================
+    $('#btnStart').addEventListener('click', () => showScreen(intakeScreen));
+
+    $('#btnBackToWelcome').addEventListener('click', () => showScreen(welcomeScreen));
+
+    $('#btnStartQuiz').addEventListener('click', () => {
+        if (validateIntake()) {
+            currentStep = 0;
+            showScreen(quizScreen);
+            renderQuestion(0);
+        }
+    });
+
+    $('#btnNext').addEventListener('click', () => {
+        if (answers[currentStep] === null) {
+            $('#validationMsg').classList.add('show');
+            return;
+        }
+        direction = 'forward';
+        if (currentStep < questions.length - 1) {
+            currentStep++;
+            renderQuestion(currentStep);
+        } else {
+            // Finish
+            showScreen(analyzingScreen);
+            const scores = calculateScores();
+            const rec = getRecommendation(scores);
+            sendData(rec);
+            setTimeout(() => renderResults(rec), 2500);
+        }
+    });
+
+    $('#btnPrev').addEventListener('click', () => {
+        if (currentStep > 0) {
+            direction = 'backward';
+            currentStep--;
+            renderQuestion(currentStep);
+        } else {
+            showScreen(intakeScreen);
+        }
+    });
+
+    document.addEventListener('keydown', e => {
+        if (quizScreen.classList.contains('hidden')) return;
+        if (e.key === 'Enter') { e.preventDefault(); $('#btnNext').click(); }
+    });
+
+})();
+</script>
+</body>
+</html>
