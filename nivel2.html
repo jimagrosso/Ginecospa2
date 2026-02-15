@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GinecoSpa - Análisis Profundo de Bienestar Emocional con Inteligencia Artificial">
+    <title>GinecoSpa - Análisis Profundo con IA</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================
+           CSS VARIABLES - PALETA ROSADA PREMIUM
+           ============================================ */
+        :root {
+            --rosa-palido: #FFF5F7;
+            --rosa-claro: #FFE5EC;
+            --rosa-medio: #FFB5C5;
+            --rosa-intenso: #FF8FA3;
+            --rosa-oscuro: #E75480;
+            --rosa-profundo: #C9365E;
+            --coral: #FF9B9B;
+            --lavanda: #F3E8FF;
+            --lavanda-medio: #E0CFFF;
+            --gris-calido: #6B5D5D;
+            --gris-suave: #9A8F8F;
+            --crema: #FFF8F0;
+            --blanco: #FFFFFF;
+            --texto-principal: #3D2E2E;
+            --texto-secundario: #7A6B6B;
+            --sombra-rosa: rgba(231, 84, 128, 0.12);
+            --sombra-suave: rgba(61, 46, 46, 0.06);
+            --gradiente-hero: linear-gradient(135deg, #FFF5F7 0%, #FFE5EC 30%, #F3E8FF 70%, #FFF5F7 100%);
+            --gradiente-boton: linear-gradient(135deg, #E75480 0%, #FF8FA3 100%);
+            --gradiente-boton-hover: linear-gradient(135deg, #C9365E 0%, #E75480 100%);
+            --gradiente-premium: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--texto-principal);
+            background: var(--gradiente-hero);
+            background-attachment: fixed;
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .font-script { font-family: 'Dancing Script', cursive; }
+        .hidden { display: none !important; }
+
+        /* ============================================
+           BACKGROUND
+           ============================================ */
+        .bg-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .bg-orb-1 { width: 400px; height: 400px; background: var(--rosa-claro); top: -100px; right: -100px; }
+        .bg-orb-2 { width: 350px; height: 350px; background: var(--lavanda); bottom: -50px; left: -80px; }
+
+        /* ============================================
+           LAYOUT
+           ============================================ */
+        .app-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+        }
+
+        /* ============================================
+           PREMIUM BADGE
+           ============================================ */
+        .premium-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--gradiente-premium);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        /* ============================================
+           CARD STYLES
+           ============================================ */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 4px 20px var(--sombra-rosa);
+            margin-bottom: 1.5rem;
+        }
+
+        /* ============================================
+           VERIFICATION SCREEN
+           ============================================ */
+        .verify-screen {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+        .verify-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .verify-title { font-size: 1.8rem; color: var(--rosa-oscuro); margin-bottom: 0.5rem; }
+        .verify-text { color: var(--texto-secundario); margin-bottom: 2rem; }
+
+        .loader-spinner {
+            width: 48px; height: 48px;
+            border: 4px solid var(--rosa-claro);
+            border-top-color: var(--rosa-oscuro);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1.5rem;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .verify-error {
+            background: #FFF3F3;
+            border: 1px solid #FFD0D0;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .verify-error p { color: #C62828; font-size: 0.9rem; }
+
+        /* ============================================
+           PROGRESS BAR
+           ============================================ */
+        .progress-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--gris-suave);
+        }
+        .progress-bar {
+            height: 6px;
+            background: var(--rosa-claro);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--gradiente-premium);
+            border-radius: 3px;
+            transition: width 0.4s var(--transition-smooth);
+        }
+
+        /* ============================================
+           QUESTION STYLES
+           ============================================ */
+        .question-icon { font-size: 2.5rem; display: block; text-align: center; margin-bottom: 0.5rem; }
+        .question-category {
+            text-align: center;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--rosa-oscuro);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .question-text {
+            text-align: center;
+            font-size: 1.4rem;
+            color: var(--texto-principal);
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+        }
+
+        .options-group { display: flex; flex-direction: column; gap: 0.7rem; }
+        .option-item { position: relative; }
+        .option-item input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            width: 0; height: 0;
+        }
+        .option-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 18px;
+            background: var(--rosa-palido);
+            border: 2px solid transparent;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all 0.25s var(--transition-smooth);
+            font-size: 0.92rem;
+            color: var(--texto-principal);
+        }
+        .option-label:hover { border-color: var(--rosa-medio); background: var(--rosa-claro); }
+        .option-item input:checked + .option-label {
+            border-color: var(--rosa-oscuro);
+            background: linear-gradient(135deg, var(--rosa-claro), var(--lavanda));
+            font-weight: 500;
+        }
+        .option-radio-circle {
+            width: 20px; height: 20px; min-width: 20px;
+            border: 2px solid var(--rosa-medio);
+            border-radius: 50%;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .option-item input:checked + .option-label .option-radio-circle {
+            border-color: var(--rosa-oscuro);
+            background: var(--rosa-oscuro);
+        }
+        .option-item input:checked + .option-label .option-radio-circle::after {
+            content: '';
+            position: absolute;
+            width: 8px; height: 8px;
+            background: white;
+            border-radius: 50%;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .option-check {
+            margin-left: auto;
+            color: var(--rosa-oscuro);
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .option-item input:checked + .option-label .option-check { opacity: 1; }
+
+        /* ============================================
+           TEXTAREA FOR NOTES
+           ============================================ */
+        .observations-wrapper { margin-top: 1.2rem; }
+        .observations-toggle {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: none;
+            border: none;
+            color: var(--gris-suave);
+            font-size: 0.82rem;
+            cursor: pointer;
+            padding: 6px 0;
+            transition: color 0.2s;
+        }
+        .observations-toggle:hover, .observations-toggle.active { color: var(--rosa-oscuro); }
+        .observations-area {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .observations-area.open { max-height: 150px; }
+        .observations-area textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 12px;
+            border: 1.5px solid var(--rosa-claro);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.88rem;
+            resize: vertical;
+            outline: none;
+            transition: border-color 0.2s;
+            margin-top: 8px;
+        }
+        .observations-area textarea:focus { border-color: var(--rosa-oscuro); }
+
+        /* ============================================
+           BUTTONS
+           ============================================ */
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .btn {
+            flex: 1;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 50px;
+            font-family: inherit;
+            font-size: 0.92rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s var(--transition-smooth);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .btn-next {
+            background: var(--gradiente-premium);
+            color: white;
+        }
+        .btn-next:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3); }
+        .btn-prev {
+            background: transparent;
+            color: var(--texto-secundario);
+            border: 2px solid var(--rosa-claro);
+        }
+        .btn-prev:hover { border-color: var(--rosa-medio); color: var(--rosa-oscuro); }
+
+        .btn-arrow { font-size: 1.1rem; }
+
+        .validation-msg {
+            text-align: center;
+            color: var(--rosa-oscuro);
+            font-size: 0.85rem;
+            margin-top: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .validation-msg.show { opacity: 1; }
+
+        /* ============================================
+           PERSONAL DATA FORM
+           ============================================ */
+        .personal-form { display: flex; flex-direction: column; gap: 1rem; }
+        .form-group label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--texto-secundario);
+            margin-bottom: 4px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1.5px solid var(--rosa-claro);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.92rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus { border-color: var(--rosa-oscuro); }
+
+        /* ============================================
+           ANALYZING SCREEN
+           ============================================ */
+        .analyzing-screen {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+        .ai-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+        .analyzing-title { font-size: 1.6rem; color: var(--rosa-oscuro); margin-bottom: 0.5rem; }
+        .analyzing-steps {
+            list-style: none;
+            margin-top: 1.5rem;
+            text-align: left;
+            max-width: 320px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .analyzing-steps li {
+            padding: 8px 0;
+            font-size: 0.88rem;
+            color: var(--texto-secundario);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0.4;
+            transition: opacity 0.5s;
+        }
+        .analyzing-steps li.active { opacity: 1; color: var(--texto-principal); }
+        .analyzing-steps li.done { opacity: 0.7; }
+        .step-check { color: #2E7D32; }
+
+        /* ============================================
+           RESULTS / ANALYSIS
+           ============================================ */
+        .results-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .results-icon { font-size: 3rem; }
+        .results-title { font-size: 2rem; color: var(--rosa-oscuro); margin: 0.5rem 0; }
+        .results-subtitle { color: var(--texto-secundario); font-size: 0.95rem; }
+
+        .analysis-content {
+            margin: 1.5rem 0;
+        }
+        .analysis-section {
+            background: var(--rosa-palido);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .analysis-section h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--rosa-profundo);
+            margin-bottom: 0.8rem;
+        }
+        .analysis-section p {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--texto-principal);
+        }
+        .analysis-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        .analysis-section ul li {
+            padding: 6px 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--texto-principal);
+            padding-left: 1.2rem;
+            position: relative;
+        }
+        .analysis-section ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--rosa-oscuro);
+            font-weight: bold;
+        }
+        .analysis-section.disclaimer {
+            background: #FFF9E6;
+            border: 1px solid #FFE082;
+        }
+        .analysis-section.disclaimer p {
+            font-size: 0.82rem;
+            color: var(--texto-secundario);
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--rosa-medio), transparent);
+            margin: 2rem 0;
+        }
+
+        /* ============================================
+           PROFESSIONAL CARDS (NIVEL 3)
+           ============================================ */
+        .nivel3-header {
+            text-align: center;
+            margin: 2rem 0 1.5rem;
+        }
+        .nivel3-header h2 { font-size: 1.6rem; color: var(--rosa-oscuro); margin-bottom: 0.5rem; }
+        .nivel3-header p { color: var(--texto-secundario); font-size: 0.9rem; }
+
+        .professional-cards { display: flex; flex-direction: column; gap: 1rem; }
+
+        .pro-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px var(--sombra-rosa);
+            display: flex;
+            gap: 1.2rem;
+            align-items: flex-start;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .pro-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px var(--sombra-rosa);
+        }
+
+        .pro-avatar {
+            width: 70px; height: 70px;
+            border-radius: 50%;
+            background: var(--gradiente-boton);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .pro-info { flex: 1; }
+        .pro-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--texto-principal);
+            margin-bottom: 2px;
+        }
+        .pro-title {
+            font-size: 0.78rem;
+            color: var(--rosa-oscuro);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        .pro-desc {
+            font-size: 0.85rem;
+            color: var(--texto-secundario);
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        .pro-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 18px;
+            background: var(--gradiente-boton);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-family: inherit;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .pro-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(231, 84, 128, 0.3);
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .app-footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--gris-suave);
+            font-size: 0.8rem;
+        }
+        .app-footer .disclaimer {
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            color: #bbb;
+            line-height: 1.5;
+        }
+
+        /* ============================================
+           ANIMATIONS
+           ============================================ */
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideInReverse {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-slide { animation: slideIn 0.35s ease-out; }
+        .fade-in { animation: fadeIn 0.5s ease-out; }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 480px) {
+            .app-wrapper { padding: 1rem; }
+            .card { padding: 1.8rem 1.3rem; }
+            .question-text { font-size: 1.2rem; }
+            .pro-card { flex-direction: column; align-items: center; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+
+    <div class="app-wrapper">
+
+        <!-- ====== VERIFICATION SCREEN ====== -->
+        <section id="verifyScreen" class="card">
+            <div class="verify-screen">
+                <div class="loader-spinner" id="verifyLoader"></div>
+                <h2 class="verify-title">Verificando tu acceso...</h2>
+                <p class="verify-text">Estamos confirmando tu pago para desbloquear el análisis profundo.</p>
+
+                <div class="verify-error hidden" id="verifyError">
+                    <p id="verifyErrorMsg">No pudimos verificar tu pago. Por favor, intenta de nuevo.</p>
+                    <br>
+                    <a href="cuestionario-bienestar.html" class="btn btn-next" style="max-width: 280px; display: inline-flex;">
+                        Volver al cuestionario
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ====== PERSONAL DATA SCREEN ====== -->
+        <section id="personalScreen" class="card hidden">
+            <div style="text-align: center; margin-bottom: 1.5rem;">
+                <span class="premium-badge">Premium con IA</span>
+                <h2 style="font-size: 1.6rem; color: var(--rosa-oscuro);">Análisis Profundo de Bienestar</h2>
+                <p style="color: var(--texto-secundario); font-size: 0.9rem; margin-top: 0.5rem;">
+                    25 preguntas especializadas + análisis personalizado con Inteligencia Artificial
+                </p>
+            </div>
+
+            <div class="personal-form">
+                <div class="form-group">
+                    <label for="personalName">Tu nombre</label>
+                    <input type="text" id="personalName" placeholder="¿Cómo te llamas?" required>
+                </div>
+                <div class="form-group">
+                    <label for="personalAge">Edad</label>
+                    <input type="number" id="personalAge" placeholder="Tu edad" min="10" max="120" required>
+                </div>
+                <div class="form-group">
+                    <label for="personalCity">Ciudad</label>
+                    <input type="text" id="personalCity" placeholder="¿Dónde vives?" required>
+                </div>
+
+                <div id="personalValidation" class="validation-msg">Por favor completa todos los campos</div>
+
+                <button class="btn btn-next" id="btnStartQuiz" style="margin-top: 0.5rem;">
+                    Comenzar análisis profundo <span class="btn-arrow">→</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ====== QUIZ SCREEN ====== -->
+        <section id="quizScreen" class="card hidden">
+            <div class="progress-wrapper">
+                <span id="progressStep">Pregunta 1 de 25</span>
+                <span id="progressPercent">4%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 4%;" role="progressbar"></div>
+            </div>
+
+            <div id="questionContainer"></div>
+
+            <div id="validationMsg" class="validation-msg">Por favor selecciona una respuesta</div>
+
+            <div class="btn-group">
+                <button class="btn btn-prev" id="btnPrev" style="display: none;">← Anterior</button>
+                <button class="btn btn-next" id="btnNext">Siguiente <span class="btn-arrow">→</span></button>
+            </div>
+        </section>
+
+        <!-- ====== ANALYZING SCREEN ====== -->
+        <section id="analyzingScreen" class="card hidden">
+            <div class="analyzing-screen">
+                <div class="ai-icon">🧠</div>
+                <h2 class="analyzing-title">Analizando tus respuestas...</h2>
+                <p style="color: var(--texto-secundario); margin-bottom: 1rem;">
+                    Nuestra IA está generando tu informe personalizado
+                </p>
+                <div class="loader-spinner"></div>
+                <ul class="analyzing-steps" id="analyzeSteps">
+                    <li class="active" id="step1">⏳ Procesando respuestas...</li>
+                    <li id="step2">⏳ Analizando patrones emocionales...</li>
+                    <li id="step3">⏳ Identificando áreas de atención...</li>
+                    <li id="step4">⏳ Generando recomendaciones...</li>
+                    <li id="step5">⏳ Preparando tu informe...</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- ====== RESULTS SCREEN ====== -->
+        <section id="resultsScreen" class="card hidden">
+            <div class="results-header fade-in">
+                <span class="premium-badge">Análisis Premium</span>
+                <span class="results-icon">✨</span>
+                <h2 class="results-title">Tu Informe Personalizado</h2>
+                <p class="results-subtitle" id="resultsSubtitle">Análisis profundo con Inteligencia Artificial</p>
+            </div>
+
+            <!-- AI Analysis Content -->
+            <div class="analysis-content" id="analysisContent">
+                <!-- Populated by OpenAI response -->
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- ====== NIVEL 3 - PROFESSIONAL CARDS ====== -->
+            <div class="nivel3-header">
+                <h2>Da el siguiente paso</h2>
+                <p>Nuestros profesionales están listos para acompañarte en tu proceso de bienestar</p>
+            </div>
+
+            <div class="professional-cards">
+                <!-- Erika -->
+                <div class="pro-card fade-in">
+                    <div class="pro-avatar">👩‍⚕️</div>
+                    <div class="pro-info">
+                        <div class="pro-name">Dra. Erika</div>
+                        <div class="pro-title">Psicóloga Clínica</div>
+                        <p class="pro-desc">Especialista en bienestar emocional y manejo del estrés. Te ayudo a construir herramientas para una vida más equilibrada.</p>
+                        <a href="https://wa.me/message/ERIKA_WHATSAPP" class="pro-btn" target="_blank">
+                            💬 Agendar consulta
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Daniel -->
+                <div class="pro-card fade-in">
+                    <div class="pro-avatar">👨‍⚕️</div>
+                    <div class="pro-info">
+                        <div class="pro-name">Dr. Daniel</div>
+                        <div class="pro-title">Terapeuta de Pareja y Familia</div>
+                        <p class="pro-desc">Experto en relaciones interpersonales y dinámicas familiares. Te acompaño en procesos de comunicación y conexión.</p>
+                        <a href="https://wa.me/message/DANIEL_WHATSAPP" class="pro-btn" target="_blank">
+                            💬 Agendar consulta
+                        </a>
+                    </div>
+                </div>
+
+                <!-- John -->
+                <div class="pro-card fade-in">
+                    <div class="pro-avatar">👨‍💼</div>
+                    <div class="pro-info">
+                        <div class="pro-name">John</div>
+                        <div class="pro-title">Coach de Bienestar Integral</div>
+                        <p class="pro-desc">Te guío en el camino hacia una vida más plena, combinando estrategias de coaching y desarrollo personal.</p>
+                        <a href="https://wa.me/message/JOHN_WHATSAPP" class="pro-btn" target="_blank">
+                            💬 Agendar consulta
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Restart -->
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="cuestionario-bienestar.html" style="color: var(--rosa-oscuro); text-decoration: none; font-size: 0.9rem;">
+                    ← Volver al cuestionario inicial
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p><span class="font-script">GinecoSpa</span> · Bienestar Íntimo y Estético</p>
+            <p class="disclaimer">
+                Este análisis es orientativo y no constituye un diagnóstico médico.
+                Si necesitas ayuda, consulta con un especialista.
+            </p>
+        </footer>
+
+    </div>
+
+    <!-- ============================================
+         JAVASCRIPT
+         ============================================ -->
+    <script>
+    (() => {
+        'use strict';
+
+        // ============================================
+        // CONFIGURATION
+        // ============================================
+        // ⬇️ PEGA AQUÍ TU URL DE GOOGLE APPS SCRIPT ⬇️
+        const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbyeh72tKkhH8C1jTXN0dDKuClXolPnPxCvhYP4j7FeBXpM7EE1kvGQ9qUb5WMxgtq8k/exec';
+
+        // ============================================
+        // QUESTIONNAIRE DATA - 25 PREGUNTAS PROFUNDAS
+        // ============================================
+        const questions = [
+            // --- PROFUNDIDAD EMOCIONAL (1-3) ---
+            {
+                id: 1, icon: '💜', category: 'Profundidad emocional',
+                text: '¿Cómo describirías tu estado emocional predominante en el último mes?',
+                options: [
+                    'Generalmente en calma y estable',
+                    'Altibajos frecuentes pero manejables',
+                    'Me siento abrumado/a con frecuencia',
+                    'Siento un vacío o tristeza constante'
+                ]
+            },
+            {
+                id: 2, icon: '🌊', category: 'Profundidad emocional',
+                text: '¿Con qué facilidad puedes identificar y expresar lo que sientes?',
+                options: [
+                    'Puedo identificar y expresar mis emociones claramente',
+                    'A veces me cuesta ponerle nombre a lo que siento',
+                    'Frecuentemente reprimo o ignoro mis emociones',
+                    'Me siento desconectado/a de mis emociones'
+                ]
+            },
+            {
+                id: 3, icon: '😢', category: 'Profundidad emocional',
+                text: '¿Con qué frecuencia sientes ganas de llorar sin una razón aparente?',
+                options: ['Nunca o casi nunca', 'Ocasionalmente', 'Varias veces por semana', 'Casi todos los días']
+            },
+
+            // --- AUTOESTIMA Y AUTOPERCEPCIÓN (4-6) ---
+            {
+                id: 4, icon: '🪞', category: 'Autoestima',
+                text: '¿Cómo te sientes contigo mismo/a en general?',
+                options: [
+                    'Me acepto y valoro como soy',
+                    'Tengo momentos de duda pero en general me siento bien',
+                    'Frecuentemente me comparo con otros y me siento menos',
+                    'Tengo una percepción muy negativa de mí mismo/a'
+                ]
+            },
+            {
+                id: 5, icon: '💪', category: 'Autoestima',
+                text: '¿Sientes que mereces cosas buenas en tu vida?',
+                options: [
+                    'Sí, creo que merezco felicidad y bienestar',
+                    'A veces lo dudo pero intento creerlo',
+                    'Frecuentemente siento que no merezco lo bueno',
+                    'Siento que no merezco ser feliz'
+                ]
+            },
+            {
+                id: 6, icon: '🎯', category: 'Autoestima',
+                text: '¿Cómo manejas las críticas o el rechazo?',
+                options: [
+                    'Las proceso y aprendo de ellas',
+                    'Me afectan temporalmente pero me recupero',
+                    'Me hieren profundamente y me cuestan superar',
+                    'Me paralizan y confirman mis peores miedos'
+                ]
+            },
+
+            // --- RELACIONES Y DINÁMICA SOCIAL (7-10) ---
+            {
+                id: 7, icon: '👥', category: 'Relaciones sociales',
+                text: '¿Cómo describirías la calidad de tus relaciones cercanas?',
+                options: [
+                    'Tengo relaciones sanas y satisfactorias',
+                    'Son aceptables pero podrían mejorar',
+                    'Tengo conflictos frecuentes con personas cercanas',
+                    'Me siento solo/a o aislado/a'
+                ]
+            },
+            {
+                id: 8, icon: '💑', category: 'Relaciones sociales',
+                text: '¿Te sientes seguro/a y valorado/a en tus relaciones íntimas?',
+                options: [
+                    'Sí, me siento seguro/a y amado/a',
+                    'La mayor parte del tiempo, con algunas inseguridades',
+                    'Frecuentemente me siento inseguro/a o menospreciado/a',
+                    'No tengo relaciones íntimas o son muy conflictivas'
+                ]
+            },
+            {
+                id: 9, icon: '🤝', category: 'Relaciones sociales',
+                text: '¿Puedes establecer límites saludables con los demás?',
+                options: [
+                    'Sí, establezco límites claros y me siento cómodo/a',
+                    'A veces, pero me cuesta decir que no',
+                    'Rara vez, suelo ceder para evitar conflictos',
+                    'No puedo, siempre antepongo las necesidades de otros'
+                ]
+            },
+            {
+                id: 10, icon: '🗣️', category: 'Relaciones sociales',
+                text: '¿Cómo manejas los conflictos interpersonales?',
+                options: [
+                    'Los abordo directamente con comunicación asertiva',
+                    'Intento resolverlos pero a veces evito la confrontación',
+                    'Tiendo a explotar o a callarme por completo',
+                    'Los evito completamente, me generan mucha ansiedad'
+                ]
+            },
+
+            // --- TRABAJO/PROPÓSITO/REALIZACIÓN (11-14) ---
+            {
+                id: 11, icon: '💼', category: 'Propósito y realización',
+                text: '¿Sientes que tu trabajo o actividad principal tiene significado para ti?',
+                options: [
+                    'Sí, me siento realizado/a con lo que hago',
+                    'En parte, pero siento que podría ser más',
+                    'Poco, lo hago por necesidad más que por vocación',
+                    'No, siento que estoy estancado/a'
+                ]
+            },
+            {
+                id: 12, icon: '🌟', category: 'Propósito y realización',
+                text: '¿Tienes metas o sueños que te motivan a seguir adelante?',
+                options: [
+                    'Sí, tengo metas claras que me ilusionan',
+                    'Tengo algunas ideas pero no están bien definidas',
+                    'He perdido interés en mis metas anteriores',
+                    'No tengo metas ni sé qué quiero para mi futuro'
+                ]
+            },
+            {
+                id: 13, icon: '⚖️', category: 'Propósito y realización',
+                text: '¿Cómo es tu equilibrio entre vida personal y responsabilidades?',
+                options: [
+                    'Mantengo un buen balance',
+                    'A veces se desequilibra pero lo manejo',
+                    'Mis responsabilidades consumen la mayor parte de mi tiempo',
+                    'No tengo tiempo para mí mismo/a'
+                ]
+            },
+            {
+                id: 14, icon: '🏆', category: 'Propósito y realización',
+                text: '¿Sientes que estás creciendo y evolucionando como persona?',
+                options: [
+                    'Sí, siento que avanzo constantemente',
+                    'En algunos aspectos sí, en otros no',
+                    'Me siento estancado/a en la mayoría de áreas',
+                    'Siento que estoy retrocediendo'
+                ]
+            },
+
+            // --- ANSIEDAD Y ESTRÉS PROFUNDO (15-17) ---
+            {
+                id: 15, icon: '😰', category: 'Ansiedad y estrés',
+                text: '¿Experimentas síntomas físicos relacionados con el estrés (tensión muscular, dolor de cabeza, problemas digestivos)?',
+                options: [
+                    'Raramente o nunca',
+                    'Ocasionalmente, en situaciones muy estresantes',
+                    'Frecuentemente, varios días a la semana',
+                    'Casi constantemente'
+                ]
+            },
+            {
+                id: 16, icon: '💭', category: 'Ansiedad y estrés',
+                text: '¿Con qué frecuencia te preocupas por cosas que están fuera de tu control?',
+                options: [
+                    'Raramente, acepto lo que no puedo cambiar',
+                    'A veces, pero logro soltar la preocupación',
+                    'Frecuentemente, me cuesta dejar de pensar en ello',
+                    'Constantemente, siento que todo puede salir mal'
+                ]
+            },
+            {
+                id: 17, icon: '😶', category: 'Ansiedad y estrés',
+                text: '¿Has sentido ataques de pánico o ansiedad intensa repentina?',
+                options: [
+                    'Nunca',
+                    'Una o dos veces en mi vida',
+                    'Varias veces en los últimos meses',
+                    'Con frecuencia, me limitan en mi vida diaria'
+                ]
+            },
+
+            // --- SALUD FÍSICA E IMPACTO (18-20) ---
+            {
+                id: 18, icon: '🛌', category: 'Salud física',
+                text: '¿Cómo ha sido tu calidad de sueño en las últimas semanas?',
+                options: [
+                    'Duermo bien y me despierto descansado/a',
+                    'Duermo pero no siempre descanso lo suficiente',
+                    'Tengo insomnio o pesadillas frecuentes',
+                    'Mi sueño está muy alterado, afecta mi día a día'
+                ]
+            },
+            {
+                id: 19, icon: '🍽️', category: 'Salud física',
+                text: '¿Has notado cambios en tu apetito o relación con la comida?',
+                options: [
+                    'Mi apetito es normal y estable',
+                    'Algunos cambios leves pero manejables',
+                    'Como mucho más o mucho menos de lo habitual',
+                    'Mi relación con la comida se ha vuelto problemática'
+                ]
+            },
+            {
+                id: 20, icon: '🏃', category: 'Salud física',
+                text: '¿Realizas algún tipo de actividad física o movimiento regular?',
+                options: [
+                    'Sí, hago ejercicio regularmente y lo disfruto',
+                    'De vez en cuando, pero no es constante',
+                    'Casi nunca, me falta motivación o energía',
+                    'No, mi cuerpo se siente pesado e inmóvil'
+                ]
+            },
+
+            // --- MECANISMOS DE AFRONTAMIENTO (21-23) ---
+            {
+                id: 21, icon: '🧘', category: 'Afrontamiento',
+                text: '¿Qué haces cuando te sientes mal emocionalmente?',
+                options: [
+                    'Tengo estrategias saludables (hablar, meditar, escribir)',
+                    'Busco distracciones pero a veces funciona',
+                    'Tiendo a aislarme o a negar lo que siento',
+                    'Recurro a hábitos poco saludables (comer en exceso, sustancias, etc.)'
+                ]
+            },
+            {
+                id: 22, icon: '🔄', category: 'Afrontamiento',
+                text: '¿Sientes que tienes herramientas para manejar momentos difíciles?',
+                options: [
+                    'Sí, tengo recursos emocionales que me ayudan',
+                    'Algunas, pero no siempre son suficientes',
+                    'Pocas, me siento desprotegido/a ante las dificultades',
+                    'Ninguna, cada crisis me desborda completamente'
+                ]
+            },
+            {
+                id: 23, icon: '🌈', category: 'Afrontamiento',
+                text: '¿Con qué frecuencia sientes esperanza sobre tu futuro?',
+                options: [
+                    'Frecuentemente, soy optimista por naturaleza',
+                    'A veces, depende de las circunstancias',
+                    'Raramente, tiendo a ver todo negro',
+                    'Casi nunca, siento que nada va a mejorar'
+                ]
+            },
+
+            // --- DISPOSICIÓN A AYUDA PROFESIONAL (24-25) ---
+            {
+                id: 24, icon: '🩺', category: 'Disposición a ayuda',
+                text: '¿Has considerado buscar ayuda profesional para tu bienestar emocional?',
+                options: [
+                    'No lo necesito actualmente, me siento bien',
+                    'He pensado en ello pero no he dado el paso',
+                    'Lo necesito y estoy buscando opciones',
+                    'Lo necesito urgentemente'
+                ]
+            },
+            {
+                id: 25, icon: '💜', category: 'Disposición a ayuda',
+                text: '¿Qué tipo de apoyo sientes que más te beneficiaría ahora mismo?',
+                options: [
+                    'Herramientas de autocuidado y manejo del estrés',
+                    'Terapia individual para explorar mis emociones',
+                    'Orientación en mis relaciones y vida social',
+                    'Apoyo integral: emocional, físico y relacional'
+                ]
+            }
+        ];
+
+        // ============================================
+        // STATE
+        // ============================================
+        let currentStep = 0;
+        let answers = new Array(questions.length).fill(null);
+        let notes = new Array(questions.length).fill('');
+        let direction = 'forward';
+        let personalData = { name: '', age: '', city: '' };
+        let sessionId = '';
+        let nivel1Score = '';
+        let nivel1Level = '';
+
+        // ============================================
+        // DOM
+        // ============================================
+        const $ = sel => document.querySelector(sel);
+        const verifyScreen = $('#verifyScreen');
+        const personalScreen = $('#personalScreen');
+        const quizScreen = $('#quizScreen');
+        const analyzingScreen = $('#analyzingScreen');
+        const resultsScreen = $('#resultsScreen');
+
+        const btnStartQuiz = $('#btnStartQuiz');
+        const btnPrev = $('#btnPrev');
+        const btnNext = $('#btnNext');
+        const progressStep = $('#progressStep');
+        const progressPercent = $('#progressPercent');
+        const progressFill = $('#progressFill');
+        const questionContainer = $('#questionContainer');
+        const validationMsg = $('#validationMsg');
+
+        // ============================================
+        // SCREEN MANAGEMENT
+        // ============================================
+        function showScreen(screen) {
+            [verifyScreen, personalScreen, quizScreen, analyzingScreen, resultsScreen]
+                .forEach(s => s.classList.add('hidden'));
+            screen.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ============================================
+        // 1. VERIFY PAYMENT ON LOAD
+        // ============================================
+        async function verifyPayment() {
+            const params = new URLSearchParams(window.location.search);
+            sessionId = params.get('session_id');
+
+            if (!sessionId) {
+                showVerifyError('No se encontró información de pago. Por favor, realiza el pago desde el cuestionario inicial.');
+                return;
+            }
+
+            try {
+                const response = await fetch(BACKEND_URL + '?action=verify-session&session_id=' + encodeURIComponent(sessionId));
+                const result = await response.json();
+
+                if (result.paid) {
+                    // Payment verified! Show quiz
+                    if (result.customerName) personalData.name = result.customerName;
+                    $('#verifyLoader').style.display = 'none';
+                    setTimeout(() => showScreen(personalScreen), 500);
+                } else {
+                    showVerifyError('Tu pago aún no ha sido confirmado. Si acabas de pagar, espera unos segundos y recarga la página.');
+                }
+            } catch (error) {
+                console.error('Error verificando pago:', error);
+                showVerifyError('Error de conexión. Intenta recargar la página.');
+            }
+        }
+
+        function showVerifyError(msg) {
+            $('#verifyLoader').style.display = 'none';
+            $('#verifyErrorMsg').textContent = msg;
+            $('#verifyError').classList.remove('hidden');
+        }
+
+        // ============================================
+        // 2. RENDER QUESTIONS
+        // ============================================
+        function renderQuestion(index) {
+            const q = questions[index];
+            const selectedAnswer = answers[index];
+            const currentNote = notes[index];
+
+            const animName = direction === 'forward' ? 'slideIn' : 'slideInReverse';
+
+            const html = `
+                <div class="question-slide" style="animation-name: ${animName}">
+                    <span class="question-icon">${q.icon}</span>
+                    <p class="question-category">${q.category}</p>
+                    <h2 class="question-text">${q.text}</h2>
+                    <div class="options-group" role="radiogroup">
+                        ${q.options.map((opt, i) => `
+                            <div class="option-item">
+                                <input type="radio" name="q${q.id}" id="q${q.id}_opt${i}" value="${i}" ${selectedAnswer === i ? 'checked' : ''}>
+                                <label class="option-label" for="q${q.id}_opt${i}">
+                                    <span class="option-radio-circle"></span>
+                                    <span>${opt}</span>
+                                    <span class="option-check">✓</span>
+                                </label>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="observations-wrapper">
+                        <button class="observations-toggle ${currentNote ? 'active' : ''}" type="button" id="obsToggle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                            Agregar observación (opcional)
+                        </button>
+                        <div class="observations-area ${currentNote ? 'open' : ''}" id="obsArea">
+                            <textarea placeholder="Escribe aquí cualquier detalle..." id="obsTextarea">${currentNote}</textarea>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            questionContainer.innerHTML = html;
+
+            // Bind radio events
+            questionContainer.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.addEventListener('change', e => {
+                    answers[index] = parseInt(e.target.value);
+                    validationMsg.classList.remove('show');
+                });
+            });
+
+            // Observation toggle
+            const toggle = $('#obsToggle');
+            const area = $('#obsArea');
+            const textarea = $('#obsTextarea');
+
+            toggle.addEventListener('click', () => {
+                const isOpen = area.classList.toggle('open');
+                toggle.classList.toggle('active', isOpen);
+                if (isOpen && textarea) textarea.focus();
+            });
+
+            if (textarea) {
+                textarea.addEventListener('input', e => { notes[index] = e.target.value; });
+            }
+
+            updateProgress(index);
+            btnPrev.style.display = index === 0 ? 'none' : 'inline-flex';
+            btnNext.innerHTML = index === questions.length - 1
+                ? 'Obtener análisis <span class="btn-arrow">→</span>'
+                : 'Siguiente <span class="btn-arrow">→</span>';
+            validationMsg.classList.remove('show');
+        }
+
+        function updateProgress(index) {
+            const pct = Math.round(((index + 1) / questions.length) * 100);
+            progressStep.textContent = `Pregunta ${index + 1} de ${questions.length}`;
+            progressPercent.textContent = `${pct}%`;
+            progressFill.style.width = `${pct}%`;
+        }
+
+        // ============================================
+        // 3. SUBMIT & GET AI ANALYSIS
+        // ============================================
+        async function submitAndAnalyze() {
+            showScreen(analyzingScreen);
+
+            // Animate steps
+            const steps = ['step1', 'step2', 'step3', 'step4', 'step5'];
+            for (let i = 0; i < steps.length; i++) {
+                await new Promise(r => setTimeout(r, i === 0 ? 500 : 2000));
+                if (i > 0) {
+                    const prev = document.getElementById(steps[i - 1]);
+                    prev.innerHTML = '✅ ' + prev.textContent.substring(2);
+                    prev.classList.remove('active');
+                    prev.classList.add('done');
+                }
+                const curr = document.getElementById(steps[i]);
+                curr.classList.add('active');
+            }
+
+            // Build payload
+            const payload = {
+                action: 'submit-nivel2',
+                sessionId: sessionId,
+                personalData: personalData,
+                answers: answers.map((a, i) => ({
+                    questionId: i + 1,
+                    category: questions[i].category,
+                    questionText: questions[i].text,
+                    selectedOption: a,
+                    selectedText: a !== null ? questions[i].options[a] : null
+                })),
+                optionalNotes: notes.map((n, i) => ({
+                    questionId: i + 1,
+                    note: n || null
+                })).filter(n => n.note),
+                nivel1Score: nivel1Score,
+                nivel1Level: nivel1Level,
+                timestamp: new Date().toISOString()
+            };
+
+            try {
+                const response = await fetch(BACKEND_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify(payload)
+                });
+
+                const result = await response.json();
+
+                // Mark last step done
+                const lastStep = document.getElementById('step5');
+                lastStep.innerHTML = '✅ ' + lastStep.textContent.substring(2);
+                lastStep.classList.remove('active');
+                lastStep.classList.add('done');
+
+                await new Promise(r => setTimeout(r, 1000));
+
+                if (result.success && result.analysis) {
+                    showAnalysisResults(result.analysis);
+                } else {
+                    showAnalysisResults(null);
+                }
+
+            } catch (error) {
+                console.error('Error:', error);
+                await new Promise(r => setTimeout(r, 1000));
+                showAnalysisResults(null);
+            }
+        }
+
+        function showAnalysisResults(analysisHtml) {
+            const displayName = personalData.name ? personalData.name.split(' ')[0] : '';
+            if (displayName) {
+                $('#resultsSubtitle').textContent = `${displayName}, aquí está tu análisis personalizado`;
+            }
+
+            const container = $('#analysisContent');
+            if (analysisHtml) {
+                container.innerHTML = analysisHtml;
+            } else {
+                container.innerHTML = `
+                    <div class="analysis-section">
+                        <h3>⚠️ Aviso</h3>
+                        <p>No pudimos generar el análisis con IA en este momento. Nuestro equipo ha recibido tus respuestas y te enviaremos el análisis completo por correo. Disculpa las molestias.</p>
+                    </div>
+                `;
+            }
+
+            showScreen(resultsScreen);
+        }
+
+        // ============================================
+        // EVENT HANDLERS
+        // ============================================
+
+        // Start quiz
+        btnStartQuiz.addEventListener('click', () => {
+            const name = $('#personalName').value.trim();
+            const age = $('#personalAge').value.trim();
+            const city = $('#personalCity').value.trim();
+
+            if (!name || !age || !city) {
+                $('#personalValidation').classList.add('show');
+                if (!name) $('#personalName').focus();
+                else if (!age) $('#personalAge').focus();
+                else $('#personalCity').focus();
+                return;
+            }
+
+            $('#personalValidation').classList.remove('show');
+            personalData = { name, age: parseInt(age), city };
+            currentStep = 1;
+            showScreen(quizScreen);
+            renderQuestion(0);
+        });
+
+        // Hide validation on input
+        ['personalName', 'personalAge', 'personalCity'].forEach(id => {
+            $(`#${id}`).addEventListener('input', () => {
+                $('#personalValidation').classList.remove('show');
+            });
+        });
+
+        // Next
+        btnNext.addEventListener('click', () => {
+            const qIndex = currentStep - 1;
+            if (answers[qIndex] === null) {
+                validationMsg.classList.add('show');
+                return;
+            }
+
+            direction = 'forward';
+
+            if (currentStep < questions.length) {
+                currentStep++;
+                renderQuestion(currentStep - 1);
+            } else {
+                // All done - submit
+                submitAndAnalyze();
+            }
+        });
+
+        // Previous
+        btnPrev.addEventListener('click', () => {
+            if (currentStep > 1) {
+                direction = 'backward';
+                currentStep--;
+                renderQuestion(currentStep - 1);
+            }
+        });
+
+        // Keyboard nav
+        document.addEventListener('keydown', e => {
+            if (quizScreen.classList.contains('hidden')) return;
+            if (e.key === 'Enter' && !e.target.matches('textarea')) {
+                e.preventDefault();
+                btnNext.click();
+            }
+        });
+
+        // ============================================
+        // INIT - Verify payment on load
+        // ============================================
+        verifyPayment();
+
+    })();
+    </script>
+</body>
+</html>

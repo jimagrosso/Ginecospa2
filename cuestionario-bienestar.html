@@ -1429,9 +1429,59 @@
 
                     <div class="divider"></div>
 
-                    <!-- CTA -->
+                    <!-- ====== PREMIUM CTA - NIVEL 2 ====== -->
+                    <div class="premium-cta-section" id="premiumCtaSection">
+                        <div style="text-align: center; margin-bottom: 1.2rem;">
+                            <span style="display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 6px 16px; border-radius: 50px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase;">🧠 Análisis con IA</span>
+                        </div>
+                        <h4 style="text-align: center; font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: #3D2E2E; margin-bottom: 0.5rem;">¿Quieres un análisis más profundo?</h4>
+                        <p style="text-align: center; color: #7A6B6B; font-size: 0.88rem; margin-bottom: 1.2rem;">Desbloquea un cuestionario de 25 preguntas + un informe personalizado generado por Inteligencia Artificial</p>
+
+                        <div style="background: linear-gradient(135deg, #FFF5F7, #F3E8FF); border-radius: 16px; padding: 1.2rem; margin-bottom: 1.2rem;">
+                            <div style="display: flex; flex-direction: column; gap: 8px; font-size: 0.85rem; color: #3D2E2E;">
+                                <div style="display: flex; align-items: center; gap: 8px;">✅ 25 preguntas profundas sobre bienestar emocional</div>
+                                <div style="display: flex; align-items: center; gap: 8px;">✅ Análisis personalizado con Inteligencia Artificial</div>
+                                <div style="display: flex; align-items: center; gap: 8px;">✅ Áreas de fortaleza y atención identificadas</div>
+                                <div style="display: flex; align-items: center; gap: 8px;">✅ Plan de acción semanal personalizado</div>
+                                <div style="display: flex; align-items: center; gap: 8px;">✅ Acceso a profesionales especializados</div>
+                            </div>
+                        </div>
+
+                        <div style="text-align: center;">
+                            <button id="btnPremium" style="
+                                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                                color: white;
+                                border: none;
+                                padding: 16px 36px;
+                                border-radius: 50px;
+                                font-family: 'Montserrat', sans-serif;
+                                font-size: 1rem;
+                                font-weight: 700;
+                                cursor: pointer;
+                                transition: all 0.3s ease;
+                                box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+                                display: inline-flex;
+                                align-items: center;
+                                gap: 8px;
+                            " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(102, 126, 234, 0.4)'"
+                               onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.3)'"
+                            >
+                                🔓 Desbloquear por $3 USD
+                            </button>
+                            <p style="font-size: 0.75rem; color: #9A8F8F; margin-top: 0.7rem;">Pago seguro con Stripe · Resultado inmediato</p>
+                        </div>
+
+                        <div id="premiumLoading" style="display: none; text-align: center; padding: 1rem;">
+                            <div style="width: 36px; height: 36px; border: 3px solid #E0CFFF; border-top-color: #667eea; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 0.8rem;"></div>
+                            <p style="color: #7A6B6B; font-size: 0.88rem;">Redirigiendo a pago seguro...</p>
+                        </div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <!-- CTA CONTACTO GRATUITO -->
                     <div class="cta-section" id="ctaSection">
-                        <h4>¿Quieres un análisis más detallado y recomendaciones personalizadas?</h4>
+                        <h4>O si prefieres, recibe orientación gratuita</h4>
                         <p>Elige cómo prefieres recibirlo</p>
 
                         <div class="cta-buttons">
@@ -1907,6 +1957,7 @@
         // ============================================
         function buildPayload(contact = null) {
             return {
+                action: 'submit-nivel1',
                 personalData: {
                     name: personalData.name,
                     age: personalData.age,
@@ -2077,6 +2128,55 @@
         contactInput.addEventListener('focus', () => {
             contactInput.style.borderColor = 'var(--rosa-intenso)';
         });
+
+        // ============================================
+        // PREMIUM CHECKOUT (NIVEL 2)
+        // ============================================
+        const btnPremium = $('#btnPremium');
+        const premiumLoading = $('#premiumLoading');
+
+        if (btnPremium) {
+            btnPremium.addEventListener('click', async () => {
+                // Show loading
+                btnPremium.style.display = 'none';
+                premiumLoading.style.display = 'block';
+
+                // Calculate results for metadata
+                const results = calculateResults();
+
+                try {
+                    const response = await fetch(BACKEND_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'text/plain' },
+                        body: JSON.stringify({
+                            action: 'create-checkout',
+                            customerName: personalData.name || '',
+                            customerEmail: '',
+                            nivel1Data: {
+                                totalScore: results.totalScore,
+                                level: results.level
+                            }
+                        })
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success && result.checkoutUrl) {
+                        // Redirect to Stripe Checkout
+                        window.location.href = result.checkoutUrl;
+                    } else {
+                        alert('Error al crear la sesión de pago. Por favor intenta de nuevo.');
+                        btnPremium.style.display = 'inline-flex';
+                        premiumLoading.style.display = 'none';
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('Error de conexión. Por favor intenta de nuevo.');
+                    btnPremium.style.display = 'inline-flex';
+                    premiumLoading.style.display = 'none';
+                }
+            });
+        }
 
         // Restart
         btnRestart.addEventListener('click', () => {
