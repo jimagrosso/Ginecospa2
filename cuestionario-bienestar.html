@@ -1861,33 +1861,45 @@
         /**
          * submitToBackend(payload)
          * 
-         * Envía los datos del cuestionario al backend.
-         * POR AHORA: solo console.log (modo demo).
+         * Envía los datos del cuestionario a Google Sheets
+         * via Google Apps Script Web App.
          * 
-         * INTEGRACIÓN FUTURA:
-         * - Google Apps Script Web App (POST) → Guardar en Google Sheets
-         * - Llamar a OpenAI para análisis personalizado
-         * - Retornar JSON: { message, level, flags }
-         * 
-         * Ejemplo de endpoint:
-         * const BACKEND_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
-         * 
-         * fetch(BACKEND_URL, {
-         *     method: 'POST',
-         *     headers: { 'Content-Type': 'application/json' },
-         *     body: JSON.stringify(payload)
-         * })
-         * .then(res => res.json())
-         * .then(data => {
-         *     // data = { message: '...', level: 'Moderado', flags: [] }
-         *     // Usar data para personalizar la pantalla de resultados
-         * });
+         * INSTRUCCIONES:
+         * Reemplaza BACKEND_URL con la URL de tu Apps Script desplegado.
          */
-        function submitToBackend(payload) {
+        
+        // ⬇️ PEGA AQUÍ TU URL DE GOOGLE APPS SCRIPT ⬇️
+        const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbyeh72tKkhH8C1jTXN0dDKuClXolPnPxCvhYP4j7FeBXpM7EE1kvGQ9qUb5WMxgtq8k/exec';
+        // ⬆️ Ejemplo: 'https://script.google.com/macros/s/AKfycb.../exec'
+
+        async function submitToBackend(payload) {
             console.log('=== PAYLOAD PARA BACKEND ===');
             console.log(JSON.stringify(payload, null, 2));
-            console.log('============================');
-            // TODO: Conectar con Google Apps Script / OpenAI
+
+            // Si no hay URL configurada, solo hacer log
+            if (!BACKEND_URL || BACKEND_URL === 'PEGA_TU_URL_AQUI') {
+                console.warn('⚠️ BACKEND_URL no configurada. Datos solo en consola.');
+                return { success: false, message: 'URL no configurada' };
+            }
+
+            try {
+                const response = await fetch(BACKEND_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify(payload),
+                    mode: 'no-cors'
+                });
+                
+                // Con no-cors no podemos leer la respuesta,
+                // pero los datos sí llegan a Google Sheets
+                console.log('✅ Datos enviados a Google Sheets');
+                return { success: true, message: 'Enviado' };
+                
+            } catch (error) {
+                console.error('❌ Error enviando datos:', error);
+                // No bloquear la experiencia del usuario si falla
+                return { success: false, message: error.message };
+            }
         }
 
         // ============================================
