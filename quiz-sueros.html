@@ -768,8 +768,14 @@
         try { localStorage.setItem('ginecospa_sueros_backup', JSON.stringify(payload)); } catch(e) {}
 
         if (ENDPOINT && ENDPOINT !== 'PEGAR_AQUI_URL_WEB_APP_SUEROS') {
-            fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload), mode: 'no-cors' })
-                .then(() => console.log('Datos enviados'))
+            fetch(ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain' },
+                body: JSON.stringify(payload),
+                redirect: 'follow'
+            })
+                .then(r => r.text())
+                .then(t => console.log('Datos enviados:', t))
                 .catch(err => console.warn('Error enviando:', err));
         } else {
             console.log('=== PAYLOAD (endpoint no configurado) ===');
