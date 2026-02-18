@@ -37,6 +37,10 @@
             --gradiente-boton: linear-gradient(135deg, #E75480 0%, #FF8FA3 100%);
             --gradiente-boton-hover: linear-gradient(135deg, #C9365E 0%, #E75480 100%);
             --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            /* Emotional panel colors */
+            --color-equilibrio: #4CAF7A;
+            --color-tension: #E5A822;
+            --color-acumulacion: #D4803A;
         }
 
         /* ============================================
@@ -1110,6 +1114,232 @@
         }
 
         /* ============================================
+           MICRO-MESSAGES (between questions)
+           ============================================ */
+        .micro-message-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 245, 247, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            opacity: 0;
+            animation: microFadeIn 0.4s var(--transition-smooth) forwards;
+        }
+
+        .micro-message-overlay.micro-fade-out {
+            animation: microFadeOut 0.4s var(--transition-smooth) forwards;
+        }
+
+        @keyframes microFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes microFadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        .micro-message-content {
+            text-align: center;
+            padding: 2rem;
+            max-width: 400px;
+            animation: microSlideUp 0.5s var(--transition-smooth) 0.15s both;
+        }
+
+        @keyframes microSlideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .micro-message-icon {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 1rem;
+            animation: floatIcon 3s ease-in-out infinite;
+        }
+
+        .micro-message-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35rem;
+            font-weight: 500;
+            color: var(--texto-principal);
+            line-height: 1.5;
+        }
+
+        .micro-message-sub {
+            font-size: 0.8rem;
+            color: var(--gris-suave);
+            margin-top: 0.75rem;
+            font-style: italic;
+        }
+
+        /* ============================================
+           PANEL DE ESTADO EMOCIONAL
+           ============================================ */
+        .emotional-panel {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(243,232,255,0.4));
+            border: 2px solid var(--lavanda-medio);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 1.75rem;
+            animation: fadeSlideUp 0.6s var(--transition-smooth);
+        }
+
+        .emotional-panel-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25rem;
+            color: var(--texto-principal);
+            text-align: center;
+            margin-bottom: 0.4rem;
+        }
+
+        .emotional-panel-subtitle {
+            font-size: 0.78rem;
+            color: var(--gris-suave);
+            text-align: center;
+            margin-bottom: 1.25rem;
+            font-style: italic;
+        }
+
+        .emotional-indicator {
+            margin-bottom: 1rem;
+        }
+
+        .emotional-indicator:last-child {
+            margin-bottom: 0;
+        }
+
+        .indicator-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.4rem;
+        }
+
+        .indicator-label {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--texto-principal);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .indicator-level {
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 0.15rem 0.6rem;
+            border-radius: 50px;
+        }
+
+        .indicator-level-equilibrio {
+            background: rgba(76, 175, 122, 0.12);
+            color: var(--color-equilibrio);
+        }
+
+        .indicator-level-tension {
+            background: rgba(229, 168, 34, 0.12);
+            color: var(--color-tension);
+        }
+
+        .indicator-level-acumulacion {
+            background: rgba(212, 128, 58, 0.12);
+            color: var(--color-acumulacion);
+        }
+
+        .indicator-bar-track {
+            width: 100%;
+            height: 8px;
+            background: var(--rosa-claro);
+            border-radius: 100px;
+            overflow: hidden;
+        }
+
+        .indicator-bar-fill {
+            height: 100%;
+            border-radius: 100px;
+            transition: width 1.2s var(--transition-smooth);
+            width: 0;
+        }
+
+        .indicator-bar-fill.bar-equilibrio {
+            background: linear-gradient(90deg, #A8E6C3, var(--color-equilibrio));
+        }
+
+        .indicator-bar-fill.bar-tension {
+            background: linear-gradient(90deg, #FFE082, var(--color-tension));
+        }
+
+        .indicator-bar-fill.bar-acumulacion {
+            background: linear-gradient(90deg, #FFCC80, var(--color-acumulacion));
+        }
+
+        /* ============================================
+           PRE-STRIPE ENHANCED TEXT
+           ============================================ */
+        .pre-stripe-text {
+            text-align: center;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .pre-stripe-text p {
+            font-size: 0.88rem;
+            color: var(--texto-secundario);
+            line-height: 1.65;
+            margin-bottom: 0.6rem;
+        }
+
+        .pre-stripe-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .pre-stripe-text .emphasis {
+            color: var(--rosa-oscuro);
+            font-weight: 600;
+        }
+
+        /* ============================================
+           EMPATHIC CLOSING
+           ============================================ */
+        .empathic-closing {
+            background: linear-gradient(135deg, var(--lavanda), rgba(255, 245, 247, 0.6));
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(224, 207, 255, 0.5);
+        }
+
+        .empathic-closing-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.6rem;
+        }
+
+        .empathic-closing p {
+            font-size: 0.85rem;
+            color: var(--texto-secundario);
+            line-height: 1.7;
+            margin-bottom: 0.5rem;
+        }
+
+        .empathic-closing p:last-child {
+            margin-bottom: 0;
+        }
+
+        .empathic-closing .script-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.05rem;
+            color: var(--rosa-oscuro);
+        }
+
+        /* ============================================
            UTILITY
            ============================================ */
         .hidden {
@@ -1143,10 +1373,10 @@
             <section id="welcomeScreen" class="welcome-screen" aria-label="Bienvenida">
                 <span class="welcome-icon" aria-hidden="true">🔮</span>
                 <h1 class="welcome-title">¿Qué está pasando contigo realmente?</h1>
-                <p class="welcome-subtitle">Un check-in breve para entender cómo estás</p>
+                <p class="welcome-subtitle">Un espacio para escucharte</p>
                 <p class="welcome-text">
-                    Un momento para conectar contigo y entender qué te pide este momento de tu vida.
-                    No es un diagnóstico. No hay respuestas correctas o incorrectas.
+                    No es un test. No hay respuestas correctas. Es un momento para conectar contigo
+                    y dejar que algo que llevas dentro empiece a tomar forma.
                 </p>
                 <div class="welcome-features">
                     <div class="welcome-feature">
@@ -1155,7 +1385,7 @@
                     </div>
                     <div class="welcome-feature">
                         <span aria-hidden="true">⏱️</span>
-                        <span>2 min</span>
+                        <span>2-3 min</span>
                     </div>
                     <div class="welcome-feature">
                         <span aria-hidden="true">💜</span>
@@ -1192,7 +1422,7 @@
                         <span class="btn-arrow-back" aria-hidden="true">←</span>
                         Anterior
                     </button>
-                    <button class="btn btn-next" id="btnNext" aria-label="Siguiente pregunta">
+                    <button class="btn btn-next hidden" id="btnNext" aria-label="Siguiente pregunta">
                         Siguiente
                         <span class="btn-arrow" aria-hidden="true">→</span>
                     </button>
@@ -1203,13 +1433,13 @@
             <section id="analyzingScreen" class="hidden" aria-label="Analizando respuestas">
                 <div class="analyzing-screen">
                     <div class="analyzing-spinner" aria-hidden="true"></div>
-                    <p class="analyzing-text">
+                    <p class="analyzing-text" id="analyzingMainText">
                         Leyendo tus respuestas
                         <span class="analyzing-dots" aria-hidden="true">
                             <span></span><span></span><span></span>
                         </span>
                     </p>
-                    <p class="analyzing-subtext">Preparando tu lectura personalizada</p>
+                    <p class="analyzing-subtext" id="analyzingSubText">Preparando tu lectura personalizada</p>
                 </div>
             </section>
 
@@ -1248,6 +1478,30 @@
         // ENDPOINT (PEGAR URL DEL NUEVO WEB APP AQUÍ)
         // ============================================
         const ENDPOINT = "PEGAR_AQUI_URL_WEB_APP";
+
+        // ============================================
+        // MICRO-MESSAGES CONFIG
+        // Phase 1 (after Q2, Q3): Validation
+        // Phase 2 (after Q5, Q6): Conscious inquiry
+        // Phase 3 (after Q8, Q9): Partial emotional reading
+        // ============================================
+        const microMessages = {
+            2: {
+                icon: '💜',
+                text: 'Lo que sientes importa. No hay respuestas incorrectas aquí.',
+                sub: 'Sigue conectando contigo...'
+            },
+            5: {
+                icon: '🌊',
+                text: 'Algo está tomando forma... tu cuerpo ya sabe lo que tu mente aún no ha nombrado.',
+                sub: 'Estás yendo más profundo...'
+            },
+            8: {
+                icon: '🪞',
+                text: 'Tu lectura está casi lista. Lo que viene puede mostrarte algo que ya intuías.',
+                sub: 'Solo unas preguntas más...'
+            }
+        };
 
         // ============================================
         // QUESTIONNAIRE DATA (10 preguntas, scoring 0-3)
@@ -1493,12 +1747,77 @@
         }
 
         // ============================================
+        // EMOTIONAL INDICATORS CALCULATION
+        // ============================================
+        function calculateEmotionalIndicators(scores) {
+            // 5 indicators mapped from the 10 questions
+            // Each indicator: average of relevant question scores, scaled to percentage
+            // Higher % = more accumulated (inverted for display as tension)
+
+            const indicators = [
+                {
+                    id: 'carga_mental',
+                    icon: '🧠',
+                    label: 'Carga mental actual',
+                    // Q4 (carga mental) + Q3 (claridad)
+                    value: Math.round(((scores[3] + scores[2]) / 6) * 100)
+                },
+                {
+                    id: 'rumiacion',
+                    icon: '💭',
+                    label: 'Rumiación / sobrepensar',
+                    // Q3 (claridad) + Q5 (emoción dominante)
+                    value: Math.round(((scores[2] + scores[4]) / 6) * 100)
+                },
+                {
+                    id: 'agotamiento',
+                    icon: '😮‍💨',
+                    label: 'Agotamiento emocional',
+                    // Q1 (sentir interno) + Q2 (energía)
+                    value: Math.round(((scores[0] + scores[1]) / 6) * 100)
+                },
+                {
+                    id: 'desconexion',
+                    icon: '🫀',
+                    label: 'Desconexión emocional',
+                    // Q10 (lectura interna) + Q9 (red de apoyo)
+                    value: Math.round(((scores[9] + scores[8]) / 6) * 100)
+                },
+                {
+                    id: 'recuperacion',
+                    icon: '🌱',
+                    label: 'Capacidad de recuperación',
+                    // Q8 (espacio personal) + Q6 (alineación) - INVERTED (high = good)
+                    value: Math.round((1 - ((scores[7] + scores[5]) / 6)) * 100)
+                }
+            ];
+
+            // Clamp values
+            indicators.forEach(ind => {
+                ind.value = Math.max(5, Math.min(95, ind.value));
+                // Determine level (for first 4: high = bad; for recuperacion: high = good)
+                if (ind.id === 'recuperacion') {
+                    if (ind.value >= 60) { ind.level = 'Equilibrio'; ind.levelClass = 'equilibrio'; }
+                    else if (ind.value >= 35) { ind.level = 'Tensión'; ind.levelClass = 'tension'; }
+                    else { ind.level = 'Acumulación'; ind.levelClass = 'acumulacion'; }
+                } else {
+                    if (ind.value <= 35) { ind.level = 'Equilibrio'; ind.levelClass = 'equilibrio'; }
+                    else if (ind.value <= 60) { ind.level = 'Tensión'; ind.levelClass = 'tension'; }
+                    else { ind.level = 'Acumulación'; ind.levelClass = 'acumulacion'; }
+                }
+            });
+
+            return indicators;
+        }
+
+        // ============================================
         // STATE
         // ============================================
         let currentStep = 0;
         let answers = new Array(questions.length).fill(null);
         let notes = new Array(questions.length).fill('');
         let direction = 'forward';
+        let autoAdvanceTimeout = null;
 
         // ============================================
         // DOM
@@ -1526,6 +1845,64 @@
             [welcomeScreen, quizScreen, analyzingScreen, resultsScreen]
                 .forEach(s => s.classList.add('hidden'));
             screen.classList.remove('hidden');
+        }
+
+        // ============================================
+        // MICRO-MESSAGE DISPLAY
+        // ============================================
+        function showMicroMessage(questionIndex, callback) {
+            const msg = microMessages[questionIndex];
+            if (!msg) { callback(); return; }
+
+            const overlay = document.createElement('div');
+            overlay.className = 'micro-message-overlay';
+            overlay.innerHTML = `
+                <div class="micro-message-content">
+                    <span class="micro-message-icon" aria-hidden="true">${msg.icon}</span>
+                    <p class="micro-message-text">${msg.text}</p>
+                    <p class="micro-message-sub">${msg.sub}</p>
+                </div>
+            `;
+            document.body.appendChild(overlay);
+
+            setTimeout(() => {
+                overlay.classList.add('micro-fade-out');
+                setTimeout(() => {
+                    overlay.remove();
+                    callback();
+                }, 400);
+            }, 2200);
+        }
+
+        // ============================================
+        // AUTO-ADVANCE LOGIC
+        // ============================================
+        function handleAutoAdvance(questionIndex) {
+            if (autoAdvanceTimeout) {
+                clearTimeout(autoAdvanceTimeout);
+                autoAdvanceTimeout = null;
+            }
+
+            autoAdvanceTimeout = setTimeout(() => {
+                direction = 'forward';
+
+                if (questionIndex < questions.length - 1) {
+                    // Check if this question triggers a micro-message
+                    const nextQNum = questionIndex + 1; // 0-indexed question just answered
+                    if (microMessages[nextQNum]) {
+                        showMicroMessage(nextQNum, () => {
+                            currentStep++;
+                            renderQuestion(currentStep - 1);
+                        });
+                    } else {
+                        currentStep++;
+                        renderQuestion(currentStep - 1);
+                    }
+                } else {
+                    // Last question — go to analyzing
+                    goToAnalyzing();
+                }
+            }, 650);
         }
 
         // ============================================
@@ -1585,11 +1962,13 @@
 
             questionContainer.innerHTML = html;
 
-            // Bind radios
+            // Bind radios with auto-advance
             questionContainer.querySelectorAll('input[type="radio"]').forEach(radio => {
                 radio.addEventListener('change', (e) => {
                     answers[index] = parseInt(e.target.value);
                     validationMsg.classList.remove('show');
+                    // Auto-advance after selection
+                    handleAutoAdvance(index);
                 });
             });
 
@@ -1599,10 +1978,19 @@
             const textarea = $('#obsTextarea');
 
             toggle.addEventListener('click', () => {
+                // If observation is opened, cancel auto-advance
+                if (autoAdvanceTimeout) {
+                    clearTimeout(autoAdvanceTimeout);
+                    autoAdvanceTimeout = null;
+                }
                 const isOpen = area.classList.toggle('open');
                 toggle.classList.toggle('active', isOpen);
                 toggle.setAttribute('aria-expanded', isOpen);
                 if (isOpen && textarea) textarea.focus();
+                // Show Next button when observation is open so user can manually advance
+                if (isOpen) {
+                    btnNext.classList.remove('hidden');
+                }
             });
 
             if (textarea) {
@@ -1613,6 +2001,12 @@
 
             updateProgress(index);
             btnPrev.style.display = index === 0 ? 'none' : 'inline-flex';
+            // Hide Next button by default (auto-advance handles it)
+            btnNext.classList.add('hidden');
+            // But show it if already answered (user went back)
+            if (selectedAnswer !== null) {
+                btnNext.classList.remove('hidden');
+            }
             btnNext.innerHTML = index === questions.length - 1
                 ? 'Ver resultados <span class="btn-arrow" aria-hidden="true">→</span>'
                 : 'Siguiente <span class="btn-arrow" aria-hidden="true">→</span>';
@@ -1635,11 +2029,9 @@
         // CALCULATE RESULTS
         // ============================================
         function calculateResults() {
-            // Get scores array
             const scores = answers.map((a, i) => a !== null ? questions[i].options[a].score : 0);
             const totalScore = scores.reduce((sum, s) => sum + s, 0);
 
-            // Determine profile
             let profileKey;
             if (totalScore <= 7) profileKey = 'A';
             else if (totalScore <= 15) profileKey = 'B';
@@ -1648,12 +2040,10 @@
 
             const profile = profiles[profileKey];
 
-            // Top 2 areas by score
             const indexed = scores.map((s, i) => ({ index: i, score: s }));
             indexed.sort((a, b) => b.score - a.score || a.index - b.index);
             const topAreas = [indexed[0].index, indexed[1].index];
 
-            // Determine pattern
             let pattern = defaultPattern;
             for (const rule of patternRules) {
                 if (rule.check(scores)) {
@@ -1662,9 +2052,9 @@
                 }
             }
 
-            // Focus and weekly priority
             const focus = getFocus(profileKey, topAreas);
             const weeklyPriority = getWeeklyPriority(profileKey, topAreas);
+            const emotionalIndicators = calculateEmotionalIndicators(scores);
 
             return {
                 totalScore,
@@ -1674,8 +2064,42 @@
                 topAreas,
                 pattern,
                 focus,
-                weeklyPriority
+                weeklyPriority,
+                emotionalIndicators
             };
+        }
+
+        // ============================================
+        // GO TO ANALYZING
+        // ============================================
+        function goToAnalyzing() {
+            showScreen(analyzingScreen);
+            const resultData = calculateResults();
+            sendData(resultData);
+
+            // Multi-step analyzing animation
+            const mainText = $('#analyzingMainText');
+            const subText = $('#analyzingSubText');
+
+            const steps = [
+                { main: 'Leyendo tus respuestas', sub: 'Conectando patrones emocionales...' },
+                { main: 'Identificando señales', sub: 'Mapeando tu estado interno...' },
+                { main: 'Preparando tu lectura', sub: 'Tu lectura personal está casi lista...' }
+            ];
+
+            let stepIndex = 0;
+            const stepInterval = setInterval(() => {
+                stepIndex++;
+                if (stepIndex < steps.length) {
+                    mainText.innerHTML = `${steps[stepIndex].main}<span class="analyzing-dots" aria-hidden="true"><span></span><span></span><span></span></span>`;
+                    subText.textContent = steps[stepIndex].sub;
+                }
+            }, 1000);
+
+            setTimeout(() => {
+                clearInterval(stepInterval);
+                showResults(resultData);
+            }, 3200);
         }
 
         // ============================================
@@ -1683,6 +2107,22 @@
         // ============================================
         function showResults(r) {
             const content = $('#resultsContent');
+
+            // Build emotional panel HTML
+            const panelBarsHTML = r.emotionalIndicators.map(ind => `
+                <div class="emotional-indicator">
+                    <div class="indicator-header">
+                        <span class="indicator-label">
+                            <span aria-hidden="true">${ind.icon}</span> ${ind.label}
+                        </span>
+                        <span class="indicator-level indicator-level-${ind.levelClass}">${ind.level}</span>
+                    </div>
+                    <div class="indicator-bar-track">
+                        <div class="indicator-bar-fill bar-${ind.levelClass}" data-width="${ind.id === 'recuperacion' ? ind.value : ind.value}"></div>
+                    </div>
+                </div>
+            `).join('');
+
             content.innerHTML = `
                 <div class="results-header">
                     <span class="results-icon" aria-hidden="true">${r.profile.icon}</span>
@@ -1713,13 +2153,20 @@
 
                 <div class="divider"></div>
 
-                <!-- Foto vs Película -->
+                <!-- PANEL DE ESTADO EMOCIONAL -->
+                <div class="emotional-panel">
+                    <h4 class="emotional-panel-title">Tu Estado Emocional Actual</h4>
+                    <p class="emotional-panel-subtitle">Esto es lo que detectamos en tus respuestas</p>
+                    ${panelBarsHTML}
+                </div>
+
+                <!-- Foto vs Película - IMPROVED -->
                 <div class="foto-pelicula">
-                    <h4>Lo que ves aquí es la foto… pero falta la película.</h4>
+                    <h4>Esto es lo que se ve por fuera… pero falta lo que pasa por dentro.</h4>
                     <p>
-                        Este resultado muestra una parte de lo que está pasando, pero no el cuadro completo.
-                        El análisis completo conecta tus respuestas para mostrar qué te drena, qué necesitas
-                        recuperar primero y cuál es el siguiente paso más efectivo.
+                        Cada barra que acabas de ver tiene una historia detrás. Hay conexiones entre lo que sientes,
+                        lo que cargas y lo que necesitas que solo se ven cuando se conectan los puntos.
+                        Lo que tienes aquí es la foto. El análisis completo es la película.
                     </p>
                 </div>
 
@@ -1771,9 +2218,17 @@
                     </ul>
                 </div>
 
-                <!-- CTA Unlock -->
+                <!-- PRE-STRIPE ENHANCED TEXT -->
+                <div class="pre-stripe-text">
+                    <p>Lo que acabas de ver apenas rasca la superficie. Tus respuestas revelaron patrones que
+                    <span class="emphasis">conectan lo que sientes con lo que necesitas</span> — pero esas conexiones
+                    solo se ven en el análisis completo.</p>
+                    <p>No es más información. Es <span class="emphasis">la pieza que falta</span> para entender
+                    por qué te sientes así y qué hacer al respecto.</p>
+                </div>
+
+                <!-- CTA Unlock - PRESERVED EXACTLY -->
                 <div class="cta-unlock">
-                    <p>Si quieres una lectura más profunda y personalizada, puedes desbloquear el análisis completo.</p>
                     <a href="https://buy.stripe.com/eVq6oI0h1czjfq4ckW5c40n" class="btn-unlock" target="_blank" rel="noopener">
                         Profundizar en mi análisis
                         <span class="btn-arrow" aria-hidden="true">→</span>
@@ -1782,6 +2237,19 @@
 
                 <div class="divider"></div>
 
+                <!-- EMPATHIC CLOSING -->
+                <div class="empathic-closing">
+                    <span class="empathic-closing-icon" aria-hidden="true">🤍</span>
+                    <p>
+                        Independientemente de lo que decidas, lo que hiciste hoy importa.
+                        Tomarte estos minutos para escucharte ya es un acto de cuidado.
+                    </p>
+                    <p class="script-text">No estás sola en esto.</p>
+                    <p>
+                        Si necesitas hablar con alguien, estamos aquí para acompañarte.
+                    </p>
+                </div>
+
                 <!-- Restart -->
                 <div style="text-align: center;">
                     <button class="btn-restart" id="btnRestart">
@@ -1789,6 +2257,13 @@
                     </button>
                 </div>
             `;
+
+            // Animate emotional bars after render
+            setTimeout(() => {
+                content.querySelectorAll('.indicator-bar-fill').forEach(bar => {
+                    bar.style.width = bar.dataset.width + '%';
+                });
+            }, 200);
 
             // Bind restart
             $('#btnRestart').addEventListener('click', () => {
@@ -1827,18 +2302,19 @@
                 localStorage.setItem('ginecospa_momento_vital_backup', JSON.stringify(payload));
             } catch (e) { /* silent */ }
 
-            // POST to endpoint
+            // POST to endpoint (FIXED: redirect follow instead of no-cors)
             if (ENDPOINT && ENDPOINT !== 'PEGAR_AQUI_URL_WEB_APP') {
                 fetch(ENDPOINT, {
                     method: 'POST',
                     headers: { 'Content-Type': 'text/plain' },
                     body: JSON.stringify(payload),
-                    mode: 'no-cors'
-                }).then(() => {
-                    console.log('Datos enviados correctamente');
-                }).catch((err) => {
-                    console.warn('Error enviando datos, guardado en localStorage:', err);
-                });
+                    redirect: 'follow'
+                })
+                    .then(r => r.text())
+                    .then(t => console.log('Datos enviados:', t))
+                    .catch((err) => {
+                        console.warn('Error enviando datos, guardado en localStorage:', err);
+                    });
             } else {
                 console.log('=== PAYLOAD (endpoint no configurado) ===');
                 console.log(JSON.stringify(payload, null, 2));
@@ -1860,25 +2336,30 @@
                 validationMsg.classList.add('show');
                 return;
             }
+
+            // Cancel any pending auto-advance
+            if (autoAdvanceTimeout) {
+                clearTimeout(autoAdvanceTimeout);
+                autoAdvanceTimeout = null;
+            }
+
             direction = 'forward';
 
             if (currentStep < questions.length) {
                 currentStep++;
                 renderQuestion(currentStep - 1);
             } else {
-                // Finished
-                showScreen(analyzingScreen);
-                const resultData = calculateResults();
-                sendData(resultData);
-
-                setTimeout(() => {
-                    showResults(resultData);
-                }, 2500);
+                goToAnalyzing();
             }
         });
 
         btnPrev.addEventListener('click', () => {
             if (currentStep > 1) {
+                // Cancel any pending auto-advance
+                if (autoAdvanceTimeout) {
+                    clearTimeout(autoAdvanceTimeout);
+                    autoAdvanceTimeout = null;
+                }
                 direction = 'backward';
                 currentStep--;
                 renderQuestion(currentStep - 1);
