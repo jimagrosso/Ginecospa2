@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GinecoSpa - Descubre tu estado corporal actual. Quiz anónimo de auto-descubrimiento sobre energía, recuperación y reserva corporal.">
+    <title>GinecoSpa - ¿Cómo Está Tu Cuerpo Realmente?</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --rosa-palido: #FFF5F7;
+            --rosa-claro: #FFE5EC;
+            --rosa-medio: #FFB5C5;
+            --rosa-intenso: #FF8FA3;
+            --rosa-oscuro: #E75480;
+            --rosa-profundo: #C9365E;
+            --coral: #FF9B9B;
+            --lavanda: #F3E8FF;
+            --lavanda-medio: #E0CFFF;
+            --gris-calido: #6B5D5D;
+            --gris-suave: #9A8F8F;
+            --crema: #FFF8F0;
+            --blanco: #FFFFFF;
+            --texto-principal: #3D2E2E;
+            --texto-secundario: #7A6B6B;
+            --sombra-rosa: rgba(231, 84, 128, 0.12);
+            --sombra-suave: rgba(61, 46, 46, 0.06);
+            --gradiente-hero: linear-gradient(135deg, #FFF5F7 0%, #FFE5EC 30%, #F3E8FF 70%, #FFF5F7 100%);
+            --gradiente-boton: linear-gradient(135deg, #E75480 0%, #FF8FA3 100%);
+            --gradiente-boton-hover: linear-gradient(135deg, #C9365E 0%, #E75480 100%);
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --verde-suave: #4CAF78;
+            --amarillo-suave: #E8B84B;
+            --ambar-suave: #D4845A;
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { font-size: 16px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+        body { font-family: 'Montserrat', sans-serif; color: var(--texto-principal); background: var(--gradiente-hero); background-attachment: fixed; min-height: 100vh; line-height: 1.6; overflow-x: hidden; }
+        h1,h2,h3,h4,h5,h6 { font-family: 'Cormorant Garamond', serif; font-weight: 600; line-height: 1.2; }
+
+        .bg-orb { position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.3; pointer-events: none; z-index: 0; }
+        .bg-orb-1 { width: 400px; height: 400px; background: var(--rosa-claro); top: -100px; right: -100px; animation: orbFloat 12s ease-in-out infinite; }
+        .bg-orb-2 { width: 350px; height: 350px; background: var(--lavanda); bottom: -80px; left: -80px; animation: orbFloat 15s ease-in-out infinite reverse; }
+        @keyframes orbFloat { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(30px,-20px) scale(1.05); } 66% { transform: translate(-20px,15px) scale(0.95); } }
+
+        .app-container { position: relative; z-index: 1; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 1.5rem 1rem; }
+        .brand-header { text-align: center; margin-bottom: 1.5rem; animation: fadeSlideDown 0.8s var(--transition-smooth); }
+        .brand-header .logo-text { font-family: 'Dancing Script', cursive; font-size: 2rem; color: var(--rosa-oscuro); text-decoration: none; }
+        .brand-header .subtitle { font-size: 0.75rem; color: var(--gris-suave); letter-spacing: 3px; text-transform: uppercase; margin-top: 0.25rem; }
+
+        .wizard-card {
+            background: rgba(255,255,255,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,229,236,0.6); border-radius: 28px;
+            box-shadow: 0 4px 24px var(--sombra-rosa), 0 1px 3px var(--sombra-suave);
+            width: 100%; max-width: 640px; padding: 2rem 1.5rem; position: relative; overflow: hidden;
+        }
+        .wizard-card::before { content:''; position:absolute; top:0; left:0; right:0; height:4px; background: var(--gradiente-boton); border-radius: 28px 28px 0 0; }
+        @media (min-width: 640px) { .wizard-card { padding: 2.5rem 3rem; } }
+
+        /* Progress */
+        .progress-wrapper { margin-bottom: 2rem; }
+        .progress-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+        .progress-step { font-size: 0.8rem; font-weight: 600; color: var(--rosa-oscuro); letter-spacing: 0.5px; }
+        .progress-percentage { font-size: 0.75rem; color: var(--gris-suave); font-weight: 500; }
+        .progress-bar-track { width: 100%; height: 6px; background: var(--rosa-claro); border-radius: 100px; overflow: hidden; }
+        .progress-bar-fill { height: 100%; background: var(--gradiente-boton); border-radius: 100px; transition: width 0.5s var(--transition-smooth); position: relative; }
+        .progress-bar-fill::after { content:''; position:absolute; top:0; left:0; right:0; bottom:0; background: linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent); animation: shimmer 2s ease-in-out infinite; }
+        @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+
+        /* Animations */
+        @keyframes slideIn { from { opacity:0; transform:translateX(40px); } to { opacity:1; transform:translateX(0); } }
+        @keyframes fadeSlideDown { from { opacity:0; transform:translateY(-15px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes fadeSlideUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+        @keyframes scaleIn { from { opacity:0; transform:scale(0.9); } to { opacity:1; transform:scale(1); } }
+        @keyframes floatIcon { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes dotPulse { 0%,80%,100% { transform:scale(0.6); opacity:0.4; } 40% { transform:scale(1); opacity:1; } }
+        @keyframes barGrow { from { width: 0; } }
+        @keyframes countUp { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Question */
+        .question-screen { position: relative; min-height: 280px; }
+        .question-slide { animation: slideIn 0.45s var(--transition-smooth); }
+        .question-icon { font-size: 2rem; margin-bottom: 0.5rem; display: block; animation: floatIcon 3s ease-in-out infinite; }
+        .question-category { font-family: 'Dancing Script', cursive; font-size: 1.1rem; color: var(--rosa-oscuro); margin-bottom: 0.5rem; opacity: 0.9; }
+        .question-text { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--texto-principal); margin-bottom: 1.5rem; line-height: 1.35; }
+        @media (min-width: 640px) { .question-text { font-size: 1.6rem; } }
+
+        /* Options - auto advance style */
+        .options-group { display: flex; flex-direction: column; gap: 0.65rem; }
+        .option-item { position: relative; }
+        .option-item input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+        .option-label {
+            display: flex; align-items: center; gap: 0.85rem; padding: 0.9rem 1.1rem;
+            background: var(--blanco); border: 2px solid var(--rosa-claro); border-radius: 14px;
+            cursor: pointer; transition: all 0.25s var(--transition-smooth); font-size: 0.9rem;
+            color: var(--texto-principal); user-select: none;
+        }
+        .option-label:hover { border-color: var(--rosa-medio); background: var(--rosa-palido); transform: translateY(-1px); box-shadow: 0 2px 12px var(--sombra-rosa); }
+        .option-radio-circle { width: 22px; height: 22px; min-width: 22px; border-radius: 50%; border: 2px solid var(--rosa-medio); display: flex; align-items: center; justify-content: center; transition: all 0.25s var(--transition-smooth); }
+        .option-radio-circle::after { content:''; width: 10px; height: 10px; border-radius: 50%; background: var(--rosa-oscuro); transform: scale(0); transition: transform 0.25s var(--transition-smooth); }
+        .option-item input:checked + .option-label { border-color: var(--rosa-oscuro); background: linear-gradient(135deg,var(--rosa-palido),rgba(255,229,236,0.5)); box-shadow: 0 2px 16px var(--sombra-rosa); }
+        .option-item input:checked + .option-label .option-radio-circle { border-color: var(--rosa-oscuro); background: var(--rosa-palido); }
+        .option-item input:checked + .option-label .option-radio-circle::after { transform: scale(1); }
+        .option-item input:checked + .option-label .option-check { opacity: 1; transform: scale(1); }
+        .option-check { margin-left: auto; opacity: 0; transform: scale(0.5); transition: all 0.25s var(--transition-smooth); color: var(--rosa-oscuro); }
+
+        /* Micro-message between questions */
+        .micro-msg {
+            text-align: center; padding: 1.5rem 1rem; animation: fadeIn 0.6s;
+            font-family: 'Cormorant Garamond', serif; font-size: 1.15rem;
+            color: var(--texto-secundario); font-style: italic; line-height: 1.5;
+        }
+        .micro-msg .micro-icon { font-size: 1.3rem; display: block; margin-bottom: 0.5rem; opacity: 0.7; }
+
+        /* Welcome */
+        .welcome-screen { text-align: center; padding: 1rem 0; animation: scaleIn 0.6s var(--transition-smooth); }
+        .welcome-icon { font-size: 3.5rem; margin-bottom: 1rem; display: block; animation: floatIcon 4s ease-in-out infinite; }
+        .welcome-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 600; color: var(--texto-principal); margin-bottom: 0.75rem; }
+        .welcome-subtitle { font-family: 'Dancing Script', cursive; font-size: 1.1rem; color: var(--rosa-oscuro); margin-bottom: 1.25rem; }
+        .welcome-text { font-size: 0.9rem; color: var(--texto-secundario); margin-bottom: 2rem; max-width: 420px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+        .welcome-features { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .welcome-feature { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; font-size: 0.75rem; color: var(--gris-suave); }
+        .welcome-feature span:first-child { font-size: 1.3rem; }
+        .btn-start { background: var(--gradiente-boton); color: var(--blanco); padding: 1rem 2.5rem; border-radius: 50px; font-family: 'Montserrat', sans-serif; font-size: 1rem; font-weight: 600; border: none; cursor: pointer; box-shadow: 0 6px 24px rgba(231,84,128,0.3); transition: all 0.3s var(--transition-smooth); display: inline-flex; align-items: center; gap: 0.5rem; }
+        .btn-start:hover { background: var(--gradiente-boton-hover); box-shadow: 0 8px 32px rgba(231,84,128,0.4); transform: translateY(-2px); }
+
+        /* Analyzing */
+        .analyzing-screen { text-align: center; padding: 3rem 1rem; animation: fadeIn 0.5s; }
+        .analyzing-spinner { width: 64px; height: 64px; border: 4px solid var(--rosa-claro); border-top-color: var(--rosa-oscuro); border-radius: 50%; margin: 0 auto 1.5rem; animation: spin 1s linear infinite; }
+        .analyzing-dots { display: inline-flex; gap: 4px; margin-left: 4px; }
+        .analyzing-dots span { width: 5px; height: 5px; background: var(--rosa-oscuro); border-radius: 50%; animation: dotPulse 1.4s ease-in-out infinite; }
+        .analyzing-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .analyzing-dots span:nth-child(3) { animation-delay: 0.4s; }
+        .analyzing-text { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--texto-principal); margin-bottom: 0.5rem; }
+        .analyzing-subtext { font-size: 0.85rem; color: var(--gris-suave); }
+        .analyzing-steps { margin-top: 1.5rem; }
+        .analyzing-step { font-size: 0.8rem; color: var(--gris-suave); margin: 0.3rem 0; opacity: 0; transition: opacity 0.5s; }
+        .analyzing-step.visible { opacity: 1; }
+
+        /* Results */
+        .results-screen { animation: fadeSlideUp 0.6s var(--transition-smooth); }
+        .results-header { text-align: center; margin-bottom: 1.5rem; }
+        .results-icon { font-size: 3rem; display: block; margin-bottom: 0.75rem; }
+        .results-title { font-size: 1.6rem; color: var(--texto-principal); margin-bottom: 0.25rem; }
+        .results-subtitle { font-family: 'Dancing Script', cursive; font-size: 1rem; color: var(--rosa-oscuro); }
+
+        /* Dimension bars */
+        .dimension-panel { background: var(--blanco); border: 2px solid var(--rosa-claro); border-radius: 16px; padding: 1.25rem; margin-bottom: 1.25rem; }
+        .dimension-item { margin-bottom: 1.1rem; }
+        .dimension-item:last-child { margin-bottom: 0; }
+        .dimension-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem; }
+        .dimension-label { font-size: 0.85rem; font-weight: 600; color: var(--texto-principal); display: flex; align-items: center; gap: 0.4rem; }
+        .dimension-value { font-size: 0.85rem; font-weight: 700; }
+        .dimension-bar-track { width: 100%; height: 10px; background: #F0EBE8; border-radius: 100px; overflow: hidden; }
+        .dimension-bar-fill { height: 100%; border-radius: 100px; transition: width 1.2s var(--transition-smooth); animation: barGrow 1.2s var(--transition-smooth); }
+        .dimension-bar-fill.green { background: linear-gradient(90deg, #7ED6A0, var(--verde-suave)); }
+        .dimension-bar-fill.yellow { background: linear-gradient(90deg, #F5D76E, var(--amarillo-suave)); }
+        .dimension-bar-fill.amber { background: linear-gradient(90deg, #F0A070, var(--ambar-suave)); }
+        .dimension-interp { font-size: 0.78rem; color: var(--texto-secundario); margin-top: 0.3rem; font-style: italic; line-height: 1.4; }
+
+        /* Reserva corporal */
+        .reserva-panel { background: linear-gradient(135deg, var(--rosa-palido), var(--lavanda)); border: 2px solid var(--lavanda-medio); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.25rem; text-align: center; }
+        .reserva-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--texto-principal); margin-bottom: 0.75rem; }
+        .reserva-blocks { display: flex; justify-content: center; gap: 4px; margin-bottom: 0.5rem; }
+        .reserva-block { width: 28px; height: 14px; border-radius: 3px; background: #E0D8D2; transition: background 0.3s; }
+        .reserva-block.filled { background: var(--rosa-oscuro); }
+        .reserva-block.filled.green { background: var(--verde-suave); }
+        .reserva-block.filled.yellow { background: var(--amarillo-suave); }
+        .reserva-block.filled.amber { background: var(--ambar-suave); }
+        .reserva-value { font-size: 2rem; font-weight: 700; color: var(--rosa-oscuro); margin: 0.5rem 0; font-family: 'Cormorant Garamond', serif; }
+        .reserva-desc { font-size: 0.82rem; color: var(--texto-secundario); line-height: 1.6; max-width: 400px; margin: 0 auto; }
+
+        /* Sections */
+        .result-section { background: var(--blanco); border: 2px solid var(--rosa-claro); border-radius: 16px; padding: 1.25rem; margin-bottom: 1.25rem; }
+        .result-section h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--rosa-oscuro); margin-bottom: 0.75rem; }
+        .result-section p, .result-section li { font-size: 0.88rem; color: var(--texto-secundario); line-height: 1.7; }
+
+        .micro-tip { display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.5rem 0; }
+        .micro-tip span:first-child { font-size: 1rem; flex-shrink: 0; margin-top: 2px; }
+
+        .suero-rec { background: linear-gradient(135deg, var(--rosa-palido), rgba(243,232,255,0.5)); border: 2px solid var(--lavanda-medio); border-radius: 16px; padding: 1.25rem; margin-bottom: 1.25rem; }
+        .suero-rec h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--rosa-oscuro); margin-bottom: 0.5rem; }
+        .suero-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1.2rem; border-radius: 50px; font-size: 0.9rem; font-weight: 700; background: var(--gradiente-boton); color: white; box-shadow: 0 4px 16px rgba(231,84,128,0.3); margin: 0.5rem 0; }
+        .suero-secondary { font-size: 0.85rem; color: var(--texto-secundario); margin-top: 0.5rem; padding: 0.6rem 0.8rem; background: var(--lavanda); border-radius: 10px; }
+        .suero-secondary strong { color: var(--rosa-oscuro); }
+
+        .transition-text { font-size: 0.88rem; color: var(--texto-secundario); line-height: 1.7; font-style: italic; padding: 0.8rem 1rem; background: var(--rosa-palido); border-radius: 12px; margin: 1rem 0; text-align: center; }
+
+        .divider { height: 1px; background: linear-gradient(to right, transparent, var(--rosa-claro), transparent); margin: 1.5rem 0; }
+
+        .cta-buttons { display: flex; flex-direction: column; gap: 0.75rem; margin: 1.5rem 0; }
+        .btn-whatsapp { background: #25D366; color: white; justify-content: center; font-size: 0.95rem; padding: 1rem 1.5rem; border-radius: 50px; font-family: 'Montserrat', sans-serif; font-weight: 600; border: none; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; text-decoration: none; box-shadow: 0 4px 16px rgba(37,211,102,0.3); transition: all 0.3s; }
+        .btn-whatsapp:hover { background: #20BA5C; box-shadow: 0 6px 24px rgba(37,211,102,0.4); transform: translateY(-1px); }
+        .btn-agenda { background: var(--gradiente-boton); color: white; justify-content: center; font-size: 0.95rem; padding: 1rem 1.5rem; border-radius: 50px; font-family: 'Montserrat', sans-serif; font-weight: 600; border: none; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; text-decoration: none; box-shadow: 0 4px 16px rgba(231,84,128,0.3); transition: all 0.3s; }
+        .btn-agenda:hover { background: var(--gradiente-boton-hover); transform: translateY(-1px); }
+
+        .disclaimer-box { background: var(--rosa-palido); border-radius: 12px; padding: 0.8rem 1rem; margin: 1rem 0; font-size: 0.75rem; color: var(--gris-suave); line-height: 1.5; text-align: center; }
+
+        .btn-restart { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1rem; font-size: 0.8rem; color: var(--gris-suave); background: none; border: none; cursor: pointer; font-family: 'Montserrat', sans-serif; transition: color 0.2s; }
+        .btn-restart:hover { color: var(--rosa-oscuro); }
+
+        .app-footer { text-align: center; margin-top: 2rem; padding: 1rem; font-size: 0.7rem; color: var(--gris-suave); }
+        .app-footer a { color: var(--rosa-oscuro); text-decoration: none; }
+        .app-footer .disclaimer { max-width: 500px; margin: 0.5rem auto 0; line-height: 1.5; font-size: 0.65rem; opacity: 0.7; }
+
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+
+    <div class="app-container">
+        <header class="brand-header">
+            <a href="index.html" class="logo-text">GinecoSpa</a>
+            <div class="subtitle">Tu Estado Corporal</div>
+        </header>
+
+        <main class="wizard-card" id="wizardCard">
+
+            <!-- WELCOME -->
+            <section id="welcomeScreen" class="welcome-screen">
+                <span class="welcome-icon">🔋</span>
+                <h1 class="welcome-title">¿Cómo está tu cuerpo realmente?</h1>
+                <p class="welcome-subtitle">Un vistazo honesto a tu energía, recuperación y reservas</p>
+                <p class="welcome-text">
+                    Tu cuerpo te habla todos los días. A veces lo escuchas, a veces no. Este quiz te ayuda a interpretar esas señales y entender qué necesita tu cuerpo en esta etapa de tu vida.
+                </p>
+                <div class="welcome-features">
+                    <div class="welcome-feature"><span>🔒</span><span>Anónimo</span></div>
+                    <div class="welcome-feature"><span>⏱️</span><span>2–3 min</span></div>
+                    <div class="welcome-feature"><span>📊</span><span>5 indicadores</span></div>
+                    <div class="welcome-feature"><span>🎯</span><span>Personalizado</span></div>
+                </div>
+                <button class="btn-start" id="btnStart">Descubrir mi estado <span>→</span></button>
+            </section>
+
+            <!-- QUIZ -->
+            <section id="quizScreen" class="hidden">
+                <div class="progress-wrapper">
+                    <div class="progress-info">
+                        <span class="progress-step" id="progressStep"></span>
+                        <span class="progress-percentage" id="progressPercent"></span>
+                    </div>
+                    <div class="progress-bar-track"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
+                </div>
+                <div class="question-screen" id="questionContainer"></div>
+            </section>
+
+            <!-- ANALYZING -->
+            <section id="analyzingScreen" class="hidden">
+                <div class="analyzing-screen">
+                    <div class="analyzing-spinner"></div>
+                    <h2 class="analyzing-text">Analizando tus respuestas<span class="analyzing-dots"><span></span><span></span><span></span></span></h2>
+                    <p class="analyzing-subtext">Generando tu panel de estado corporal</p>
+                    <div class="analyzing-steps">
+                        <p class="analyzing-step" id="step1">✦ Evaluando niveles de energía…</p>
+                        <p class="analyzing-step" id="step2">✦ Calculando carga del sistema nervioso…</p>
+                        <p class="analyzing-step" id="step3">✦ Midiendo capacidad de recuperación…</p>
+                        <p class="analyzing-step" id="step4">✦ Estimando reserva corporal…</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RESULTS -->
+            <section id="resultsScreen" class="hidden"></section>
+
+        </main>
+
+        <footer class="app-footer">
+            <a href="index.html">GinecoSpa</a> · Bienestar Integral
+            <p class="disclaimer">Este quiz es orientativo y no sustituye una valoración médica profesional. Los resultados son estimaciones basadas en tus respuestas.</p>
+        </footer>
+    </div>
+
+<script>
+(() => {
+    'use strict';
+
+    const WA_NUMBER = "584125366811";
+
+    // ============================================
+    // QUESTIONS (9 total: 1 age + 8 quiz)
+    // ============================================
+    // Dimensions: energia, nervioso, recuperacion, inmuno, hidratacion
+    // Scores: 0-3 per option (0=optimal, 3=depleted)
+
+    const ageQuestion = {
+        icon: '🌿',
+        category: 'Identificación',
+        text: '¿En qué etapa de tu vida te encuentras?',
+        options: [
+            { label: '18 – 25 años', value: '18-25' },
+            { label: '26 – 35 años', value: '26-35' },
+            { label: '36 – 45 años', value: '36-45' },
+            { label: '46 – 55 años', value: '46-55' },
+            { label: '56+ años', value: '56+' }
+        ]
+    };
+
+    const questions = [
+        {
+            icon: '☀️',
+            category: 'Tu energía',
+            text: '¿Cómo describirías tu energía a lo largo del día?',
+            options: [
+                { label: 'Estable y constante desde la mañana hasta la noche', scores: { energia: 0, nervioso: 0, recuperacion: 0, inmuno: 0, hidratacion: 0 } },
+                { label: 'Arranca bien pero cae notablemente después del almuerzo', scores: { energia: 1, nervioso: 0, recuperacion: 1, inmuno: 0, hidratacion: 1 } },
+                { label: 'Fluctúa: momentos de arranque y momentos de agotamiento', scores: { energia: 2, nervioso: 1, recuperacion: 1, inmuno: 1, hidratacion: 1 } },
+                { label: 'Baja casi todo el día, me cuesta mantener el ritmo', scores: { energia: 3, nervioso: 2, recuperacion: 2, inmuno: 1, hidratacion: 2 } }
+            ]
+        },
+        {
+            icon: '🌙',
+            category: 'Tu descanso',
+            text: '¿Cómo despiertas la mayoría de los días?',
+            options: [
+                { label: 'Descansada/o, con ganas de empezar el día', scores: { energia: 0, nervioso: 0, recuperacion: 0, inmuno: 0, hidratacion: 0 } },
+                { label: 'Más o menos, necesito un rato para activarme', scores: { energia: 1, nervioso: 1, recuperacion: 1, inmuno: 0, hidratacion: 0 } },
+                { label: 'Cansada/o, como si no hubiera dormido suficiente', scores: { energia: 2, nervioso: 1, recuperacion: 2, inmuno: 1, hidratacion: 1 } },
+                { label: 'Agotada/o desde que suena la alarma', scores: { energia: 3, nervioso: 2, recuperacion: 3, inmuno: 1, hidratacion: 1 } }
+            ]
+        },
+        {
+            icon: '🧠',
+            category: 'Tu mente',
+            text: '¿Cómo responde tu cuerpo al estrés cotidiano?',
+            microAfter: true,
+            microText: 'Muchas personas normalizan estas señales sin darse cuenta…',
+            options: [
+                { label: 'Lo manejo bien, no me afecta mucho físicamente', scores: { energia: 0, nervioso: 0, recuperacion: 0, inmuno: 0, hidratacion: 0 } },
+                { label: 'Me tenso un poco pero se me pasa relativamente rápido', scores: { energia: 0, nervioso: 1, recuperacion: 0, inmuno: 0, hidratacion: 1 } },
+                { label: 'Me genera dolor de cabeza, tensión muscular o malestar digestivo', scores: { energia: 1, nervioso: 2, recuperacion: 1, inmuno: 1, hidratacion: 1 } },
+                { label: 'Siento que mi cuerpo está en alerta constante', scores: { energia: 2, nervioso: 3, recuperacion: 2, inmuno: 2, hidratacion: 1 } }
+            ]
+        },
+        {
+            icon: '♻️',
+            category: 'Tu recuperación',
+            text: '¿Qué tan rápido te recuperas después de días exigentes?',
+            options: [
+                { label: 'En uno o dos días vuelvo a la normalidad', scores: { energia: 0, nervioso: 0, recuperacion: 0, inmuno: 0, hidratacion: 0 } },
+                { label: 'Me toma un poco más que antes, pero me recupero', scores: { energia: 1, nervioso: 0, recuperacion: 1, inmuno: 1, hidratacion: 1 } },
+                { label: 'Me cuesta varios días sentirme bien otra vez', scores: { energia: 1, nervioso: 1, recuperacion: 2, inmuno: 1, hidratacion: 2 } },
+                { label: 'Siento que nunca termino de recuperarme del todo', scores: { energia: 2, nervioso: 2, recuperacion: 3, inmuno: 2, hidratacion: 2 } }
+            ]
+        },
+        {
+            icon: '🛡️',
+            category: 'Tus defensas',
+            text: '¿Con qué frecuencia te sientes "bajita/o" sin razón clara?',
+            microAfter: true,
+            microText: 'Aquí suele aparecer el primer desgaste silencioso.',
+            options: [
+                { label: 'Casi nunca, me siento bien la mayor parte del tiempo', scores: { energia: 0, nervioso: 0, recuperacion: 0, inmuno: 0, hidratacion: 0 } },
+                { label: 'De vez en cuando, sobre todo en cambios de clima', scores: { energia: 0, nervioso: 0, recuperacion: 0, inmuno: 1, hidratacion: 1 } },
+                { label: 'Varias veces al mes, me resfrio o me siento frágil', scores: { energia: 1, nervioso: 1, recuperacion: 1, inmuno: 2, hidratacion: 1 } },
+                { label: 'Con frecuencia, parece que todo me afecta', scores: { energia: 2, nervioso: 1, recuperacion: 2, inmuno: 3, hidratacion: 2 } }
+            ]
+        },
+        {
+            icon: '💧',
+            category: 'Tu hidratación',
+            text: '¿Cómo es tu relación con el agua y la hidratación?',
+            options: [
+                { label: 'Tomo suficiente agua, mi piel y labios se sienten bien', scores: { energia: 0, nervioso: 0, recuperacion: 0, inmuno: 0, hidratacion: 0 } },
+                { label: 'Tomo algo pero sé que debería tomar más', scores: { energia: 0, nervioso: 0, recuperacion: 0, inmuno: 0, hidratacion: 1 } },
+                { label: 'Poca agua, mucho café o bebidas con azúcar', scores: { energia: 1, nervioso: 1, recuperacion: 1, inmuno: 0, hidratacion: 2 } },
+                { label: 'Casi no tomo agua, mi piel está seca y me siento pesada/o', scores: { energia: 1, nervioso: 1, recuperacion: 1, inmuno: 1, hidratacion: 3 } }
+            ]
+        },
+        {
+            icon: '🔋',
+            category: 'Tu cuerpo',
+            text: '¿En qué momento sientes que tu cuerpo "se apaga"?',
+            microAfter: true,
+            microText: 'Este patrón es más común de lo que parece.',
+            options: [
+                { label: 'No siento eso, mantengo buen nivel todo el día', scores: { energia: 0, nervioso: 0, recuperacion: 0, inmuno: 0, hidratacion: 0 } },
+                { label: 'A media tarde, necesito café o algo dulce para seguir', scores: { energia: 1, nervioso: 1, recuperacion: 1, inmuno: 0, hidratacion: 1 } },
+                { label: 'Después del almuerzo ya me cuesta concentrarme', scores: { energia: 2, nervioso: 1, recuperacion: 2, inmuno: 1, hidratacion: 1 } },
+                { label: 'Desde temprano siento que mi cuerpo no responde', scores: { energia: 3, nervioso: 2, recuperacion: 2, inmuno: 2, hidratacion: 2 } }
+            ]
+        },
+        {
+            icon: '🌅',
+            category: 'Tu cierre del día',
+            text: '¿Cómo terminas la mayoría de tus días?',
+            options: [
+                { label: 'Con energía suficiente para disfrutar la noche', scores: { energia: 0, nervioso: 0, recuperacion: 0, inmuno: 0, hidratacion: 0 } },
+                { label: 'Cansada/o pero funcional, hago lo básico', scores: { energia: 1, nervioso: 1, recuperacion: 1, inmuno: 0, hidratacion: 0 } },
+                { label: 'Exhausta/o, solo quiero acostarme', scores: { energia: 2, nervioso: 2, recuperacion: 2, inmuno: 1, hidratacion: 1 } },
+                { label: 'Agotada/o pero no logro descansar bien cuando me acuesto', scores: { energia: 3, nervioso: 3, recuperacion: 2, inmuno: 1, hidratacion: 1 } }
+            ]
+        }
+    ];
+
+    // ============================================
+    // SUERO RECOMMENDATIONS MAP
+    // ============================================
+    const sueroMap = {
+        energia: {
+            name: 'Suero Energía & Vitalidad', icon: '⚡',
+            desc: 'Diseñado para reactivar tu energía celular y mejorar tu rendimiento diario sin estimulantes artificiales.'
+        },
+        nervioso: {
+            name: 'Suero Calma & Equilibrio', icon: '🌙',
+            desc: 'Ayuda a tu sistema nervioso a liberar la carga acumulada y recuperar un estado de calma funcional.'
+        },
+        recuperacion: {
+            name: 'Suero Recovery & Restauración', icon: '♻️',
+            desc: 'Apoya la capacidad natural de tu cuerpo para repararse, regenerarse y volver a su línea base.'
+        },
+        inmuno: {
+            name: 'Suero Escudo Inmune', icon: '🛡️',
+            desc: 'Fortalece tus defensas naturales para que tu cuerpo responda mejor ante exigencias y cambios.'
+        },
+        hidratacion: {
+            name: 'Suero Hidratación & Minerales', icon: '💧',
+            desc: 'Rehidratación profunda con minerales esenciales para que cada célula funcione en su mejor estado.'
+        }
+    };
+
+    // ============================================
+    // STATE
+    // ============================================
+    let currentStep = -1; // -1 = age question, 0-7 = quiz questions
+    let ageRange = null;
+    let answers = new Array(questions.length).fill(null);
+    let showingMicro = false;
+
+    const $ = s => document.querySelector(s);
+    const totalSteps = questions.length + 1; // +1 for age
+
+    // ============================================
+    // SCREENS
+    // ============================================
+    const welcomeScreen = $('#welcomeScreen');
+    const quizScreen = $('#quizScreen');
+    const analyzingScreen = $('#analyzingScreen');
+    const resultsScreen = $('#resultsScreen');
+
+    function showScreen(screen) {
+        [welcomeScreen, quizScreen, analyzingScreen, resultsScreen].forEach(s => s.classList.add('hidden'));
+        screen.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ============================================
+    // PROGRESS
+    // ============================================
+    function updateProgress() {
+        const stepNum = currentStep + 2; // +1 for 1-indexed, +1 for age being step 1
+        const pct = Math.round((stepNum / totalSteps) * 100);
+        $('#progressStep').textContent = `Pregunta ${stepNum} de ${totalSteps}`;
+        $('#progressPercent').textContent = `${pct}%`;
+        $('#progressFill').style.width = `${pct}%`;
+    }
+
+    // ============================================
+    // RENDER QUESTION
+    // ============================================
+    function renderQuestion() {
+        showingMicro = false;
+        const container = $('#questionContainer');
+
+        if (currentStep === -1) {
+            // Age question
+            const q = ageQuestion;
+            container.innerHTML = `
+                <div class="question-slide">
+                    <span class="question-icon">${q.icon}</span>
+                    <p class="question-category">${q.category}</p>
+                    <h2 class="question-text">${q.text}</h2>
+                    <div class="options-group">
+                        ${q.options.map((opt, i) => `
+                            <div class="option-item">
+                                <input type="radio" name="ageQ" id="age_${i}" value="${opt.value}">
+                                <label class="option-label" for="age_${i}">
+                                    <span class="option-radio-circle"></span>
+                                    <span>${opt.label}</span>
+                                    <span class="option-check">✓</span>
+                                </label>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            container.querySelectorAll('input[name="ageQ"]').forEach(input => {
+                input.addEventListener('change', () => {
+                    ageRange = input.value;
+                    setTimeout(() => { currentStep = 0; updateProgress(); renderQuestion(); }, 450);
+                });
+            });
+        } else {
+            const q = questions[currentStep];
+            container.innerHTML = `
+                <div class="question-slide">
+                    <span class="question-icon">${q.icon}</span>
+                    <p class="question-category">${q.category}</p>
+                    <h2 class="question-text">${q.text}</h2>
+                    <div class="options-group">
+                        ${q.options.map((opt, i) => `
+                            <div class="option-item">
+                                <input type="radio" name="q${currentStep}" id="q${currentStep}_${i}" value="${i}" ${answers[currentStep] === i ? 'checked' : ''}>
+                                <label class="option-label" for="q${currentStep}_${i}">
+                                    <span class="option-radio-circle"></span>
+                                    <span>${opt.label}</span>
+                                    <span class="option-check">✓</span>
+                                </label>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            const step = currentStep;
+            container.querySelectorAll(`input[name="q${step}"]`).forEach(input => {
+                input.addEventListener('change', () => {
+                    answers[step] = parseInt(input.value);
+                    const q = questions[step];
+                    if (q.microAfter) {
+                        setTimeout(() => showMicroMessage(q.microText, step), 400);
+                    } else {
+                        setTimeout(() => advanceQuestion(step), 450);
+                    }
+                });
+            });
+        }
+        updateProgress();
+    }
+
+    function showMicroMessage(text, fromStep) {
+        showingMicro = true;
+        const container = $('#questionContainer');
+        container.innerHTML = `
+            <div class="micro-msg">
+                <span class="micro-icon">✦</span>
+                <p>${text}</p>
+            </div>
+        `;
+        setTimeout(() => {
+            if (showingMicro) advanceQuestion(fromStep);
+        }, 2200);
+    }
+
+    function advanceQuestion(fromStep) {
+        showingMicro = false;
+        if (fromStep >= questions.length - 1) {
+            showAnalyzing();
+        } else {
+            currentStep = fromStep + 1;
+            updateProgress();
+            renderQuestion();
+        }
+    }
+
+    // ============================================
+    // ANALYZING
+    // ============================================
+    function showAnalyzing() {
+        showScreen(analyzingScreen);
+        const steps = ['step1', 'step2', 'step3', 'step4'];
+        steps.forEach((id, i) => {
+            setTimeout(() => { document.getElementById(id).classList.add('visible'); }, 600 + i * 700);
+        });
+        setTimeout(showResults, 3500);
+    }
+
+    // ============================================
+    // CALCULATE SCORES
+    // ============================================
+    function calculateScores() {
+        const raw = { energia: 0, nervioso: 0, recuperacion: 0, inmuno: 0, hidratacion: 0 };
+
+        questions.forEach((q, i) => {
+            if (answers[i] !== null) {
+                const scores = q.options[answers[i]].scores;
+                for (let dim in scores) {
+                    raw[dim] += scores[dim];
+                }
+            }
+        });
+
+        // Max per dimension from all questions
+        const maxPerDim = {};
+        for (let dim in raw) {
+            maxPerDim[dim] = 0;
+            questions.forEach(q => {
+                maxPerDim[dim] += Math.max(...q.options.map(o => o.scores[dim]));
+            });
+        }
+
+        // Convert to percentages (inverted: 100% = optimal, 0% = depleted)
+        const pct = {};
+        for (let dim in raw) {
+            const ratio = maxPerDim[dim] > 0 ? raw[dim] / maxPerDim[dim] : 0;
+            pct[dim] = Math.round((1 - ratio) * 100);
+        }
+
+        // Age adjustment
+        const ageAdj = { '18-25': 5, '26-35': 2, '36-45': 0, '46-55': -3, '56+': -6 };
+        const adj = ageAdj[ageRange] || 0;
+        for (let dim in pct) {
+            pct[dim] = Math.max(5, Math.min(98, pct[dim] + adj));
+        }
+
+        return { raw, pct };
+    }
+
+    function getReserva(pct) {
+        const avg = Math.round(Object.values(pct).reduce((a, b) => a + b, 0) / 5);
+        return avg;
+    }
+
+    function getColor(val) {
+        if (val >= 65) return 'green';
+        if (val >= 40) return 'yellow';
+        return 'amber';
+    }
+
+    function getColorHex(val) {
+        if (val >= 65) return 'var(--verde-suave)';
+        if (val >= 40) return 'var(--amarillo-suave)';
+        return 'var(--ambar-suave)';
+    }
+
+    // ============================================
+    // DIMENSION INTERPRETATIONS
+    // ============================================
+    function getInterpretation(dim, val) {
+        const age = ageRange || '36-45';
+        const etapa = age === '18-25' ? 'esta etapa temprana' :
+                      age === '26-35' ? 'esta fase de tu vida' :
+                      age === '36-45' ? 'esta etapa de madurez activa' :
+                      age === '46-55' ? 'esta fase de transición' :
+                      'esta etapa de tu vida';
+
+        const texts = {
+            energia: {
+                high: 'Tu energía celular está en buen nivel. Tu cuerpo está produciendo y usando energía de forma eficiente.',
+                mid: `En ${etapa}, tu cuerpo aún responde, pero la energía ya no se regenera con la misma facilidad de antes.`,
+                low: `Tu cuerpo está pidiendo apoyo. En ${etapa}, la energía celular necesita refuerzos para mantener el ritmo diario.`
+            },
+            nervioso: {
+                high: 'Tu sistema nervioso está manejando bien la carga diaria. Buena capacidad de regulación.',
+                mid: `En ${etapa}, la carga acumulada empieza a notarse. Tu sistema nervioso necesita momentos de descarga real.`,
+                low: 'Tu sistema nervioso está operando en modo de alerta sostenida. Es importante atender esta señal.'
+            },
+            recuperacion: {
+                high: 'Tu capacidad de recuperación está bien. Tu cuerpo se repara con eficiencia después del esfuerzo.',
+                mid: `En ${etapa}, el cuerpo suele tardar más en volver a su línea base. La recuperación se vuelve un recurso valioso.`,
+                low: 'Tu cuerpo está tardando demasiado en recuperarse. Esta es una señal importante que merece atención.'
+            },
+            inmuno: {
+                high: 'Tus defensas naturales están respondiendo bien. Tu sistema inmune está en buen estado funcional.',
+                mid: `En ${etapa}, las defensas pueden fluctuar. Tu cuerpo necesita nutrientes clave para mantener su escudo activo.`,
+                low: 'Tu reserva inmunológica está baja. Tu cuerpo es más vulnerable de lo habitual a factores externos.'
+            },
+            hidratacion: {
+                high: 'Tu nivel de hidratación y minerales parece adecuado. Cada célula está funcionando con lo que necesita.',
+                mid: `En ${etapa}, la hidratación celular va más allá del agua. Tu cuerpo necesita minerales y electrolitos para funcionar bien.`,
+                low: 'Tu cuerpo muestra señales de deshidratación celular. Esto afecta prácticamente todas las funciones.'
+            }
+        };
+
+        const level = val >= 65 ? 'high' : val >= 40 ? 'mid' : 'low';
+        return texts[dim][level];
+    }
+
+    // ============================================
+    // RESERVA INTERPRETATION
+    // ============================================
+    function getReservaText(val) {
+        if (val >= 75) return 'Tu reserva corporal está en buen nivel. Tu cuerpo tiene margen para responder, adaptarse y mantenerse en equilibrio. Sigue cuidándote como lo haces.';
+        if (val >= 55) return 'Tu reserva corporal está en un nivel moderado. Tu cuerpo funciona, pero con menos margen del que necesita. Es buen momento para reforzar desde adentro.';
+        if (val >= 40) return 'Tu reserva corporal está en un nivel que merece atención. Tu cuerpo está respondiendo con lo justo, y ese equilibrio puede romperse si no actúas.';
+        return 'Tu reserva corporal está en un nivel bajo. Tu cuerpo está operando por debajo de su capacidad. Es importante buscar apoyo profesional para recuperar tu base.';
+    }
+
+    // ============================================
+    // MICRO-SOLUTIONS
+    // ============================================
+    function getMicroSolutions(pct) {
+        const tips = [];
+        if (pct.recuperacion < 60) tips.push({ icon: '😴', text: 'Prioriza el ritmo de sueño: acuéstate y despierta a la misma hora, incluso los fines de semana. Tu cuerpo necesita predecibilidad para repararse.' });
+        if (pct.hidratacion < 60) tips.push({ icon: '💧', text: 'Hidratación consciente: no se trata solo de cantidad, sino de constancia. Un vaso al despertar y antes de cada comida marca diferencia.' });
+        if (pct.nervioso < 60) tips.push({ icon: '🧘', text: 'Pausas reales (no pantalla): 5 minutos de silencio, respiración profunda o caminar sin teléfono. Tu sistema nervioso necesita desconectar de verdad.' });
+        if (pct.energia < 60) tips.push({ icon: '☕', text: 'Manejo de estimulantes: el café después del almuerzo puede estar saboteando tu energía real. Prueba reducirlo gradualmente.' });
+        if (tips.length < 3 && pct.inmuno < 65) tips.push({ icon: '🍊', text: 'Nutrición con intención: incluye alimentos ricos en vitamina C, zinc y antioxidantes. Tu escudo inmune se construye con lo que comes.' });
+        if (tips.length < 3) tips.push({ icon: '🚶', text: 'Movimiento suave diario: no necesitas un gym. Caminar 20 minutos al aire libre activa tu circulación y tu sistema inmune.' });
+        return tips.slice(0, 4);
+    }
+
+    // ============================================
+    // GET SUERO RECOMMENDATION
+    // ============================================
+    function getSueroRec(pct) {
+        // Find the dimension with lowest percentage (most depleted)
+        let dims = Object.entries(pct).sort((a, b) => a[1] - b[1]);
+        const principal = dims[0][0];
+        let secondary = null;
+        if (dims[1][1] < 60 && dims[1][1] <= dims[0][1] + 12) {
+            secondary = dims[1][0];
+        }
+        return { principal, secondary };
+    }
+
+    // ============================================
+    // SHOW RESULTS
+    // ============================================
+    function showResults() {
+        const { raw, pct } = calculateScores();
+        const reserva = getReserva(pct);
+        const rec = getSueroRec(pct);
+        const tips = getMicroSolutions(pct);
+
+        const dimLabels = {
+            energia: { label: 'Energía celular', icon: '🔋' },
+            nervioso: { label: 'Carga del sistema nervioso', icon: '🧠' },
+            recuperacion: { label: 'Capacidad de recuperación', icon: '♻️' },
+            inmuno: { label: 'Reserva de defensas', icon: '🛡️' },
+            hidratacion: { label: 'Hidratación / minerales', icon: '💧' }
+        };
+
+        // Build reserva blocks
+        const totalBlocks = 10;
+        const filledBlocks = Math.round((reserva / 100) * totalBlocks);
+        let blocksHtml = '';
+        for (let i = 0; i < totalBlocks; i++) {
+            if (i < filledBlocks) {
+                blocksHtml += `<div class="reserva-block filled ${getColor(reserva)}"></div>`;
+            } else {
+                blocksHtml += `<div class="reserva-block"></div>`;
+            }
+        }
+
+        // Build dimensions HTML
+        let dimsHtml = '';
+        for (let dim in dimLabels) {
+            const val = pct[dim];
+            const color = getColor(val);
+            const interp = getInterpretation(dim, val);
+            dimsHtml += `
+                <div class="dimension-item">
+                    <div class="dimension-header">
+                        <span class="dimension-label">${dimLabels[dim].icon} ${dimLabels[dim].label}</span>
+                        <span class="dimension-value" style="color: ${getColorHex(val)}">${val}%</span>
+                    </div>
+                    <div class="dimension-bar-track">
+                        <div class="dimension-bar-fill ${color}" style="width: ${val}%"></div>
+                    </div>
+                    <p class="dimension-interp">${interp}</p>
+                </div>
+            `;
+        }
+
+        // Micro-solutions HTML
+        let tipsHtml = tips.map(t => `
+            <div class="micro-tip">
+                <span>${t.icon}</span>
+                <p>${t.text}</p>
+            </div>
+        `).join('');
+
+        // Suero recommendation
+        const principalSuero = sueroMap[rec.principal];
+        let secondaryHtml = '';
+        if (rec.secondary) {
+            const secSuero = sueroMap[rec.secondary];
+            secondaryHtml = `
+                <div class="suero-secondary">
+                    <strong>${secSuero.icon} También podrías considerar:</strong> ${secSuero.name}
+                </div>
+            `;
+        }
+
+        // WhatsApp message
+        const waMsg = encodeURIComponent(`Hola GinecoSpa, acabo de hacer el quiz de estado corporal y me gustaría recibir orientación. Mi reserva corporal estimada es ${reserva}%.`);
+
+        resultsScreen.innerHTML = `
+            <div class="results-screen">
+                <div class="results-header">
+                    <span class="results-icon">📊</span>
+                    <h2 class="results-title">Tu Panel de Estado Corporal</h2>
+                    <p class="results-subtitle">Basado en tus respuestas de hoy</p>
+                </div>
+
+                <!-- Reserva Corporal Estimada -->
+                <div class="reserva-panel">
+                    <h3 class="reserva-title">Reserva Corporal Estimada</h3>
+                    <div class="reserva-blocks">${blocksHtml}</div>
+                    <div class="reserva-value" style="color: ${getColorHex(reserva)}">${reserva}%</div>
+                    <p class="reserva-desc">${getReservaText(reserva)}</p>
+                    <p style="font-size: 0.75rem; color: var(--gris-suave); margin-top: 0.5rem; font-style: italic;">
+                        Es la capacidad que tiene tu cuerpo hoy para responder, adaptarse y recuperarse sin agotarse.
+                    </p>
+                </div>
+
+                <!-- Dimension Bars -->
+                <div class="dimension-panel">
+                    <h4 style="font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--rosa-oscuro); margin-bottom: 1rem;">Indicadores por Área</h4>
+                    ${dimsHtml}
+                </div>
+
+                <div class="divider"></div>
+
+                <!-- Micro-Solutions -->
+                <div class="result-section">
+                    <h4>💡 Qué podrías empezar a hacer desde hoy</h4>
+                    ${tipsHtml}
+                </div>
+
+                <p class="transition-text">
+                    Estos hábitos ayudan, pero cuando el desgaste ya se acumuló, muchas personas necesitan un apoyo más dirigido.
+                </p>
+
+                <!-- Suero Recommendation -->
+                <div class="suero-rec">
+                    <h4>Tu cuerpo podría beneficiarse de</h4>
+                    <p style="font-size: 0.85rem; color: var(--texto-secundario); margin-bottom: 0.5rem;">
+                        Según tu perfil actual, personas con un estado similar suelen beneficiarse de sueroterapia personalizada, siempre bajo valoración médica.
+                    </p>
+                    <div class="suero-badge">${principalSuero.icon} ${principalSuero.name}</div>
+                    <p style="font-size: 0.85rem; color: var(--texto-secundario); line-height: 1.6; margin-top: 0.5rem;">${principalSuero.desc}</p>
+                    ${secondaryHtml}
+                </div>
+
+                <div class="disclaimer-box">
+                    ⚕️ Esta información es orientativa y no sustituye una valoración médica. Cada persona es única y merece atención personalizada.
+                </div>
+
+                <div class="divider"></div>
+
+                <!-- CTA -->
+                <div class="cta-buttons">
+                    <a href="https://wa.me/${WA_NUMBER}?text=${waMsg}" target="_blank" rel="noopener" class="btn-whatsapp">
+                        💬 Hablar con GinecoSpa por WhatsApp
+                    </a>
+                    <a href="https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hola GinecoSpa, me gustaría agendar una valoración para sueroterapia.')}" target="_blank" rel="noopener" class="btn-agenda">
+                        📅 Agendar una valoración
+                    </a>
+                </div>
+
+                <div style="text-align:center; margin-top: 1rem;">
+                    <button class="btn-restart" id="btnRestart">↺ Hacer el quiz de nuevo</button>
+                </div>
+            </div>
+        `;
+
+        showScreen(resultsScreen);
+
+        $('#btnRestart').addEventListener('click', () => {
+            currentStep = -1;
+            ageRange = null;
+            answers = new Array(questions.length).fill(null);
+            showScreen(quizScreen);
+            renderQuestion();
+        });
+    }
+
+    // ============================================
+    // EVENTS
+    // ============================================
+    $('#btnStart').addEventListener('click', () => {
+        showScreen(quizScreen);
+        renderQuestion();
+    });
+
+})();
+</script>
+</body>
+</html>
