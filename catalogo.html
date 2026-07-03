@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="GinecoSpa — Clínica de ginecología funcional, regenerativa y salud del piso pélvico. Diagnóstico con tecnología avanzada, tratamientos basados en evidencia y acompañamiento integral. Caracas, Barquisimeto y San Cristóbal.">
+    <meta name="keywords" content="ginecología funcional, salud piso pélvico, menopausia, perimenopausia, ginecología regenerativa, HIFU 7D, bienestar íntimo femenino, Venezuela">
+    <title>Catálogo de Suplementos | GinecoSpa</title>
+    
+    <!-- Fonts - More elegant combination -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'rosa-palido': '#FFF5F7',
+                        'rosa-claro': '#FFE5EC',
+                        'rosa-medio': '#FFB5C5',
+                        'rosa-intenso': '#FF8FA3',
+                        'rosa-oscuro': '#E75480',
+                        'coral': '#FF9B9B',
+                        'melon': '#FFD6A5',
+                        'lavanda': '#E8CFFF',
+                        'gris-calido': '#6B5D5D',
+                        'dorado': '#D4AF37',
+                        'crema': '#FFF8F0',
+                    },
+                    fontFamily: {
+                        'display': ['Cormorant Garamond', 'serif'],
+                        'sans': ['Montserrat', 'sans-serif'],
+                        'script': ['Dancing Script', 'cursive'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fade-in': 'fadeIn 1s ease-in',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'shimmer': 'shimmer 2s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-1000px 0' },
+                            '100%': { backgroundPosition: '1000px 0' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        * {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+        
+        .font-script {
+            font-family: 'Dancing Script', cursive;
+        }
+        
+        /* Hero gradient with warmth */
+        .hero-gradient {
+            background: linear-gradient(135deg, 
+                #FFF5F7 0%, 
+                #FFE5EC 25%,
+                #FFD6E8 50%,
+                #FFC9E0 75%,
+                #FFB5C5 100%
+            );
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,181,197,0.3) 0%, transparent 70%);
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .hero-gradient::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            left: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,214,165,0.2) 0%, transparent 70%);
+            animation: float 10s ease-in-out infinite reverse;
+        }
+        
+        /* Glassmorphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        
+        /* Card with warm glow */
+        .card-glow {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        
+        .card-glow::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            padding: 2px;
+            background: linear-gradient(135deg, #FFB5C5, #FFD6A5, #E8CFFF);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        
+        .card-glow:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(231, 84, 128, 0.2);
+        }
+        
+        .card-glow:hover::before {
+            opacity: 1;
+        }
+        
+        /* Animated gradient text */
+        .gradient-text {
+            background: linear-gradient(90deg, #E75480, #FFB5C5, #FFD6A5, #E8CFFF, #E75480);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s linear infinite;
+        }
+        
+        /* Floating WhatsApp with pulse */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 10px 20px rgba(37, 211, 102, 0.4));
+        }
+        
+        .floating-whatsapp:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Smooth mobile menu */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        /* Section decorative elements */
+        .section-decoration {
+            position: relative;
+        }
+        
+        .section-decoration::before {
+            content: '❀';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            color: #FFB5C5;
+            opacity: 0.3;
+        }
+        
+        /* Button effects */
+        .btn-primary {
+            background: linear-gradient(135deg, #E75480 0%, #FF8FA3 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 0 10px 30px rgba(231, 84, 128, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        /* Image placeholder with gradient */
+        .img-placeholder {
+            background: linear-gradient(135deg, #FFE5EC 0%, #FFD6E8 50%, #FFC9E0 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .img-placeholder::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent
+            );
+            animation: shimmer 2s infinite;
+        }
+        
+        /* Nav hover effect */
+        .nav-link {
+            position: relative;
+            padding-bottom: 4px;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #E75480, #FFB5C5);
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Scroll reveal animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Icon glow effect */
+        .icon-glow {
+            filter: drop-shadow(0 4px 8px rgba(231, 84, 128, 0.3));
+        }
+    </style>
+</head>
+<body class="bg-crema text-gris-calido antialiased">
+<header class="sticky top-0 z-50 glass border-b border-rosa-claro">
+        <div class="container mx-auto px-4 py-4">
+            <nav class="flex items-center justify-between">
+                <!-- Logo with script font -->
+                <a href="index.html#inicio" class="text-3xl font-script font-bold text-rosa-oscuro hover:text-rosa-intenso transition-colors">
+                    GinecoSpa
+                </a>
+                
+                <!-- Desktop Menu -->
+                <ul class="hidden lg:flex items-center space-x-8">
+                    <li><a href="index.html#inicio" class="nav-link text-sm font-medium text-gris-calido hover:text-rosa-oscuro">Inicio</a></li>
+                    <li><a href="index.html#servicios" class="nav-link text-sm font-medium text-gris-calido hover:text-rosa-oscuro">Servicios</a></li>
+                    <li><a href="procedimientos.html" class="nav-link text-sm font-medium text-gris-calido hover:text-rosa-oscuro">Procedimientos</a></li>
+                    <li><a href="index.html#tecnologia" class="nav-link text-sm font-medium text-gris-calido hover:text-rosa-oscuro">Tecnologías</a></li>
+                    <li><a href="index.html#productos" class="nav-link text-sm font-medium text-gris-calido hover:text-rosa-oscuro">Productos</a></li>
+                    <li><a href="catalogo.html" class="nav-link text-sm font-semibold text-rosa-oscuro">Catálogo</a></li>
+                    <li><a href="index.html#conoce-tu-cuerpo" class="nav-link text-sm font-medium text-gris-calido hover:text-rosa-oscuro">Conócete</a></li>
+                    <li><a href="index.html#sedes" class="nav-link text-sm font-medium text-gris-calido hover:text-rosa-oscuro">Sedes</a></li>
+                    <li><a href="index.html#contacto" class="nav-link text-sm font-medium text-gris-calido hover:text-rosa-oscuro">Contacto</a></li>
+                </ul>
+                
+                <!-- CTA Button -->
+                <a href="https://wa.me/584241234567" class="hidden lg:block btn-primary text-white px-6 py-3 rounded-full text-sm font-semibold shadow-lg relative z-10">
+                    Agendar por WhatsApp
+                </a>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="lg:hidden text-rosa-oscuro">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </nav>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu lg:hidden fixed inset-y-0 right-0 w-72 bg-gradient-to-br from-rosa-palido to-rosa-claro shadow-2xl p-6">
+            <button id="mobile-menu-close" class="absolute top-4 right-4 text-rosa-oscuro">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <div class="mt-16">
+                <h3 class="font-script text-3xl text-rosa-oscuro mb-8">GinecoSpa</h3>
+                <ul class="space-y-6">
+                    <li><a href="index.html#inicio" class="block text-lg font-medium text-gris-calido hover:text-rosa-oscuro transition-colors">Inicio</a></li>
+                    <li><a href="index.html#servicios" class="block text-lg font-medium text-gris-calido hover:text-rosa-oscuro transition-colors">Servicios</a></li>
+                    <li><a href="procedimientos.html" class="block text-lg font-medium text-gris-calido hover:text-rosa-oscuro transition-colors">Procedimientos</a></li>
+                    <li><a href="index.html#tecnologia" class="block text-lg font-medium text-gris-calido hover:text-rosa-oscuro transition-colors">Tecnologías</a></li>
+                    <li><a href="index.html#productos" class="block text-lg font-medium text-gris-calido hover:text-rosa-oscuro transition-colors">Productos</a></li>
+                    <li><a href="catalogo.html" class="block text-lg font-semibold text-rosa-oscuro transition-colors">Catálogo</a></li>
+                    <li><a href="index.html#conoce-tu-cuerpo" class="block text-lg font-medium text-gris-calido hover:text-rosa-oscuro transition-colors">Conócete</a></li>
+                    <li><a href="index.html#sedes" class="block text-lg font-medium text-gris-calido hover:text-rosa-oscuro transition-colors">Sedes</a></li>
+                    <li><a href="index.html#contacto" class="block text-lg font-medium text-gris-calido hover:text-rosa-oscuro transition-colors">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== HERO CATÁLOGO ===== -->
+    <section class="hero-gradient py-20 lg:py-28 relative">
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-4xl mx-auto text-center reveal">
+          <span class="font-script text-rosa-intenso text-2xl mb-3 block">Bienestar y longevidad</span>
+          <h1 class="text-4xl lg:text-6xl font-display font-bold text-rosa-oscuro mb-6">Catálogo de Suplementos</h1>
+          <p class="text-lg lg:text-xl text-gris-calido max-w-2xl mx-auto">
+            Una selección curada de fórmulas premium para tu energía celular, el equilibrio hormonal,
+            la salud íntima y la vitalidad. Cada producto, con su historia y sus beneficios.
+          </p>
+          <div class="flex flex-wrap justify-center gap-3 mt-8 text-xs font-semibold text-rosa-oscuro">
+            <span class="glass px-4 py-2 rounded-full border border-rosa-medio/40">Longevidad · NAD+</span>
+            <span class="glass px-4 py-2 rounded-full border border-rosa-medio/40">Equilibrio hormonal</span>
+            <span class="glass px-4 py-2 rounded-full border border-rosa-medio/40">Salud íntima</span>
+            <span class="glass px-4 py-2 rounded-full border border-rosa-medio/40">Energía y descanso</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== GRID DE PRODUCTOS ===== -->
+    <section class="py-20 bg-gradient-to-br from-crema to-rosa-palido relative overflow-hidden">
+      <div class="absolute bottom-0 right-0 w-96 h-96 bg-melon rounded-full opacity-20 blur-3xl"></div>
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          
+        <div class="card-glow bg-white rounded-3xl overflow-hidden shadow-2xl reveal flex flex-col" style="animation-delay: 0.00s;">
+          <div class="relative bg-gradient-to-br from-rosa-palido to-rosa-claro p-8 flex items-center justify-center" style="min-height:260px;">
+            <span class="absolute top-4 left-4 bg-white/80 backdrop-blur text-rosa-oscuro text-[11px] font-semibold tracking-wide uppercase px-3 py-1.5 rounded-full">Adaptógenos · Estrés</span>
+            <img src="https://res.cloudinary.com/dzq9lldhw/image/upload/v1783044710/ashawanda_nutricost_u2shyc.jpg" alt="Ashwagandha" loading="lazy" class="max-h-56 w-auto object-contain drop-shadow-xl">
+          </div>
+          <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center mb-1">
+              <div class="w-11 h-11 bg-gradient-to-br from-lavanda to-rosa-intenso rounded-xl flex items-center justify-center mr-3 flex-shrink-0 icon-glow"><span class="text-xl">🌿</span></div>
+              <div>
+                <h3 class="text-2xl font-display font-bold text-rosa-oscuro leading-tight">Ashwagandha</h3>
+                <p class="text-xs text-gris-calido/70">Nutricost · 120 cápsulas</p>
+              </div>
+            </div>
+            <p class="font-script text-rosa-intenso text-xl mt-2">Calma y energía en equilibrio</p>
+            <p class="text-sm text-gris-calido mt-3">Raíz ayurvédica de alta concentración que ayuda al cuerpo a adaptarse al estrés y recuperar su balance natural.</p>
+            <ul class="space-y-2.5 mt-5 mb-5 text-sm text-gris-calido">
+              <li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Apoya el manejo del estrés diario</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Contribuye a un sueño más reparador</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Ayuda a equilibrar el cortisol</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Favorece energía y claridad mental</span></li>
+            </ul>
+            <div class="glass border border-rosa-medio/40 rounded-2xl p-4 mb-6 mt-auto">
+              <p class="text-[11px] font-semibold text-rosa-oscuro uppercase tracking-wide mb-1">¿Sabías que?</p>
+              <p class="text-xs text-gris-calido leading-relaxed">Se usa hace más de 3.000 años en la medicina Ayurveda por su fuerza y vitalidad.</p>
+            </div>
+            <a href="https://wa.me/584241234567?text=Hola%20GinecoSpa%20%F0%9F%92%97%2C%20me%20interesa%20el%20producto%3A%20Ashwagandha%20%28Nutricost%20%C2%B7%20120%20c%C3%A1psulas%29.%20%C2%BFMe%20das%20m%C3%A1s%20informaci%C3%B3n%20y%20precio%3F" target="_blank" rel="noopener" class="btn-primary text-white text-center w-full py-3.5 rounded-2xl font-semibold shadow-lg">
+              Pedir por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="card-glow bg-white rounded-3xl overflow-hidden shadow-2xl reveal flex flex-col" style="animation-delay: 0.05s;">
+          <div class="relative bg-gradient-to-br from-rosa-palido to-rosa-claro p-8 flex items-center justify-center" style="min-height:260px;">
+            <span class="absolute top-4 left-4 bg-white/80 backdrop-blur text-rosa-oscuro text-[11px] font-semibold tracking-wide uppercase px-3 py-1.5 rounded-full">Longevidad celular</span>
+            <img src="https://res.cloudinary.com/dzq9lldhw/image/upload/v1783044286/IMG_6161_ipv14f.jpg" alt="NAD+ Booster" loading="lazy" class="max-h-56 w-auto object-contain drop-shadow-xl">
+          </div>
+          <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center mb-1">
+              <div class="w-11 h-11 bg-gradient-to-br from-coral to-melon rounded-xl flex items-center justify-center mr-3 flex-shrink-0 icon-glow"><span class="text-xl">⚡</span></div>
+              <div>
+                <h3 class="text-2xl font-display font-bold text-rosa-oscuro leading-tight">NAD+ Booster</h3>
+                <p class="text-xs text-gris-calido/70">NAD+ · Coenzima Q10 · Niacinamida</p>
+              </div>
+            </div>
+            <p class="font-script text-rosa-intenso text-xl mt-2">Recarga tu energía celular</p>
+            <p class="text-sm text-gris-calido mt-3">Precursor de NAD+, la coenzima que tus células usan para producir energía, reforzado con CoQ10 y niacinamida.</p>
+            <ul class="space-y-2.5 mt-5 mb-5 text-sm text-gris-calido">
+              <li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Apoya la producción de energía celular</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Contribuye al antienvejecimiento celular</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>CoQ10 antioxidante y cardiovascular</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Favorece el metabolismo y la vitalidad</span></li>
+            </ul>
+            <div class="glass border border-rosa-medio/40 rounded-2xl p-4 mb-6 mt-auto">
+              <p class="text-[11px] font-semibold text-rosa-oscuro uppercase tracking-wide mb-1">¿Sabías que?</p>
+              <p class="text-xs text-gris-calido leading-relaxed">Los niveles de NAD+ caen hasta 50% entre los 40 y 60 años; reponerlo es clave en longevidad.</p>
+            </div>
+            <a href="https://wa.me/584241234567?text=Hola%20GinecoSpa%20%F0%9F%92%97%2C%20me%20interesa%20el%20producto%3A%20NAD%2B%20Booster%20%28NAD%2B%20%C2%B7%20Coenzima%20Q10%20%C2%B7%20Niacinamida%29.%20%C2%BFMe%20das%20m%C3%A1s%20informaci%C3%B3n%20y%20precio%3F" target="_blank" rel="noopener" class="btn-primary text-white text-center w-full py-3.5 rounded-2xl font-semibold shadow-lg">
+              Pedir por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="card-glow bg-white rounded-3xl overflow-hidden shadow-2xl reveal flex flex-col" style="animation-delay: 0.10s;">
+          <div class="relative bg-gradient-to-br from-rosa-palido to-rosa-claro p-8 flex items-center justify-center" style="min-height:260px;">
+            <span class="absolute top-4 left-4 bg-white/80 backdrop-blur text-rosa-oscuro text-[11px] font-semibold tracking-wide uppercase px-3 py-1.5 rounded-full">Equilibrio hormonal</span>
+            <img src="https://res.cloudinary.com/dzq9lldhw/image/upload/v1783044286/IMG_6157_mrv41s.jpg" alt="DIM 300 mg + BioPerine" loading="lazy" class="max-h-56 w-auto object-contain drop-shadow-xl">
+          </div>
+          <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center mb-1">
+              <div class="w-11 h-11 bg-gradient-to-br from-rosa-intenso to-lavanda rounded-xl flex items-center justify-center mr-3 flex-shrink-0 icon-glow"><span class="text-xl">🌸</span></div>
+              <div>
+                <h3 class="text-2xl font-display font-bold text-rosa-oscuro leading-tight">DIM 300 mg + BioPerine</h3>
+                <p class="text-xs text-gris-calido/70">60 cápsulas</p>
+              </div>
+            </div>
+            <p class="font-script text-rosa-intenso text-xl mt-2">Equilibrio de estrógenos</p>
+            <p class="text-sm text-gris-calido mt-3">Diindolilmetano derivado de crucíferos, con BioPerine para potenciar su absorción y apoyar el metabolismo del estrógeno.</p>
+            <ul class="space-y-2.5 mt-5 mb-5 text-sm text-gris-calido">
+              <li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Apoya el equilibrio hormonal</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Favorece el metabolismo del estrógeno</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Contribuye a una piel más clara</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>BioPerine mejora la absorción</span></li>
+            </ul>
+            <div class="glass border border-rosa-medio/40 rounded-2xl p-4 mb-6 mt-auto">
+              <p class="text-[11px] font-semibold text-rosa-oscuro uppercase tracking-wide mb-1">¿Sabías que?</p>
+              <p class="text-xs text-gris-calido leading-relaxed">Tendrías que comer casi un kilo de brócoli para obtener el DIM de una sola cápsula.</p>
+            </div>
+            <a href="https://wa.me/584241234567?text=Hola%20GinecoSpa%20%F0%9F%92%97%2C%20me%20interesa%20el%20producto%3A%20DIM%20300%20mg%20%2B%20BioPerine%20%2860%20c%C3%A1psulas%29.%20%C2%BFMe%20das%20m%C3%A1s%20informaci%C3%B3n%20y%20precio%3F" target="_blank" rel="noopener" class="btn-primary text-white text-center w-full py-3.5 rounded-2xl font-semibold shadow-lg">
+              Pedir por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="card-glow bg-white rounded-3xl overflow-hidden shadow-2xl reveal flex flex-col" style="animation-delay: 0.00s;">
+          <div class="relative bg-gradient-to-br from-rosa-palido to-rosa-claro p-8 flex items-center justify-center" style="min-height:260px;">
+            <span class="absolute top-4 left-4 bg-white/80 backdrop-blur text-rosa-oscuro text-[11px] font-semibold tracking-wide uppercase px-3 py-1.5 rounded-full">Antioxidantes</span>
+            <img src="https://res.cloudinary.com/dzq9lldhw/image/upload/v1783044285/IMG_6205_qfy8yz.jpg" alt="Resveratrol Complex" loading="lazy" class="max-h-56 w-auto object-contain drop-shadow-xl">
+          </div>
+          <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center mb-1">
+              <div class="w-11 h-11 bg-gradient-to-br from-lavanda to-coral rounded-xl flex items-center justify-center mr-3 flex-shrink-0 icon-glow"><span class="text-xl">🍇</span></div>
+              <div>
+                <h3 class="text-2xl font-display font-bold text-rosa-oscuro leading-tight">Resveratrol Complex</h3>
+                <p class="text-xs text-gris-calido/70">Complejo antioxidante</p>
+              </div>
+            </div>
+            <p class="font-script text-rosa-intenso text-xl mt-2">Antioxidante de la copa de vino</p>
+            <p class="text-sm text-gris-calido mt-3">Polifenol de la uva y el vino tinto, uno de los antioxidantes más potentes para el corazón y la longevidad.</p>
+            <ul class="space-y-2.5 mt-5 mb-5 text-sm text-gris-calido">
+              <li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Poderoso antioxidante</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Apoya la salud cardiovascular</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Contribuye a la longevidad celular</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Favorece una piel más joven</span></li>
+            </ul>
+            <div class="glass border border-rosa-medio/40 rounded-2xl p-4 mb-6 mt-auto">
+              <p class="text-[11px] font-semibold text-rosa-oscuro uppercase tracking-wide mb-1">¿Sabías que?</p>
+              <p class="text-xs text-gris-calido leading-relaxed">Famoso por la “paradoja francesa”: baja incidencia cardíaca pese a una dieta rica en grasas.</p>
+            </div>
+            <a href="https://wa.me/584241234567?text=Hola%20GinecoSpa%20%F0%9F%92%97%2C%20me%20interesa%20el%20producto%3A%20Resveratrol%20Complex%20%28Complejo%20antioxidante%29.%20%C2%BFMe%20das%20m%C3%A1s%20informaci%C3%B3n%20y%20precio%3F" target="_blank" rel="noopener" class="btn-primary text-white text-center w-full py-3.5 rounded-2xl font-semibold shadow-lg">
+              Pedir por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="card-glow bg-white rounded-3xl overflow-hidden shadow-2xl reveal flex flex-col" style="animation-delay: 0.05s;">
+          <div class="relative bg-gradient-to-br from-rosa-palido to-rosa-claro p-8 flex items-center justify-center" style="min-height:260px;">
+            <span class="absolute top-4 left-4 bg-white/80 backdrop-blur text-rosa-oscuro text-[11px] font-semibold tracking-wide uppercase px-3 py-1.5 rounded-full">Minerales esenciales</span>
+            <img src="https://res.cloudinary.com/dzq9lldhw/image/upload/v1783044284/IMG_6158_d2g9n9.jpg" alt="Magnesio 14 en 1" loading="lazy" class="max-h-56 w-auto object-contain drop-shadow-xl">
+          </div>
+          <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center mb-1">
+              <div class="w-11 h-11 bg-gradient-to-br from-melon to-rosa-medio rounded-xl flex items-center justify-center mr-3 flex-shrink-0 icon-glow"><span class="text-xl">😴</span></div>
+              <div>
+                <h3 class="text-2xl font-display font-bold text-rosa-oscuro leading-tight">Magnesio 14 en 1</h3>
+                <p class="text-xs text-gris-calido/70">VEV · Gomitas</p>
+              </div>
+            </div>
+            <p class="font-script text-rosa-intenso text-xl mt-2">Descanso y relajación</p>
+            <p class="text-sm text-gris-calido mt-3">Complejo completo de magnesio en gomita, para la relajación muscular y nerviosa y un mejor descanso.</p>
+            <ul class="space-y-2.5 mt-5 mb-5 text-sm text-gris-calido">
+              <li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Apoya la relajación muscular y nerviosa</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Contribuye a un mejor descanso</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Ayuda a reducir calambres y tensión</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Formato gomita, fácil y agradable</span></li>
+            </ul>
+            <div class="glass border border-rosa-medio/40 rounded-2xl p-4 mb-6 mt-auto">
+              <p class="text-[11px] font-semibold text-rosa-oscuro uppercase tracking-wide mb-1">¿Sabías que?</p>
+              <p class="text-xs text-gris-calido leading-relaxed">El magnesio participa en más de 300 reacciones del cuerpo, y la mayoría no consume suficiente.</p>
+            </div>
+            <a href="https://wa.me/584241234567?text=Hola%20GinecoSpa%20%F0%9F%92%97%2C%20me%20interesa%20el%20producto%3A%20Magnesio%2014%20en%201%20%28VEV%20%C2%B7%20Gomitas%29.%20%C2%BFMe%20das%20m%C3%A1s%20informaci%C3%B3n%20y%20precio%3F" target="_blank" rel="noopener" class="btn-primary text-white text-center w-full py-3.5 rounded-2xl font-semibold shadow-lg">
+              Pedir por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="card-glow bg-white rounded-3xl overflow-hidden shadow-2xl reveal flex flex-col" style="animation-delay: 0.10s;">
+          <div class="relative bg-gradient-to-br from-rosa-palido to-rosa-claro p-8 flex items-center justify-center" style="min-height:260px;">
+            <span class="absolute top-4 left-4 bg-white/80 backdrop-blur text-rosa-oscuro text-[11px] font-semibold tracking-wide uppercase px-3 py-1.5 rounded-full">Longevidad femenina</span>
+            <img src="https://res.cloudinary.com/dzq9lldhw/image/upload/v1783044277/IMG_6165_e0onhj.jpg" alt="NAD+ for Women 8 en 1" loading="lazy" class="max-h-56 w-auto object-contain drop-shadow-xl">
+          </div>
+          <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center mb-1">
+              <div class="w-11 h-11 bg-gradient-to-br from-rosa-oscuro to-rosa-intenso rounded-xl flex items-center justify-center mr-3 flex-shrink-0 icon-glow"><span class="text-xl">💗</span></div>
+              <div>
+                <h3 class="text-2xl font-display font-bold text-rosa-oscuro leading-tight">NAD+ for Women 8 en 1</h3>
+                <p class="text-xs text-gris-calido/70">Liposomal · con Q10</p>
+              </div>
+            </div>
+            <p class="font-script text-rosa-intenso text-xl mt-2">Longevidad formulada para la mujer</p>
+            <p class="text-sm text-gris-calido mt-3">Fórmula liposomal 8 en 1 con NAD+ y Q10, con tecnología de máxima absorción para energía, piel y antiedad.</p>
+            <ul class="space-y-2.5 mt-5 mb-5 text-sm text-gris-calido">
+              <li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Tecnología liposomal de máxima absorción</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Apoya la energía y vitalidad femenina</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Contribuye a piel radiante y antiedad</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>8 activos en una sola fórmula</span></li>
+            </ul>
+            <div class="glass border border-rosa-medio/40 rounded-2xl p-4 mb-6 mt-auto">
+              <p class="text-[11px] font-semibold text-rosa-oscuro uppercase tracking-wide mb-1">¿Sabías que?</p>
+              <p class="text-xs text-gris-calido leading-relaxed">La tecnología liposomal envuelve el activo como una célula, multiplicando cuánto llega al cuerpo.</p>
+            </div>
+            <a href="https://wa.me/584241234567?text=Hola%20GinecoSpa%20%F0%9F%92%97%2C%20me%20interesa%20el%20producto%3A%20NAD%2B%20for%20Women%208%20en%201%20%28Liposomal%20%C2%B7%20con%20Q10%29.%20%C2%BFMe%20das%20m%C3%A1s%20informaci%C3%B3n%20y%20precio%3F" target="_blank" rel="noopener" class="btn-primary text-white text-center w-full py-3.5 rounded-2xl font-semibold shadow-lg">
+              Pedir por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="card-glow bg-white rounded-3xl overflow-hidden shadow-2xl reveal flex flex-col" style="animation-delay: 0.00s;">
+          <div class="relative bg-gradient-to-br from-rosa-palido to-rosa-claro p-8 flex items-center justify-center" style="min-height:260px;">
+            <span class="absolute top-4 left-4 bg-white/80 backdrop-blur text-rosa-oscuro text-[11px] font-semibold tracking-wide uppercase px-3 py-1.5 rounded-full">Salud íntima femenina</span>
+            <img src="https://res.cloudinary.com/dzq9lldhw/image/upload/v1783044277/IMG_6202_plgfnr.jpg" alt="Gel Vaginal con Probióticos" loading="lazy" class="max-h-56 w-auto object-contain drop-shadow-xl">
+          </div>
+          <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center mb-1">
+              <div class="w-11 h-11 bg-gradient-to-br from-rosa-medio to-lavanda rounded-xl flex items-center justify-center mr-3 flex-shrink-0 icon-glow"><span class="text-xl">🌷</span></div>
+              <div>
+                <h3 class="text-2xl font-display font-bold text-rosa-oscuro leading-tight">Gel Vaginal con Probióticos</h3>
+                <p class="text-xs text-gris-calido/70">Cuidado íntimo</p>
+              </div>
+            </div>
+            <p class="font-script text-rosa-intenso text-xl mt-2">Equilibrio íntimo, confianza cada día</p>
+            <p class="text-sm text-gris-calido mt-3">Gel de uso íntimo con probióticos para apoyar la flora vaginal y un ambiente sano y confortable.</p>
+            <ul class="space-y-2.5 mt-5 mb-5 text-sm text-gris-calido">
+              <li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Apoya el equilibrio de la flora vaginal</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Contribuye a un pH saludable</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Sensación de frescura y confort</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Formulación con probióticos</span></li>
+            </ul>
+            <div class="glass border border-rosa-medio/40 rounded-2xl p-4 mb-6 mt-auto">
+              <p class="text-[11px] font-semibold text-rosa-oscuro uppercase tracking-wide mb-1">¿Sabías que?</p>
+              <p class="text-xs text-gris-calido leading-relaxed">Una flora vaginal sana está dominada por lactobacilos, los mismos “buenos” del yogur.</p>
+            </div>
+            <a href="https://wa.me/584241234567?text=Hola%20GinecoSpa%20%F0%9F%92%97%2C%20me%20interesa%20el%20producto%3A%20Gel%20Vaginal%20con%20Probi%C3%B3ticos%20%28Cuidado%20%C3%ADntimo%29.%20%C2%BFMe%20das%20m%C3%A1s%20informaci%C3%B3n%20y%20precio%3F" target="_blank" rel="noopener" class="btn-primary text-white text-center w-full py-3.5 rounded-2xl font-semibold shadow-lg">
+              Pedir por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="card-glow bg-white rounded-3xl overflow-hidden shadow-2xl reveal flex flex-col" style="animation-delay: 0.05s;">
+          <div class="relative bg-gradient-to-br from-rosa-palido to-rosa-claro p-8 flex items-center justify-center" style="min-height:260px;">
+            <span class="absolute top-4 left-4 bg-white/80 backdrop-blur text-rosa-oscuro text-[11px] font-semibold tracking-wide uppercase px-3 py-1.5 rounded-full">Vitalidad masculina</span>
+            <img src="https://res.cloudinary.com/dzq9lldhw/image/upload/v1783044267/IMG_6144_d6qki1.jpg" alt="Testosterone Extra Strength" loading="lazy" class="max-h-56 w-auto object-contain drop-shadow-xl">
+          </div>
+          <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center mb-1">
+              <div class="w-11 h-11 bg-gradient-to-br from-gris-calido to-rosa-oscuro rounded-xl flex items-center justify-center mr-3 flex-shrink-0 icon-glow"><span class="text-xl">🔥</span></div>
+              <div>
+                <h3 class="text-2xl font-display font-bold text-rosa-oscuro leading-tight">Testosterone Extra Strength</h3>
+                <p class="text-xs text-gris-calido/70">Fórmula de fuerza extra</p>
+              </div>
+            </div>
+            <p class="font-script text-rosa-intenso text-xl mt-2">Fuerza, energía y vitalidad</p>
+            <p class="text-sm text-gris-calido mt-3">Fórmula concentrada que apoya niveles saludables de testosterona para energía, rendimiento y masa muscular.</p>
+            <ul class="space-y-2.5 mt-5 mb-5 text-sm text-gris-calido">
+              <li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Apoya niveles saludables de testosterona</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Contribuye a energía y rendimiento</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Favorece la masa muscular y la libido</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Concentración de fuerza extra</span></li>
+            </ul>
+            <div class="glass border border-rosa-medio/40 rounded-2xl p-4 mb-6 mt-auto">
+              <p class="text-[11px] font-semibold text-rosa-oscuro uppercase tracking-wide mb-1">¿Sabías que?</p>
+              <p class="text-xs text-gris-calido leading-relaxed">Desde los 30, la testosterona baja ~1% al año; el apoyo nutricional cobra importancia con la edad.</p>
+            </div>
+            <a href="https://wa.me/584241234567?text=Hola%20GinecoSpa%20%F0%9F%92%97%2C%20me%20interesa%20el%20producto%3A%20Testosterone%20Extra%20Strength%20%28F%C3%B3rmula%20de%20fuerza%20extra%29.%20%C2%BFMe%20das%20m%C3%A1s%20informaci%C3%B3n%20y%20precio%3F" target="_blank" rel="noopener" class="btn-primary text-white text-center w-full py-3.5 rounded-2xl font-semibold shadow-lg">
+              Pedir por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="card-glow bg-white rounded-3xl overflow-hidden shadow-2xl reveal flex flex-col" style="animation-delay: 0.10s;">
+          <div class="relative bg-gradient-to-br from-rosa-palido to-rosa-claro p-8 flex items-center justify-center" style="min-height:260px;">
+            <span class="absolute top-4 left-4 bg-white/80 backdrop-blur text-rosa-oscuro text-[11px] font-semibold tracking-wide uppercase px-3 py-1.5 rounded-full">Salud digestiva</span>
+            <img src="https://res.cloudinary.com/dzq9lldhw/image/upload/v1783044268/IMG_6206_cyaigr.jpg" alt="Candida Cleanse" loading="lazy" class="max-h-56 w-auto object-contain drop-shadow-xl">
+          </div>
+          <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center mb-1">
+              <div class="w-11 h-11 bg-gradient-to-br from-melon to-coral rounded-xl flex items-center justify-center mr-3 flex-shrink-0 icon-glow"><span class="text-xl">🌱</span></div>
+              <div>
+                <h3 class="text-2xl font-display font-bold text-rosa-oscuro leading-tight">Candida Cleanse</h3>
+                <p class="text-xs text-gris-calido/70">Con botánicos y probióticos</p>
+              </div>
+            </div>
+            <p class="font-script text-rosa-intenso text-xl mt-2">Equilibrio para tu flora intestinal</p>
+            <p class="text-sm text-gris-calido mt-3">Fórmula con botánicos y probióticos que apoya el equilibrio de la cándida y una digestión saludable.</p>
+            <ul class="space-y-2.5 mt-5 mb-5 text-sm text-gris-calido">
+              <li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Apoya el equilibrio de la flora intestinal</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Contribuye a una digestión ligera</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Con botánicos y probióticos</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Sensación de bienestar diario</span></li>
+            </ul>
+            <div class="glass border border-rosa-medio/40 rounded-2xl p-4 mb-6 mt-auto">
+              <p class="text-[11px] font-semibold text-rosa-oscuro uppercase tracking-wide mb-1">¿Sabías que?</p>
+              <p class="text-xs text-gris-calido leading-relaxed">La cándida vive de forma natural en el intestino; la meta es mantenerla en equilibrio, no eliminarla.</p>
+            </div>
+            <a href="https://wa.me/584241234567?text=Hola%20GinecoSpa%20%F0%9F%92%97%2C%20me%20interesa%20el%20producto%3A%20Candida%20Cleanse%20%28Con%20bot%C3%A1nicos%20y%20probi%C3%B3ticos%29.%20%C2%BFMe%20das%20m%C3%A1s%20informaci%C3%B3n%20y%20precio%3F" target="_blank" rel="noopener" class="btn-primary text-white text-center w-full py-3.5 rounded-2xl font-semibold shadow-lg">
+              Pedir por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="card-glow bg-white rounded-3xl overflow-hidden shadow-2xl reveal flex flex-col" style="animation-delay: 0.00s;">
+          <div class="relative bg-gradient-to-br from-rosa-palido to-rosa-claro p-8 flex items-center justify-center" style="min-height:260px;">
+            <span class="absolute top-4 left-4 bg-white/80 backdrop-blur text-rosa-oscuro text-[11px] font-semibold tracking-wide uppercase px-3 py-1.5 rounded-full">Rendimiento</span>
+            <img src="https://res.cloudinary.com/dzq9lldhw/image/upload/v1783044264/IMG_6150_t1t6rt.jpg" alt="Creatina Monohidrato" loading="lazy" class="max-h-56 w-auto object-contain drop-shadow-xl">
+          </div>
+          <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center mb-1">
+              <div class="w-11 h-11 bg-gradient-to-br from-rosa-intenso to-melon rounded-xl flex items-center justify-center mr-3 flex-shrink-0 icon-glow"><span class="text-xl">💪</span></div>
+              <div>
+                <h3 class="text-2xl font-display font-bold text-rosa-oscuro leading-tight">Creatina Monohidrato</h3>
+                <p class="text-xs text-gris-calido/70">En gomitas</p>
+              </div>
+            </div>
+            <p class="font-script text-rosa-intenso text-xl mt-2">La creatina más estudiada, en gomita</p>
+            <p class="text-sm text-gris-calido mt-3">Creatina monohidrato en gomita para fuerza, energía, recuperación y también enfoque mental, sin batidos.</p>
+            <ul class="space-y-2.5 mt-5 mb-5 text-sm text-gris-calido">
+              <li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Apoya la fuerza y el rendimiento</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Favorece la recuperación muscular</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Contribuye a energía y enfoque mental</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Formato gomita, práctico</span></li>
+            </ul>
+            <div class="glass border border-rosa-medio/40 rounded-2xl p-4 mb-6 mt-auto">
+              <p class="text-[11px] font-semibold text-rosa-oscuro uppercase tracking-wide mb-1">¿Sabías que?</p>
+              <p class="text-xs text-gris-calido leading-relaxed">Es uno de los suplementos más investigados del mundo, con cientos de estudios que lo respaldan.</p>
+            </div>
+            <a href="https://wa.me/584241234567?text=Hola%20GinecoSpa%20%F0%9F%92%97%2C%20me%20interesa%20el%20producto%3A%20Creatina%20Monohidrato%20%28En%20gomitas%29.%20%C2%BFMe%20das%20m%C3%A1s%20informaci%C3%B3n%20y%20precio%3F" target="_blank" rel="noopener" class="btn-primary text-white text-center w-full py-3.5 rounded-2xl font-semibold shadow-lg">
+              Pedir por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="card-glow bg-white rounded-3xl overflow-hidden shadow-2xl reveal flex flex-col" style="animation-delay: 0.05s;">
+          <div class="relative bg-gradient-to-br from-rosa-palido to-rosa-claro p-8 flex items-center justify-center" style="min-height:260px;">
+            <span class="absolute top-4 left-4 bg-white/80 backdrop-blur text-rosa-oscuro text-[11px] font-semibold tracking-wide uppercase px-3 py-1.5 rounded-full">Cuidado de la piel</span>
+            <img src="https://res.cloudinary.com/dzq9lldhw/image/upload/v1783044260/IMG_6210_btu5ha.jpg" alt="Crema para Psoriasis" loading="lazy" class="max-h-56 w-auto object-contain drop-shadow-xl">
+          </div>
+          <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center mb-1">
+              <div class="w-11 h-11 bg-gradient-to-br from-lavanda to-rosa-medio rounded-xl flex items-center justify-center mr-3 flex-shrink-0 icon-glow"><span class="text-xl">🧴</span></div>
+              <div>
+                <h3 class="text-2xl font-display font-bold text-rosa-oscuro leading-tight">Crema para Psoriasis</h3>
+                <p class="text-xs text-gris-calido/70">Uso tópico</p>
+              </div>
+            </div>
+            <p class="font-script text-rosa-intenso text-xl mt-2">Alivio y calma para la piel sensible</p>
+            <p class="text-sm text-gris-calido mt-3">Crema formulada para calmar, hidratar y aliviar la piel con psoriasis, resequedad y descamación.</p>
+            <ul class="space-y-2.5 mt-5 mb-5 text-sm text-gris-calido">
+              <li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Calma la picazón y el enrojecimiento</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Hidrata profundamente la piel</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Ayuda a suavizar placas y descamación</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Apta para uso tópico diario</span></li>
+            </ul>
+            <div class="glass border border-rosa-medio/40 rounded-2xl p-4 mb-6 mt-auto">
+              <p class="text-[11px] font-semibold text-rosa-oscuro uppercase tracking-wide mb-1">¿Sabías que?</p>
+              <p class="text-xs text-gris-calido leading-relaxed">La piel con psoriasis se renueva hasta 10 veces más rápido; por eso la hidratación constante es clave.</p>
+            </div>
+            <a href="https://wa.me/584241234567?text=Hola%20GinecoSpa%20%F0%9F%92%97%2C%20me%20interesa%20el%20producto%3A%20Crema%20para%20Psoriasis%20%28Uso%20t%C3%B3pico%29.%20%C2%BFMe%20das%20m%C3%A1s%20informaci%C3%B3n%20y%20precio%3F" target="_blank" rel="noopener" class="btn-primary text-white text-center w-full py-3.5 rounded-2xl font-semibold shadow-lg">
+              Pedir por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="card-glow bg-white rounded-3xl overflow-hidden shadow-2xl reveal flex flex-col" style="animation-delay: 0.10s;">
+          <div class="relative bg-gradient-to-br from-rosa-palido to-rosa-claro p-8 flex items-center justify-center" style="min-height:260px;">
+            <span class="absolute top-4 left-4 bg-white/80 backdrop-blur text-rosa-oscuro text-[11px] font-semibold tracking-wide uppercase px-3 py-1.5 rounded-full">Longevidad celular</span>
+            <img src="https://res.cloudinary.com/dzq9lldhw/image/upload/v1783044256/IMG_6209_kxf2qa.jpg" alt="NAD+ Nicotinamida + Riboside" loading="lazy" class="max-h-56 w-auto object-contain drop-shadow-xl">
+          </div>
+          <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center mb-1">
+              <div class="w-11 h-11 bg-gradient-to-br from-coral to-rosa-oscuro rounded-xl flex items-center justify-center mr-3 flex-shrink-0 icon-glow"><span class="text-xl">✨</span></div>
+              <div>
+                <h3 class="text-2xl font-display font-bold text-rosa-oscuro leading-tight">NAD+ Nicotinamida + Riboside</h3>
+                <p class="text-xs text-gris-calido/70">900 mg · Alta potencia</p>
+              </div>
+            </div>
+            <p class="font-script text-rosa-intenso text-xl mt-2">Máxima potencia NAD+</p>
+            <p class="text-sm text-gris-calido mt-3">900 mg que combinan nicotinamida y ribósido de nicotinamida (NR), precursores directos del NAD+.</p>
+            <ul class="space-y-2.5 mt-5 mb-5 text-sm text-gris-calido">
+              <li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Alta potencia: 900 mg por porción</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Precursores directos del NAD+</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Apoya la energía y reparación celular</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Enfocado en longevidad y antiedad</span></li>
+            </ul>
+            <div class="glass border border-rosa-medio/40 rounded-2xl p-4 mb-6 mt-auto">
+              <p class="text-[11px] font-semibold text-rosa-oscuro uppercase tracking-wide mb-1">¿Sabías que?</p>
+              <p class="text-xs text-gris-calido leading-relaxed">El ribósido de nicotinamida (NR) es una de las vías más eficientes para elevar el NAD+ en la célula.</p>
+            </div>
+            <a href="https://wa.me/584241234567?text=Hola%20GinecoSpa%20%F0%9F%92%97%2C%20me%20interesa%20el%20producto%3A%20NAD%2B%20Nicotinamida%20%2B%20Riboside%20%28900%20mg%20%C2%B7%20Alta%20potencia%29.%20%C2%BFMe%20das%20m%C3%A1s%20informaci%C3%B3n%20y%20precio%3F" target="_blank" rel="noopener" class="btn-primary text-white text-center w-full py-3.5 rounded-2xl font-semibold shadow-lg">
+              Pedir por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="card-glow bg-white rounded-3xl overflow-hidden shadow-2xl reveal flex flex-col" style="animation-delay: 0.00s;">
+          <div class="relative bg-gradient-to-br from-rosa-palido to-rosa-claro p-8 flex items-center justify-center" style="min-height:260px;">
+            <span class="absolute top-4 left-4 bg-white/80 backdrop-blur text-rosa-oscuro text-[11px] font-semibold tracking-wide uppercase px-3 py-1.5 rounded-full">Energía y minerales</span>
+            <img src="https://res.cloudinary.com/dzq9lldhw/image/upload/v1783044257/IMG_6151_bxrb7q.jpg" alt="Shilajit Gold" loading="lazy" class="max-h-56 w-auto object-contain drop-shadow-xl">
+          </div>
+          <div class="p-8 flex flex-col flex-grow">
+            <div class="flex items-center mb-1">
+              <div class="w-11 h-11 bg-gradient-to-br from-dorado to-melon rounded-xl flex items-center justify-center mr-3 flex-shrink-0 icon-glow"><span class="text-xl">⛰️</span></div>
+              <div>
+                <h3 class="text-2xl font-display font-bold text-rosa-oscuro leading-tight">Shilajit Gold</h3>
+                <p class="text-xs text-gris-calido/70">En gomitas</p>
+              </div>
+            </div>
+            <p class="font-script text-rosa-intenso text-xl mt-2">El oro del Himalaya, en gomita</p>
+            <p class="text-sm text-gris-calido mt-3">Shilajit rico en ácido fúlvico y minerales traza, en gomita premium, para energía, resistencia y vitalidad.</p>
+            <ul class="space-y-2.5 mt-5 mb-5 text-sm text-gris-calido">
+              <li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Rico en ácido fúlvico y minerales traza</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Apoya la energía y resistencia natural</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Contribuye a la vitalidad y rendimiento</span></li>
+<li class="flex items-start"><svg class="w-5 h-5 text-rosa-intenso mr-3 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span>Formato gomita premium</span></li>
+            </ul>
+            <div class="glass border border-rosa-medio/40 rounded-2xl p-4 mb-6 mt-auto">
+              <p class="text-[11px] font-semibold text-rosa-oscuro uppercase tracking-wide mb-1">¿Sabías que?</p>
+              <p class="text-xs text-gris-calido leading-relaxed">Se recolecta de rocas del Himalaya a más de 3.000 m de altura, donde se forma durante siglos.</p>
+            </div>
+            <a href="https://wa.me/584241234567?text=Hola%20GinecoSpa%20%F0%9F%92%97%2C%20me%20interesa%20el%20producto%3A%20Shilajit%20Gold%20%28En%20gomitas%29.%20%C2%BFMe%20das%20m%C3%A1s%20informaci%C3%B3n%20y%20precio%3F" target="_blank" rel="noopener" class="btn-primary text-white text-center w-full py-3.5 rounded-2xl font-semibold shadow-lg">
+              Pedir por WhatsApp
+            </a>
+          </div>
+        </div>
+        </div>
+
+        <!-- CTA final -->
+        <div class="max-w-3xl mx-auto text-center mt-20 reveal">
+          <h2 class="text-3xl lg:text-4xl font-display font-bold text-rosa-oscuro mb-4">¿Lista para tu pedido?</h2>
+          <p class="text-gris-calido mb-8">Escríbenos con el nombre del producto que te interesa y te confirmamos disponibilidad y precio.</p>
+          <a href="https://wa.me/584241234567?text=Hola%20GinecoSpa%20%F0%9F%92%97%2C%20quiero%20informaci%C3%B3n%20del%20cat%C3%A1logo%20de%20suplementos" target="_blank" rel="noopener"
+             class="btn-primary text-white inline-block px-10 py-4 rounded-full font-semibold shadow-lg">
+            Escribir por WhatsApp
+          </a>
+          <p class="text-xs text-gris-calido/70 max-w-2xl mx-auto mt-10 leading-relaxed">
+            <strong>Aviso:</strong> Estos productos son suplementos alimenticios y de cuidado personal. No son medicamentos
+            ni sustituyen la consulta médica; no están destinados a diagnosticar, tratar, curar ni prevenir enfermedades.
+            Los resultados pueden variar. Consulta a tu médico antes de iniciar cualquier suplemento, especialmente durante
+            el embarazo, la lactancia o si tomas medicación.
+          </p>
+        </div>
+      </div>
+    </section>
+
+<footer class="bg-gradient-to-br from-gris-calido to-gray-700 text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <div>
+                    <h3 class="text-4xl font-script font-bold mb-6 text-rosa-claro">GinecoSpa</h3>
+                    <p class="text-sm text-gray-300 mb-6 leading-relaxed">
+                        Clínica especializada en ginecología funcional, regenerativa y salud del piso pélvico. Diagnóstico consciente, tecnología médica avanzada y acompañamiento integral.
+                    </p>
+                    <p class="text-xs text-gray-400 mb-6">Marca GinecoSpa – Registro SAPI</p>
+                    
+                    <div class="flex space-x-4">
+                        <a href="index.html#" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-rosa-medio transition-all group">
+                            <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path>
+                            </svg>
+                        </a>
+                        <a href="index.html#" class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center hover:bg-rosa-medio transition-all group">
+                            <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6 text-rosa-claro">Enlaces rápidos</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="index.html#servicios" class="text-gray-300 hover:text-rosa-claro transition-colors">Servicios</a></li>
+                        <li><a href="index.html#tecnologia" class="text-gray-300 hover:text-rosa-claro transition-colors">Tecnologías</a></li>
+                        <li><a href="index.html#productos" class="text-gray-300 hover:text-rosa-claro transition-colors">Productos</a></li>
+                        <li><a href="index.html#sedes" class="text-gray-300 hover:text-rosa-claro transition-colors">Sedes</a></li>
+                        <li><a href="index.html#conoce-tu-cuerpo" class="text-gray-300 hover:text-rosa-claro transition-colors">Conócete</a></li>
+                        <li><a href="index.html#contacto" class="text-gray-300 hover:text-rosa-claro transition-colors">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-6 text-rosa-claro">Legal</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="index.html#" class="text-gray-300 hover:text-rosa-claro transition-colors">Política de privacidad</a></li>
+                        <li><a href="index.html#" class="text-gray-300 hover:text-rosa-claro transition-colors">Términos y condiciones</a></li>
+                        <li><a href="index.html#" class="text-gray-300 hover:text-rosa-claro transition-colors">Política de cancelación</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-10">
+                <p class="text-xs text-gray-400 text-center max-w-4xl mx-auto mb-6 leading-relaxed">
+                    <strong>Aviso importante:</strong> El contenido de este sitio web es informativo y educativo. No sustituye la consulta, diagnóstico o tratamiento médico profesional. Los resultados pueden variar según cada paciente. Consulta siempre con un profesional de la salud certificado.
+                </p>
+                <p class="text-xs text-gray-400 text-center">
+                    © 2026 GinecoSpa. Todos los derechos reservados.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/584241234567" class="floating-whatsapp bg-green-500 text-white w-20 h-20 rounded-full flex items-center justify-center shadow-2xl hover:bg-green-600 transition-all group">
+        <svg class="w-10 h-10 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path>
+        </svg>
+    </a>
+
+    <script>
+      // Menú móvil
+      const mb = document.getElementById('mobile-menu-btn');
+      const mm = document.getElementById('mobile-menu');
+      const mc = document.getElementById('mobile-menu-close');
+      if (mb && mm) { mb.addEventListener('click', () => mm.classList.add('active')); }
+      if (mc && mm) { mc.addEventListener('click', () => mm.classList.remove('active')); }
+      if (mm) { mm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mm.classList.remove('active'))); }
+      // Reveal on scroll
+      const rev = document.querySelectorAll('.reveal');
+      const onScroll = () => rev.forEach(el => { if (el.getBoundingClientRect().top < innerHeight - 100) el.classList.add('active'); });
+      addEventListener('scroll', onScroll); addEventListener('load', onScroll);
+      // Sombra del header al hacer scroll
+      const hdr = document.querySelector('header');
+      addEventListener('scroll', () => { if (hdr) hdr.style.boxShadow = scrollY > 50 ? '0 4px 20px rgba(231,84,128,0.1)' : 'none'; });
+    </script>
+
+</body>
+</html>
