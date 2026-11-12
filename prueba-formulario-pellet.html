@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>GinecoSpa · Prepárate para tu cita</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;500;600;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--rosa:#E75480;--rosa2:#FF8FA3;--rosa-claro:#FFE5EC;--rosa-palido:#FFF5F7;--crema:#FFF8F0;--texto:#3E2F33;--gris:#7A6A6E}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{min-height:100%}
+body{font-family:'Montserrat',sans-serif;color:var(--texto);background:linear-gradient(160deg,#FFF5F7 0%,#FFE5EC 55%,#FFD6E4 100%);min-height:100vh;min-height:100dvh}
+.wrap{max-width:480px;margin:0 auto;padding:18px 18px calc(28px + env(safe-area-inset-bottom));min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+header img{height:38px}
+.step{font-size:12px;font-weight:600;color:var(--rosa);letter-spacing:1px}
+.bar{height:7px;background:#fff;border-radius:9px;overflow:hidden;margin-bottom:22px;box-shadow:inset 0 1px 3px rgba(0,0,0,.06)}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--rosa),var(--rosa2));border-radius:9px;transition:width .5s ease}
+.screen{flex:1;display:flex;flex-direction:column;animation:in .45s ease}
+@keyframes in{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+.sec{font-size:12px;font-weight:700;letter-spacing:2px;color:var(--rosa);text-transform:uppercase;margin-bottom:8px}
+h1{font-family:'Cormorant Garamond',serif;font-size:34px;line-height:1.1;margin-bottom:10px}
+h2{font-family:'Cormorant Garamond',serif;font-size:29px;line-height:1.15;margin-bottom:6px}
+.sub{font-size:14.5px;color:var(--gris);line-height:1.5;margin-bottom:20px}
+.script{font-family:'Dancing Script',cursive;color:var(--rosa);font-size:30px}
+.opts{display:grid;gap:11px}
+.opts.two{grid-template-columns:1fr 1fr}
+.opt{background:#fff;border:2px solid transparent;border-radius:18px;padding:15px 16px;display:flex;align-items:center;gap:13px;font-size:15.5px;font-weight:600;cursor:pointer;box-shadow:0 6px 18px rgba(231,84,128,.09);transition:transform .15s,border-color .2s,background .2s;text-align:left;font-family:inherit;color:inherit;width:100%}
+.opts.two .opt{flex-direction:column;text-align:center;padding:18px 10px;gap:8px}
+.opt .e{font-size:28px;line-height:1;flex:none}
+.opt:active{transform:scale(.97)}
+.opt.sel{border-color:var(--rosa);background:var(--rosa-palido)}
+.opt.sel::after{content:'✓';margin-left:auto;color:var(--rosa);font-weight:800}
+.opts.two .opt.sel::after{display:none}
+.scale{display:flex;justify-content:space-between;gap:8px}
+.scale .opt{flex-direction:column;padding:14px 4px;gap:6px;font-size:13px;text-align:center;justify-content:center}
+.scale .opt.sel::after{display:none}
+input[type=text]{width:100%;font-family:inherit;font-size:18px;padding:17px 18px;border-radius:18px;border:2px solid #fff;background:#fff;box-shadow:0 6px 18px rgba(231,84,128,.09);outline:none;color:var(--texto)}
+input[type=text]:focus{border-color:var(--rosa)}
+.btn{margin-top:auto;padding-top:20px}
+.btn button{width:100%;border:0;border-radius:999px;padding:17px;font-family:inherit;font-size:16px;font-weight:700;color:#fff;background:linear-gradient(90deg,var(--rosa),var(--rosa2));box-shadow:0 10px 26px rgba(231,84,128,.35);cursor:pointer}
+.btn button:disabled{opacity:.4;box-shadow:none}
+.back{background:none;border:0;color:var(--gris);font-family:inherit;font-size:13px;margin-top:12px;cursor:pointer;width:100%}
+.hint{font-size:12.5px;color:var(--gris);margin:-8px 0 14px}
+.note{background:#fff;border-radius:16px;padding:12px 14px;font-size:13px;color:var(--gris);margin-top:14px;line-height:1.45}
+.hero{font-size:62px;text-align:center;margin:18px 0 6px}
+.center{text-align:center}
+.pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:6px 0 18px}
+.pill{background:#fff;border-radius:999px;padding:8px 14px;font-size:13px;font-weight:600;box-shadow:0 4px 12px rgba(231,84,128,.08)}
+/* tarjeta final */
+.card{background:#fff;border-radius:26px;padding:24px 20px;box-shadow:0 18px 44px rgba(231,84,128,.18);position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:-60px;right:-60px;width:170px;height:170px;border-radius:50%;background:var(--rosa-claro)}
+.card > *{position:relative}
+.card h2{font-size:31px}
+.tag{display:inline-block;background:var(--rosa-claro);color:var(--rosa);font-weight:700;font-size:11px;letter-spacing:2px;padding:6px 12px;border-radius:999px;margin-bottom:10px}
+.goal{display:flex;gap:12px;align-items:center;background:var(--rosa-palido);border-radius:16px;padding:13px;margin:16px 0}
+.goal .e{font-size:32px}
+.tip{display:flex;gap:12px;margin:13px 0;font-size:14.5px;line-height:1.45}
+.tip .n{flex:none;width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--rosa),var(--rosa2));color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+.gift{margin-top:18px;border:2px dashed var(--rosa2);border-radius:18px;padding:14px;text-align:center;font-size:14px;line-height:1.5}
+.gift b{color:var(--rosa)}
+.foot{font-size:11.5px;color:var(--gris);text-align:center;margin-top:16px;line-height:1.5}
+.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:9}
+.confetti span{position:absolute;top:-20px;font-size:20px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img src="https://res.cloudinary.com/dzq9lldhw/image/upload/v1763148037/Logo_2_ky7mki.png" alt="GinecoSpa">
+    <div class="step" id="step"></div>
+  </header>
+  <div class="bar"><i id="prog"></i></div>
+  <div id="app"></div>
+</div>
+
+<script>
+/* ============ PREGUNTAS ============ */
+const Q = [
+ {id:'nombre', sec:'Para conocerte', type:'text', t:'¿Cómo te gusta que te llamemos?', s:'Así te recibiremos el día de tu cita 💗', ph:'Ej: Mariela, Mari, Sra. Gómez…'},
+ {id:'edad', sec:'Para conocerte', type:'one', two:true, t:'¿En qué rango de edad estás?', o:[['🌷','30 – 39'],['🌸','40 – 44'],['🌺','45 – 49'],['🌼','50 – 54'],['🌻','55 o más']]},
+ {id:'meta', sec:'Para conocerte', type:'one', t:'Si pudieras recuperar una sola cosa primero, ¿cuál sería?', o:[['🔋','Mi energía'],['💤','Dormir bien'],['🔥','Mi deseo'],['🧠','Concentración y memoria'],['⚖️','Controlar mi peso'],['😊','Mi ánimo']]},
+ {id:'fecha', sec:'Para conocerte', type:'one', t:'¿Hay algo especial en camino?', s:'Nos encanta saber para qué te estás preparando ✨', o:[['🎂','Un cumpleaños'],['✈️','Un viaje o una boda'],['🏋️','Un reto físico'],['💼','Un proyecto importante'],['✨','Solo volver a sentirme yo']]},
+ {id:'etapa', sec:'Tu cuerpo', type:'one', t:'¿En qué etapa está tu ciclo?', o:[['🌸','Menstrúo normal'],['🌗','Mi regla está irregular'],['🍂','Ya no menstrúo'],['❓','No estoy segura']]},
+ {id:'sintomas', sec:'Tu cuerpo', type:'multi', t:'¿Cuáles de estas te pasan?', s:'Marca todas las que quieras.', o:[['🔥','Calores o sudores'],['🌙','Me despierto de noche'],['🌵','Resequedad íntima'],['😤','Irritabilidad'],['🫠','Cansancio a media tarde'],['💇‍♀️','Caída de cabello'],['🧩','Olvidos'],['🎈','Hinchazón o retención'],['🌿','Ninguna de estas']]},
+ {id:'energia', sec:'Tu cuerpo', type:'scale', t:'Del 1 al 5, ¿cómo está tu energía estos días?', o:[['🪫','1'],['😮‍💨','2'],['🙂','3'],['😃','4'],['⚡','5']]},
+ {id:'deseo', sec:'Tu cuerpo', type:'one', two:true, t:'¿Cómo está tu deseo íntimo?', s:'Solo lo verá tu doctor 🔒', o:[['😴','Desaparecido'],['🌥️','Bajo'],['🌤️','Normal'],['☀️','¡Muy bien!']]},
+ {id:'antecedentes', sec:'Tu seguridad', type:'multi', t:'¿Has tenido alguna de estas?', s:'Es importante para cuidarte bien.', o:[['🎗️','Cáncer de mama o de útero'],['🩸','Coágulos o trombosis'],['🫀','Problemas del hígado'],['🤰','Estoy embarazada o lactando'],['✅','Ninguna']]},
+ {id:'fuma', sec:'Tu seguridad', type:'one', two:true, t:'¿Fumas?', o:[['🚭','No'],['🌫️','A veces'],['🚬','Sí']]},
+ {id:'examenes', sec:'Tu seguridad', type:'one', t:'¿Ya tienes tus exámenes de laboratorio?', o:[['✅','Sí, todos'],['🟡','Tengo algunos'],['❌','Todavía no']]},
+ {id:'agujas', sec:'Para consentirte', type:'one', t:'¿Cómo te llevas con las agujas?', s:'Sin pena: así sabemos cómo acompañarte.', o:[['😎','Tranquila, sin problema'],['😬','Un poquito nerviosa'],['😱','¡Me dan miedo!']]},
+ {id:'bebida', sec:'Para consentirte', type:'one', two:true, t:'Mientras te atendemos, ¿qué te provoca?', o:[['☕','Café con leche'],['🖤','Café negro'],['🍵','Té'],['💧','Agua'],['🧃','Algo frío']]},
+];
+
+const R = {};             // respuestas
+window.respuestas = R;    // (para leerlas en el simulacro)
+let i = -1;
+const app = document.getElementById('app'), prog = document.getElementById('prog'), step = document.getElementById('step');
+
+function intro(){
+  step.textContent = '';
+  prog.style.width = '0';
+  app.innerHTML = `<div class="screen">
+    <div class="hero">🌸</div>
+    <div class="center script">Bienvenida</div>
+    <h1 class="center">Prepárate para tu cita de pellet</h1>
+    <p class="sub center">Son 13 preguntas rápidas, casi todas de un toque. Así tu doctor llega preparado para ti y te atendemos como mereces.</p>
+    <div class="pills"><span class="pill">⏱️ 3 minutos</span><span class="pill">🔒 Confidencial</span><span class="pill">🎁 Sorpresa al final</span></div>
+    <div class="btn"><button onclick="go(0)">Empezar</button></div>
+  </div>`;
+}
+
+function go(n){
+  i = n;
+  if (i >= Q.length) return final();
+  const q = Q[i];
+  step.textContent = `${i+1} de ${Q.length}`;
+  prog.style.width = ((i)/Q.length*100)+'%';
+  let body = '';
+  if (q.type === 'text'){
+    body = `<input type="text" id="txt" placeholder="${q.ph}" value="${R[q.id]||''}" autocomplete="given-name" oninput="document.getElementById('nx').disabled=!this.value.trim()">
+      <div class="btn"><button id="nx" ${R[q.id]?'':'disabled'} onclick="R['${q.id}']=document.getElementById('txt').value.trim();go(i+1)">Continuar</button></div>`;
+  } else {
+    const cls = q.type==='scale' ? 'scale' : 'opts' + (q.two ? ' two' : '');
+    const cur = R[q.id];
+    body = `<div class="${cls}">` + q.o.map((o,k)=>{
+      const sel = q.type==='multi' ? (cur||[]).includes(o[1]) : cur===o[1];
+      return `<button class="opt ${sel?'sel':''}" onclick="pick(${k})"><span class="e">${o[0]}</span><span>${o[1]}</span></button>`;
+    }).join('') + `</div>`;
+    if (q.type==='multi') body += `<div class="btn"><button id="nx" ${(cur&&cur.length)?'':'disabled'} onclick="go(i+1)">Continuar</button></div>`;
+  }
+  if (q.id==='examenes') body += `<div class="note">💡 Si ya los tienes, podrás enviarnos la foto por WhatsApp antes de tu cita.</div>`;
+  app.innerHTML = `<div class="screen">
+    <div class="sec">${q.sec}</div>
+    <h2>${q.t}</h2>
+    ${q.s?`<p class="sub">${q.s}</p>`:'<div style="height:16px"></div>'}
+    ${body}
+    ${i>0?`<button class="back" onclick="go(i-1)">← Volver</button>`:''}
+  </div>`;
+  if (q.type==='text') setTimeout(()=>document.getElementById('txt').focus(),300);
+}
+
+function pick(k){
+  const q = Q[i], v = q.o[k][1];
+  if (q.type==='multi'){
+    let a = R[q.id] || [];
+    const none = /^(Ninguna)/.test(v);
+    if (a.includes(v)) a = a.filter(x=>x!==v);
+    else a = none ? [v] : a.filter(x=>!/^(Ninguna)/.test(x)).concat(v);
+    R[q.id] = a; go(i);
+  } else {
+    R[q.id] = v;
+    document.querySelectorAll('.opt').forEach((b,j)=>b.classList.toggle('sel', j===k));
+    setTimeout(()=>go(i+1), 280);
+  }
+}
+
+/* ============ TARJETA FINAL PARA LA PACIENTE ============ */
+const TIPS = {
+  'Calores o sudores':'Ten a mano un vaso de agua fría y evita el café y el picante en la tarde: suelen disparar los calores.',
+  'Me despierto de noche':'Cena liviano y apaga pantallas 30 minutos antes de dormir. Tu cuerpo repara hormonas mientras duermes.',
+  'Resequedad íntima':'Toma suficiente agua y prefiere ropa interior de algodón. En tu cita te contamos qué más puede ayudarte.',
+  'Irritabilidad':'Regálate 5 minutos de respiración lenta al día: inhala 4 segundos, exhala 6. Calma tu sistema nervioso.',
+  'Cansancio a media tarde':'Sal a caminar 10 minutos después del almuerzo en vez de un segundo café. La luz del sol activa tu energía.',
+  'Caída de cabello':'Incluye proteína en cada comida (huevo, pollo, granos). Tu cabello está hecho de ella.',
+  'Olvidos':'Duerme 7 horas y anota tus pendientes en un solo lugar. Tu mente descansa cuando no tiene que recordarlo todo.',
+  'Hinchazón o retención':'Baja la sal y sube el agua. Parece al revés, pero hidratarte ayuda a soltar líquido.',
+};
+const META_E = {'Mi energía':'🔋','Dormir bien':'💤','Mi deseo':'🔥','Concentración y memoria':'🧠','Controlar mi peso':'⚖️','Mi ánimo':'😊'};
+
+function final(){
+  step.textContent = '¡Listo!';
+  prog.style.width = '100%';
+  const n = R.nombre || 'amiga';
+  const tips = (R.sintomas||[]).filter(s=>TIPS[s]).slice(0,3).map(s=>TIPS[s]);
+  if (tips.length < 2) tips.push('Toma un vaso de agua al despertar, antes del café. Es el gesto más simple para empezar el día con energía.');
+  if (tips.length < 3) tips.push('Muévete 20 minutos al día, aunque sea caminando. Tu cuerpo agradece la constancia más que la intensidad.');
+  const bebida = R.bebida ? `Tu <b>${R.bebida.toLowerCase()}</b> te estará esperando ☕` : '';
+  const nervios = R.agujas && R.agujas!=='Tranquila, sin problema' ? '<br>Y tranquila: te explicaremos todo paso a paso, a tu ritmo 🤍' : '';
+  app.innerHTML = `<div class="screen">
+    <div class="center script" style="margin-bottom:8px">¡Gracias, ${n}!</div>
+    <div class="card">
+      <span class="tag">TU MAPA DE BIENESTAR</span>
+      <h2>${n}, tu cuerpo ya nos contó mucho</h2>
+      <div class="goal"><span class="e">${META_E[R.meta]||'🌸'}</span><div><div style="font-size:12px;color:var(--gris);font-weight:600">TU PRIORIDAD</div><div style="font-weight:700;font-size:16px">${R.meta||'Sentirte mejor'}</div></div></div>
+      <div style="font-weight:700;font-size:14px;margin-bottom:2px">Trucos que la Dra. Ajakaida le recomienda a sus pacientes:</div>
+      ${tips.map((t,k)=>`<div class="tip"><span class="n">${k+1}</span><span>${t}</span></div>`).join('')}
+      <div class="gift">🎁 <b>En tu cita te espera un obsequio</b> elegido según lo que nos contaste.<br>${bebida}${nervios}</div>
+    </div>
+    <p class="foot">Estos consejos son orientativos. Tu doctor revisará tus respuestas antes de la cita y te indicará lo adecuado para ti.</p>
+  </div>`;
+  confetti();
+  try { localStorage.setItem('gs_pellet_test', JSON.stringify(R)); } catch(e){}
+}
+
+function confetti(){
+  const c = document.createElement('div'); c.className='confetti'; document.body.appendChild(c);
+  const em = ['💗','🌸','✨','💖','🌷'];
+  for (let k=0;k<28;k++){
+    const s = document.createElement('span');
+    s.textContent = em[k%em.length];
+    s.style.left = Math.random()*100+'%';
+    s.style.animationDuration = (2.5+Math.random()*2)+'s';
+    s.style.animationDelay = Math.random()*0.8+'s';
+    c.appendChild(s);
+  }
+  setTimeout(()=>c.remove(), 5000);
+}
+
+intro();
+</script>
+</body>
+</html>
