@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>GinecoSpa · Pantalla</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   AJUSTES RÁPIDOS
+   - Segundos por diapositiva: cambia SEGUNDOS más abajo (en el script)
+   - Para quitar un procedimiento: borra su bloque { ... } en la lista
+   - Flechas del control remoto: ← → para pasar manualmente
+   - Clic / OK / Enter: pantalla completa
+   ========================================================= */
+:root{
+  --rosa-palido:#FFF5F7; --rosa-claro:#FFE5EC; --rosa-medio:#FFB5C5;
+  --rosa-intenso:#FF8FA3; --rosa-oscuro:#E75480; --gris:#6B5D5D;
+  --texto:#3E2F33; --dorado:#D4AF37; --crema:#FFF8F0;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;background:#1a1114;overflow:hidden;cursor:none}
+body{font-family:'Montserrat',sans-serif;color:var(--texto)}
+
+/* Lienzo fijo 1920x1080 que se escala al tamaño del TV */
+#stage{position:absolute;left:50%;top:50%;width:1920px;height:1080px;transform-origin:center center;overflow:hidden;background:var(--crema)}
+
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease;display:flex}
+.slide.active{opacity:1;z-index:2}
+
+/* ---------- Diapositiva de procedimiento ---------- */
+.media{position:relative;width:50%;height:100%;overflow:hidden;background:linear-gradient(135deg,#FFE5EC,#FFB5C5)}
+.media .blur{position:absolute;inset:-60px;background-size:cover;background-position:center;filter:blur(40px) saturate(1.15);opacity:.75;transform:scale(1.1)}
+.media img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:70px}
+.slide.active .media img{animation:kb var(--dur) linear forwards}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.06)}}
+.media .fallback{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:90px;color:#fff;text-align:center;padding:80px;text-shadow:0 4px 30px rgba(0,0,0,.2)}
+.media.noimg .fallback{display:flex}
+.media.noimg img,.media.noimg .blur{display:none}
+
+.info{width:50%;height:100%;position:relative;padding:110px 110px 170px;display:flex;flex-direction:column;justify-content:center;
+  background:radial-gradient(circle at 85% 10%,#FFE5EC 0,transparent 45%),radial-gradient(circle at 10% 95%,#FFF0E0 0,transparent 40%),var(--crema)}
+.slide.flip{flex-direction:row-reverse}
+
+.badge{align-self:flex-start;display:inline-flex;gap:18px;align-items:center;padding:14px 30px;border-radius:999px;color:#fff;font-weight:700;letter-spacing:4px;font-size:24px;background:linear-gradient(90deg,var(--rosa-oscuro),var(--rosa-intenso));box-shadow:0 10px 30px rgba(231,84,128,.25)}
+.badge .cat{font-weight:500;opacity:.9;letter-spacing:2px;border-left:2px solid rgba(255,255,255,.5);padding-left:18px}
+h2{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:104px;line-height:1.02;margin:40px 0 30px;color:var(--texto)}
+.desc{font-size:42px;line-height:1.4;color:var(--gris);font-weight:500;margin-bottom:46px;max-width:800px}
+ul{list-style:none;display:flex;flex-direction:column;gap:24px}
+li{display:flex;align-items:center;gap:26px;font-size:38px;font-weight:600;color:var(--texto)}
+li .ck{flex:none;width:58px;height:58px;border-radius:50%;background:var(--rosa-claro);display:flex;align-items:center;justify-content:center}
+li .ck svg{width:32px;height:32px}
+
+/* animación de entrada del texto */
+.slide .info > *{opacity:0;transform:translateY(30px)}
+.slide.active .info > *{animation:up .9s ease forwards}
+.slide.active .info > *:nth-child(2){animation-delay:.25s}
+.slide.active .info > *:nth-child(3){animation-delay:.6s}
+.slide.active .info > *:nth-child(4){animation-delay:1s}
+.slide.active li{opacity:0;animation:up .8s ease forwards}
+.slide.active li:nth-child(1){animation-delay:1.4s}
+.slide.active li:nth-child(2){animation-delay:1.9s}
+.slide.active li:nth-child(3){animation-delay:2.4s}
+@keyframes up{to{opacity:1;transform:none}}
+
+/* ---------- Diapositivas de marca ---------- */
+.brand{flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 160px 200px;
+  background:linear-gradient(135deg,#FFF5F7 0%,#FFE5EC 30%,#FFD6E8 60%,#FFB5C5 100%)}
+.brand .script{font-family:'Dancing Script',cursive;font-size:80px;color:var(--rosa-oscuro);margin-bottom:10px}
+.brand h1{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:130px;line-height:1.02;color:var(--texto)}
+.brand p{font-size:46px;line-height:1.45;color:var(--gris);font-weight:500;max-width:1400px;margin-top:40px}
+.brand .logo-big{height:220px;margin-bottom:30px}
+.pills{display:flex;gap:34px;margin-top:60px;flex-wrap:wrap;justify-content:center}
+.pill{background:#fff;border-radius:40px;padding:36px 50px;box-shadow:0 20px 50px rgba(231,84,128,.18);min-width:330px}
+.pill .ic{font-size:70px;line-height:1}
+.pill b{display:block;font-family:'Cormorant Garamond',serif;font-size:56px;margin-top:12px;color:var(--texto)}
+.pill span{display:block;font-size:28px;color:var(--gris);margin-top:6px;font-weight:500}
+.brand > *{opacity:0;transform:translateY(30px)}
+.brand.active > *{animation:up 1s ease forwards}
+.brand.active > *:nth-child(2){animation-delay:.3s}
+.brand.active > *:nth-child(3){animation-delay:.7s}
+.brand.active > *:nth-child(4){animation-delay:1.1s}
+
+/* ---------- Barra inferior fija ---------- */
+#bar{position:absolute;left:0;right:0;bottom:0;height:120px;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:0 70px;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-top:3px solid var(--rosa-medio)}
+#bar img{height:78px}
+#bar .msg{font-size:32px;font-weight:600;color:var(--rosa-oscuro);text-align:center;flex:1;padding:0 40px;transition:opacity .6s}
+#bar .ig{font-size:32px;font-weight:700;color:var(--texto);display:flex;align-items:center;gap:14px}
+#bar .ig svg{width:42px;height:42px}
+#progress{position:absolute;left:0;bottom:120px;height:8px;z-index:11;background:linear-gradient(90deg,var(--rosa-oscuro),var(--rosa-intenso));width:0}
+
+#hint{position:absolute;top:30px;right:30px;z-index:20;background:rgba(0,0,0,.6);color:#fff;font-size:24px;padding:16px 26px;border-radius:14px;transition:opacity 1s}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="slides"></div>
+  <div id="progress"></div>
+  <div id="bar">
+    <img src="https://res.cloudinary.com/dzq9lldhw/image/upload/v1763148037/Logo_2_ky7mki.png" alt="GinecoSpa">
+    <div class="msg" id="barMsg">Pregunta en recepción por nuestros tratamientos</div>
+    <div class="ig">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#E75480" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#E75480"/></svg>
+      @ginecospaccs
+    </div>
+  </div>
+  <div id="hint">Toca la pantalla o pulsa OK para pantalla completa</div>
+</div>
+
+<script>
+/* ===== AJUSTES ===== */
+const SEGUNDOS = 15;            // tiempo de cada procedimiento
+const SEGUNDOS_MARCA = 12;      // tiempo de las diapositivas de GinecoSpa
+const MARCA_CADA = 4;           // cada cuántos procedimientos sale una diapositiva de marca
+
+const C = "https://res.cloudinary.com/dzq9lldhw/image/upload/";
+
+const procedimientos = [
+  { name:"HIFU Facial 7D y 12D", cat:"Facial", badge:"PREMIUM", img:"v1763148218/HIFU_FACIAL_PARA_IMPULSAR_1_ekouf8.jpg",
+    desc:"Lifting facial sin cirugía con ultrasonido microfocalizado que estimula tu propio colágeno.",
+    ben:["Sin tiempo de recuperación","Incluye escáner facial","Efecto lifting natural"] },
+  { name:"HIFU Vaginal", cat:"Íntimo", badge:"PREMIUM", img:"v1763149073/11_xipujw.png",
+    desc:"Tensado y rejuvenecimiento vaginal no invasivo. Ayuda con resequedad, laxitud y escapes.",
+    ben:["No invasivo","Sin tiempo de recuperación","Mejora tu calidad de vida"] },
+  { name:"Sueroterapia", cat:"Bienestar", badge:"WELLNESS", img:"v1763149097/37_zktpbm.png",
+    desc:"Sueros intravenosos según lo que tu cuerpo necesita: NAD, glutatión, vitamina C y antiedad.",
+    ben:["Más energía y vitalidad","Piel más luminosa","Refuerza tus defensas"] },
+  { name:"Labioplastia Láser", cat:"Íntimo", badge:"NUESTRA ESPECIALIDAD", img:"v1763149065/7_buh3je.png",
+    desc:"Remodelación estética y funcional de los labios menores con láser especializado.",
+    ben:["Ambulatoria, con anestesia local","Recuperación rápida","Resultados naturales"] },
+  { name:"PRP Vaginal", cat:"Íntimo", badge:"REGENERATIVO", img:"v1763149096/36_c4jodx.png",
+    desc:"Plasma rico en plaquetas de tu propia sangre para regenerar y rejuvenecer la zona íntima.",
+    ben:["100% natural","Mejora la sensibilidad","Trata la resequedad"] },
+  { name:"Láser CO2", cat:"Dermatológico", badge:"TECNOLOGÍA", img:"v1763149061/6_ktalik.png",
+    desc:"Láser CO2 fraccionado para rejuvenecer la piel desde adentro.",
+    ben:["Rejuvenecimiento profundo","Mejora la textura","Renovación celular"] },
+  { name:"Hollywood Peel", cat:"Facial", badge:"GLOW", img:"v1763149088/26_glaha4.png",
+    desc:"Láser con carbón activado para una piel luminosa al instante.",
+    ben:["Luminosidad inmediata","Reduce poros dilatados","Unifica el tono"] },
+  { name:"Exosomas", cat:"Regenerativo", badge:"EXCLUSIVO", img:"v1763149097/34_yblwzz.png",
+    desc:"Terapia regenerativa de vanguardia para piel madura y flacidez.",
+    ben:["Tecnología de vanguardia","Regeneración celular","Ideal después de los 50"] },
+  { name:"Emsculpt", cat:"Corporal", badge:"INNOVADOR", img:"v1763149082/23_avtcnh.png",
+    desc:"Tecnología electromagnética que tonifica tus músculos.",
+    ben:["Aumenta masa muscular","Reduce grasa localizada","Sesiones cómodas"] },
+  { name:"HIFU Corporal", cat:"Corporal", badge:"CORPORAL", img:"v1763149063/8_fybeya.png",
+    desc:"Reducción de grasa localizada y tensado de la piel sin cirugía.",
+    ben:["Reduce medidas","Tensa la piel","Sin cirugía"] },
+  { name:"Hilos Tensores", cat:"Facial", badge:"LIFTING", img:"v1763149084/25_erx85b.png",
+    desc:"Lifting facial con hilos reabsorbibles PDO.",
+    ben:["Efecto inmediato","Estimula el colágeno","Mínimamente invasivo"] },
+  { name:"Rejuchip", cat:"Facial", badge:"INNOVADOR", img:"v1763149092/32_conn5g.png",
+    desc:"Microchips de ácido hialurónico que hidratan tu piel por más tiempo.",
+    ben:["Hidratación prolongada","Rejuvenecimiento gradual","Efecto duradero"] },
+  { name:"Ondas de Choque", cat:"Corporal", badge:"CORPORAL", img:"v1763149101/40_ftsdwz.png",
+    desc:"Ondas acústicas que ayudan a reducir la celulitis.",
+    ben:["Reduce la celulitis","Mejora la circulación","Tensa la piel"] },
+  { name:"PRP Cuero Cabelludo", cat:"Capilar", badge:"REGENERATIVO", img:"v1763149094/35_h1xstb.png",
+    desc:"Plasma rico en plaquetas para estimular el crecimiento del cabello.",
+    ben:["Estimula el crecimiento","Fortalece el cabello","100% natural"] },
+  { name:"Limpieza Facial Profunda", cat:"Facial", badge:"ESENCIAL", img:"v1763149098/39_lybffi.png",
+    desc:"Limpieza profesional con extracción e hidratación.",
+    ben:["Piel purificada","Poros limpios","Hidratación profunda"] },
+  { name:"Blanqueamiento Íntimo", cat:"Íntimo", badge:"ESTÉTICO", img:"v1763149066/10_x6pfeg.png",
+    desc:"Aclaramiento de la zona íntima con tecnología segura y valoración previa.",
+    ben:["Resultados visibles","Procedimiento seguro","Mejora tu autoestima"] },
+  { name:"Blanqueamiento Perianal", cat:"Íntimo", badge:"ESTÉTICO", img:"v1763149068/9_uzwffw.png",
+    desc:"Aclaramiento de la zona perianal con láser especializado.",
+    ben:["Técnica segura","Resultados graduales","Sin irritación"] },
+  { name:"Cauterización de VPH", cat:"Ginecológico", badge:"ESPECIALIZADO", img:"v1763149059/2_b6abjt.png",
+    desc:"Tratamiento para eliminar las verrugas genitales causadas por VPH.",
+    ben:["Procedimiento rápido","Mínimas molestias","Alta tasa de éxito"] },
+  { name:"Vacuna VPH", cat:"Preventivo", badge:"PREVENCIÓN", img:"v1763149061/4_tgdx98.png",
+    desc:"Protección contra los tipos de VPH de alto riesgo.",
+    ben:["Prevención efectiva","Protección duradera","Recomendada por la OMS"] },
+  { name:"Patologías del Tracto Genital", cat:"Ginecológico", badge:"GINECOLOGÍA", img:"v1763149095/33_hbyybv.png",
+    desc:"Diagnóstico y tratamiento integral de patologías ginecológicas.",
+    ben:["Atención especializada","Tratamiento integral","Seguimiento personalizado"] },
+  { name:"Patologías de la Piel", cat:"Dermatológico", badge:"DERMATOLOGÍA", img:"v1763149073/13_ehdhdx.png",
+    desc:"Diagnóstico y tratamiento de condiciones de la piel.",
+    ben:["Diagnóstico preciso","Tratamiento personalizado","Seguimiento continuo"] },
+];
+
+/* Diapositivas de GinecoSpa que se intercalan */
+const marca = [
+  `<img class="logo-big" src="${C}v1763148037/Logo_2_ky7mki.png" alt="">
+   <div class="script">Bienvenida</div>
+   <h1>Bienestar íntimo y estético<br>para mujeres reales</h1>
+   <p>Ginecología regenerativa, estética y bienestar en un solo lugar.</p>`,
+  `<div class="script">Más que un tratamiento</div>
+   <h1>Te acompañamos en todo el proceso</h1>
+   <div class="pills">
+     <div class="pill"><div class="ic">🎁</div><b>Obsequio</b><span>con tu tratamiento</span></div>
+     <div class="pill"><div class="ic">💗</div><b>Seguimiento</b><span>a los 3 meses</span></div>
+     <div class="pill"><div class="ic">👩‍⚕️</div><b>Especialistas</b><span>que te escuchan</span></div>
+   </div>`,
+  `<div class="script">Estamos cerca de ti</div>
+   <h1>Nuestras sedes</h1>
+   <div class="pills">
+     <div class="pill"><div class="ic">📍</div><b>Caracas</b></div>
+     <div class="pill"><div class="ic">📍</div><b>Barquisimeto</b></div>
+     <div class="pill"><div class="ic">📍</div><b>San Cristóbal</b></div>
+     <div class="pill"><div class="ic">📍</div><b>Lechería</b></div>
+   </div>
+   <p>Atención con previa cita.</p>`,
+  `<div class="script">Tus tratamientos se combinan</div>
+   <h1>Cada mujer es única</h1>
+   <p>Por eso armamos tu protocolo según lo que tú necesitas.<br>Pregunta en recepción y te orientamos.</p>`,
+];
+
+const mensajesBarra = [
+  "Pregunta en recepción por nuestros tratamientos",
+  "Todos los tratamientos incluyen obsequio y seguimiento",
+  "Síguenos en Instagram para tips de la Dra. Ajakaida Renaud",
+  "Aceptamos Zelle, pago móvil, efectivo y divisas",
+];
+
+/* ===== CONSTRUCCIÓN ===== */
+const check = `<svg viewBox="0 0 24 24" fill="none" stroke="#E75480" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>`;
+const cont = document.getElementById('slides');
+const lista = [];
+let flip = false, m = 0;
+
+function addMarca(html){
+  const d = document.createElement('div');
+  d.className = 'slide brand'; d.innerHTML = html;
+  cont.appendChild(d); lista.push({el:d, dur:SEGUNDOS_MARCA});
+}
+addMarca(marca[m++ % marca.length]);
+procedimientos.forEach((p,i)=>{
+  const url = C + p.img;
+  const d = document.createElement('div');
+  d.className = 'slide' + (flip ? ' flip' : ''); flip = !flip;
+  d.style.setProperty('--dur', SEGUNDOS + 's');
+  d.innerHTML = `
+    <div class="media">
+      <div class="blur" style="background-image:url('${url}')"></div>
+      <img src="${url}" alt="" loading="eager">
+      <div class="fallback">${p.name}</div>
+    </div>
+    <div class="info">
+      <div class="badge">${p.badge}<span class="cat">${p.cat.toUpperCase()}</span></div>
+      <h2>${p.name}</h2>
+      <div class="desc">${p.desc}</div>
+      <ul>${p.ben.map(b=>`<li><span class="ck">${check}</span>${b}</li>`).join('')}</ul>
+    </div>`;
+  d.querySelector('img').onerror = () => d.querySelector('.media').classList.add('noimg');
+  cont.appendChild(d); lista.push({el:d, dur:SEGUNDOS});
+  if ((i+1) % MARCA_CADA === 0 && i < procedimientos.length-1) addMarca(marca[m++ % marca.length]);
+});
+
+/* ===== ESCALADO AL TV ===== */
+const stage = document.getElementById('stage');
+function fit(){
+  const s = Math.min(innerWidth/1920, innerHeight/1080);
+  stage.style.transform = `translate(-50%,-50%) scale(${s})`;
+}
+addEventListener('resize', fit); fit();
+
+/* ===== ROTACIÓN ===== */
+const prog = document.getElementById('progress');
+const barMsg = document.getElementById('barMsg');
+let idx = -1, timer, vueltas = 0, b = 0;
+
+function show(n){
+  if (idx >= 0) lista[idx].el.classList.remove('active');
+  if (n >= lista.length){ n = 0; vueltas++; if (vueltas >= 6) { location.reload(); return; } }
+  if (n < 0) n = lista.length - 1;
+  idx = n;
+  const s = lista[idx];
+  // reiniciar animaciones
+  s.el.classList.remove('active'); void s.el.offsetWidth; s.el.classList.add('active');
+  prog.style.transition = 'none'; prog.style.width = '0';
+  void prog.offsetWidth;
+  prog.style.transition = `width ${s.dur}s linear`; prog.style.width = '100%';
+  clearTimeout(timer);
+  timer = setTimeout(()=>show(idx+1), s.dur*1000);
+  if (idx % 3 === 0){
+    barMsg.style.opacity = 0;
+    setTimeout(()=>{ barMsg.textContent = mensajesBarra[b++ % mensajesBarra.length]; barMsg.style.opacity = 1; }, 600);
+  }
+}
+show(0);
+
+/* ===== CONTROLES ===== */
+function fullscreen(){
+  const el = document.documentElement;
+  try { (el.requestFullscreen || el.webkitRequestFullscreen || function(){}).call(el); } catch(e){}
+  document.getElementById('hint').style.opacity = 0;
+}
+addEventListener('click', fullscreen);
+addEventListener('keydown', e=>{
+  if (e.key === 'ArrowRight') show(idx+1);
+  else if (e.key === 'ArrowLeft') show(idx-1);
+  else if (e.key === 'Enter' || e.key === ' ' || e.key === 'f') fullscreen();
+});
+setTimeout(()=>document.getElementById('hint').style.opacity = 0, 8000);
+
+/* Evitar que la pantalla se apague (si el navegador lo permite) */
+async function wake(){ try { if ('wakeLock' in navigator) await navigator.wakeLock.request('screen'); } catch(e){} }
+wake(); document.addEventListener('visibilitychange', ()=>{ if (!document.hidden) wake(); });
+</script>
+</body>
+</html>
