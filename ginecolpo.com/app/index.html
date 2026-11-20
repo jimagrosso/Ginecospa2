@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Descarga la app · Ginecolpo</title>
+<meta name="description" content="Descarga la app Ginecolpo para tu colposcopio WiFi. Instálala en 1 minuto y actívala con la llave que te enviamos por correo.">
+<meta property="og:title" content="Descarga tu app Ginecolpo">
+<meta property="og:description" content="Instálala en tu teléfono Android en 1 minuto.">
+<style>
+@font-face{font-family:Inter;src:url(fonts/Inter.ttf);font-weight:100 900;font-display:swap}
+@font-face{font-family:Jakarta;src:url(fonts/PlusJakartaSans.ttf);font-weight:200 800;font-display:swap}
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--p:#961E55;--pd:#7A1745;--ink:#231F28;--soft:#6E6976;--pink:#FAECF3;--bg:#FBF8F9}
+html{-webkit-text-size-adjust:100%}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
+img{max-width:100%;display:block}
+.wrap{max-width:640px;margin:0 auto;padding:0 20px}
+a{color:inherit}
+/* header */
+header{position:sticky;top:0;z-index:20;background:rgba(251,248,249,.92);backdrop-filter:blur(8px);border-bottom:1px solid #EFE6EB}
+.hd{max-width:640px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:9px}
+.brand span{font-family:Jakarta;font-weight:800;font-size:19px;letter-spacing:-.01em}
+.sup{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--p);text-decoration:none;background:var(--pink);padding:8px 13px;border-radius:11px}
+/* hero */
+.hero{text-align:center;padding:26px 0 8px}
+.kick{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--p);background:var(--pink);padding:7px 14px;border-radius:30px}
+.hero h1{font-family:Jakarta;font-weight:800;font-size:30px;line-height:1.1;letter-spacing:-.02em;margin:16px 0 10px}
+.hero p{font-size:16px;color:#4A4552;max-width:460px;margin:0 auto}
+.device{height:300px;margin:18px auto 6px;filter:drop-shadow(0 22px 34px rgba(122,23,69,.28))}
+/* download */
+.dl{display:flex;flex-direction:column;align-items:center;gap:10px;margin:6px 0 10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:11px;background:var(--p);color:#fff;font-weight:700;font-size:18px;padding:17px 30px;border-radius:16px;text-decoration:none;box-shadow:0 12px 26px -8px rgba(150,30,85,.6);width:100%;max-width:360px;transition:transform .08s}
+.btn:active{transform:scale(.98)}
+.btn.wa{background:#25D366;box-shadow:0 12px 26px -8px rgba(37,211,102,.5)}
+.meta{font-size:13px;color:var(--soft)}
+.meta b{color:var(--ink)}
+/* qr */
+.qr{display:flex;align-items:center;gap:16px;background:#fff;border:1px solid #EFE6EB;border-radius:18px;padding:14px 16px;margin:18px 0}
+.qr img{width:96px;height:96px;flex:0 0 auto}
+.qr .t{font-weight:700;font-size:15px;margin-bottom:2px}
+.qr .d{font-size:13px;color:var(--soft);line-height:1.4}
+/* sections */
+section{padding:30px 0}
+h2{font-family:Jakarta;font-weight:800;font-size:22px;letter-spacing:-.01em;text-align:center;margin-bottom:4px}
+.sub{text-align:center;color:var(--soft);font-size:14px;margin-bottom:22px}
+/* steps */
+.steps{display:grid;gap:18px}
+.step{background:#fff;border:1px solid #EFE6EB;border-radius:20px;overflow:hidden}
+.step .cap{display:flex;gap:12px;align-items:flex-start;padding:16px 18px}
+.step .num{flex:0 0 30px;height:30px;border-radius:50%;background:var(--p);color:#fff;font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center;font-family:Jakarta}
+.step .cap b{display:block;font-size:16px;margin-bottom:2px}
+.step .cap p{font-size:14px;color:var(--soft);line-height:1.45}
+.step .shot{background:linear-gradient(180deg,#F4ECF0,#EADFE6);display:flex;justify-content:center;padding:18px 0 0}
+.step .shot img{width:180px}
+/* key card */
+.key{background:linear-gradient(135deg,var(--p),var(--pd));color:#fff;border-radius:22px;padding:26px 22px;text-align:center}
+.key .ic{width:54px;height:54px;border-radius:15px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;font-size:26px;margin:0 auto 14px}
+.key h2{color:#fff;margin-bottom:8px}
+.key p{color:#FAD7E8;font-size:15px;max-width:440px;margin:0 auto 6px}
+.key .tag{display:inline-block;margin-top:14px;background:rgba(255,255,255,.16);border-radius:30px;padding:8px 16px;font-size:13px;font-weight:600}
+/* reqs */
+.reqs{background:#fff;border:1px solid #EFE6EB;border-radius:18px;padding:6px 20px}
+.reqs .r{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid #F1E8EE;font-size:14.5px;align-items:flex-start}
+.reqs .r:last-child{border-bottom:0}
+.reqs .r b{color:var(--p)}
+.ck{flex:0 0 22px;color:var(--p);font-weight:800}
+/* footer */
+footer{text-align:center;padding:34px 20px 46px;color:var(--soft);font-size:13px;border-top:1px solid #EFE6EB;margin-top:12px}
+footer .f-cta{margin-bottom:18px}
+@media(min-width:560px){.hero h1{font-size:36px}.step{display:flex;flex-direction:row-reverse;align-items:center}.step .shot{flex:0 0 220px;align-self:stretch;align-items:center;padding:18px}.step .shot img{width:170px}}
+</style>
+</head>
+<body>
+
+<header><div class="hd">
+<div class="brand">
+<svg width="30" height="30" viewBox="0 0 34 34" aria-hidden="true"><rect width="34" height="34" rx="9" fill="#961E55"></rect><circle cx="17" cy="17" r="9" fill="#fff"></circle><circle cx="17" cy="17" r="6" fill="#28282F"></circle><circle cx="17" cy="17" r="2.6" fill="#FFCD3C"></circle></svg>
+<span>Gineco<span style="color:#961E55">colpo</span></span>
+</div>
+<a class="sup" href="https://wa.me/584149796282?text=Hola%2C%20necesito%20ayuda%20con%20la%20app%20Ginecolpo">Soporte</a>
+</div></header>
+
+<div class="wrap">
+
+<div class="hero">
+<span class="kick">App para tu colposcopio</span>
+<img class="device" src="img/device.png" alt="Colposcopio Ginecolpo">
+<h1>Descarga tu app<br>Ginecolpo</h1>
+<p>La app en español que convierte tu teléfono en la pantalla del colposcopio. Foto, video, filtro verde e informe PDF por WhatsApp.</p>
+</div>
+
+<div class="dl">
+<a class="btn" href="Ginecolpo.apk" download>⬇  Descargar app (Android)</a>
+<div class="meta">Android 8 o más reciente · <b>140 KB</b> · instalación en 1 minuto</div>
+</div>
+
+<div class="qr">
+<img src="img/qr.png" alt="Código QR a ginecolpo.com/app">
+<div><div class="t">¿Estás en la computadora?</div><div class="d">Escanea este código con la cámara de tu teléfono para abrir esta página y descargar la app ahí.</div></div>
+</div>
+
+</div>
+
+<div class="wrap">
+<section>
+<h2>Instálala en 1 minuto</h2>
+<div class="sub">Como no viene de Play Store, tu teléfono te pide confirmar una sola vez. Es normal y seguro.</div>
+<div class="steps">
+
+<div class="step">
+<div class="shot"><img src="img/step_p1.png" alt=""></div>
+<div class="cap"><div class="num">1</div><div><b>Descarga la app</b><p>Toca “Descargar app”. Cuando termine, toca <b>Abrir</b> en la barra de abajo.</p></div></div>
+</div>
+
+<div class="step">
+<div class="shot"><img src="img/step_p2.png" alt=""></div>
+<div class="cap"><div class="num">2</div><div><b>Da el permiso (una sola vez)</b><p>Tu teléfono preguntará si permites instalar desde Chrome. Activa el interruptor y vuelve atrás.</p></div></div>
+</div>
+
+<div class="step">
+<div class="shot"><img src="img/step_p3.png" alt=""></div>
+<div class="cap"><div class="num">3</div><div><b>Toca “Instalar de todos modos”</b><p>Si aparece un aviso de Google, no te preocupes: es porque la app no viene de Play Store. Toca <b>Instalar de todos modos</b> y sigue.</p></div></div>
+</div>
+
+<div class="step">
+<div class="shot"><img src="img/step_p4.png" alt=""></div>
+<div class="cap"><div class="num">4</div><div><b>Abre Ginecolpo</b><p>Ingresa la llave que te enviamos por correo y empieza. ¡Listo!</p></div></div>
+</div>
+
+</div>
+</section>
+
+<section>
+<div class="key">
+<div class="ic">🔑</div>
+<h2>Tu llave de activación</h2>
+<p>La app se activa con una llave personal que te enviamos por correo al comprar tu Ginecolpo. La primera vez que la abras, escríbela y quedará activada.</p>
+<div class="tag">Una llave · hasta 3 equipos</div>
+</div>
+</section>
+
+<section>
+<h2>Antes de empezar</h2>
+<div class="sub">Para que todo funcione bien</div>
+<div class="reqs">
+<div class="r"><span class="ck">✓</span><div>Un teléfono o tablet <b>Android 8 o más reciente</b>.</div></div>
+<div class="r"><span class="ck">✓</span><div>Tu <b>colposcopio Ginecolpo</b> cargado y encendido.</div></div>
+<div class="r"><span class="ck">✓</span><div>Tu <b>llave de activación</b> (te llegó por correo). Si no la tienes, escríbenos.</div></div>
+<div class="r"><span class="ck">✓</span><div>Internet solo para enviar los informes. El examen funciona sin internet.</div></div>
+</div>
+</section>
+
+</div>
+
+<footer>
+<div class="f-cta"><a class="btn wa" href="https://wa.me/584149796282?text=Hola%2C%20necesito%20ayuda%20con%20la%20app%20Ginecolpo" style="display:inline-flex;width:auto;font-size:16px;padding:14px 24px">Ayuda por WhatsApp</a></div>
+Ginecolpo · Colposcopio digital WiFi<br>ginecolpo.com · WhatsApp 0414-979-6282
+</footer>
+
+</body>
+</html>
